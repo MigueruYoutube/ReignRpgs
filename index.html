@@ -837,7 +837,7 @@
         // Função para buscar os novels
         async function fetchNovels() {
             try {
-                const response = await fetch('../Novels/AllNovels.json');
+                const response = await fetch('./Novels/AllNovels.json');
                 
                 if (!response.ok) {
                     throw new Error('Arquivo não encontrado');
