@@ -3,16 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Midnight Novels - Portal de Light Novels</title>
+    <title>Reign Of RPG's</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --dark-purple: #1a0a2e;
-            --deep-purple: #2d0a45;
-            --accent-gold: #d4af37;
-            --light-gold: #f0e68c;
-            --accent-red: #b22222;
-            --light-red: #ff6b6b;
+            --dark-black: #0a0a0a;
+            --deep-gray: #1a1a1a;
+            --accent-yellow: #d4af37;
+            --light-yellow: #f0e68c;
+            --accent-orange: #ff8c00;
+            --light-orange: #ffa54f;
             --white: #ffffff;
             --light-gray: #e0e0e0;
             --medium-gray: #8a8a8a;
@@ -29,7 +29,7 @@
         }
 
         body {
-            background: linear-gradient(135deg, var(--dark-purple) 0%, #0d0630 100%);
+            background: linear-gradient(135deg, var(--dark-black) 0%, #0d0d0d 100%);
             color: var(--light-gray);
             line-height: 1.6;
             min-height: 100vh;
@@ -55,7 +55,7 @@
         .logo {
             font-size: 1.8rem;
             font-weight: 700;
-            color: var(--accent-gold);
+            color: var(--accent-yellow);
             display: flex;
             align-items: center;
             gap: 10px;
@@ -63,13 +63,13 @@
         }
 
         .logo i {
-            color: var(--light-gold);
+            color: var(--light-yellow);
         }
 
         .btn-voltar {
             background: transparent;
-            color: var(--accent-gold);
-            border: 2px solid var(--accent-gold);
+            color: var(--accent-yellow);
+            border: 2px solid var(--accent-yellow);
             padding: 10px 20px;
             border-radius: 50px;
             font-weight: 600;
@@ -84,7 +84,7 @@
         .btn-voltar:hover {
             background: rgba(212, 175, 55, 0.1);
             transform: translateY(-2px);
-            text-shadow: 0 0 8px var(--accent-gold);
+            text-shadow: 0 0 8px var(--accent-yellow);
         }
 
         .novel-header {
@@ -92,7 +92,7 @@
             flex-wrap: wrap;
             gap: 30px;
             margin: 40px 0;
-            background: rgba(45, 10, 69, 0.7);
+            background: rgba(26, 26, 26, 0.7);
             border-radius: 20px;
             overflow: hidden;
             box-shadow: var(--shadow);
@@ -105,7 +105,7 @@
             height: 350px;
             overflow: hidden;
             position: relative;
-            border-right: 2px solid var(--accent-gold);
+            border-right: 2px solid var(--accent-orange);
         }
 
         .capa {
@@ -123,18 +123,29 @@
 
         .novel-title {
             font-size: 2.5rem;
-            color: var(--accent-gold);
+            color: var(--accent-orange);
             margin-bottom: 15px;
-            text-shadow: 0 0 15px rgba(212, 175, 55, 0.3);
+            text-shadow: 0 0 15px rgba(255, 140, 0, 0.3);
         }
 
         .novel-author {
             font-size: 1.2rem;
-            color: var(--light-gold);
+            color: var(--light-yellow);
             margin-bottom: 20px;
             display: flex;
             align-items: center;
             gap: 10px;
+        }
+
+        .novel-author a {
+            color: var(--light-yellow);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .novel-author a:hover {
+            color: var(--accent-orange);
+            text-decoration: underline;
         }
 
         .novel-synopsis {
@@ -168,7 +179,7 @@
         .stat-value {
             font-size: 1.8rem;
             font-weight: 700;
-            color: var(--accent-gold);
+            color: var(--accent-yellow);
         }
 
         .stat-label {
@@ -182,10 +193,10 @@
 
         .section-title {
             font-size: 2rem;
-            color: var(--accent-gold);
+            color: var(--accent-orange);
             margin-bottom: 30px;
             padding-bottom: 10px;
-            border-bottom: 3px solid rgba(212, 175, 55, 0.3);
+            border-bottom: 3px solid rgba(255, 140, 0, 0.3);
             display: flex;
             align-items: center;
             gap: 15px;
@@ -198,7 +209,7 @@
         }
 
         .chapter-card {
-            background: rgba(45, 10, 69, 0.7);
+            background: rgba(26, 26, 26, 0.7);
             border-radius: 15px;
             overflow: hidden;
             transition: var(--transition);
@@ -209,26 +220,26 @@
         .chapter-card:hover {
             transform: translateY(-10px);
             box-shadow: 0 12px 30px rgba(0, 0, 0, 0.7);
-            border-color: rgba(212, 175, 55, 0.3);
+            border-color: rgba(255, 140, 0, 0.3);
         }
 
         .chapter-header {
             padding: 20px;
-            background: linear-gradient(90deg, var(--deep-purple) 0%, #3a0d5a 100%);
+            background: linear-gradient(90deg, var(--deep-gray) 0%, #2a2a2a 100%);
             color: var(--white);
-            border-bottom: 2px solid var(--accent-gold);
+            border-bottom: 2px solid var(--accent-orange);
         }
 
         .chapter-number {
             font-size: 0.9rem;
-            color: var(--light-gold);
+            color: var(--light-yellow);
         }
 
         .chapter-title {
             font-size: 1.4rem;
             font-weight: 600;
             margin: 5px 0;
-            color: var(--accent-gold);
+            color: var(--accent-yellow);
         }
 
         .chapter-date {
@@ -255,15 +266,15 @@
         }
 
         .badge-new {
-            background: linear-gradient(135deg, var(--accent-gold) 0%, #b8860b 100%);
-            color: var(--dark-purple);
+            background: linear-gradient(135deg, var(--accent-yellow) 0%, #b8860b 100%);
+            color: var(--dark-black);
             box-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
         }
 
         .badge-hot {
-            background: linear-gradient(135deg, var(--accent-red) 0%, #8b0000 100%);
+            background: linear-gradient(135deg, var(--accent-orange) 0%, #cc7000 100%);
             color: var(--white);
-            box-shadow: 0 0 10px rgba(178, 34, 34, 0.5);
+            box-shadow: 0 0 10px rgba(255, 140, 0, 0.5);
         }
 
         .badge-final {
@@ -288,8 +299,8 @@
         }
 
         .btn-read {
-            background: linear-gradient(135deg, var(--accent-gold) 0%, #b8860b 100%);
-            color: var(--dark-purple);
+            background: linear-gradient(135deg, var(--accent-orange) 0%, #cc7000 100%);
+            color: var(--white);
             border: none;
             padding: 12px 20px;
             border-radius: 8px;
@@ -303,13 +314,13 @@
             gap: 8px;
             letter-spacing: 1px;
             text-transform: uppercase;
-            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+            box-shadow: 0 4px 15px rgba(255, 140, 0, 0.3);
         }
 
         .btn-read:hover {
             transform: translateY(-3px);
-            box-shadow: 0 6px 20px rgba(212, 175, 55, 0.5);
-            background: linear-gradient(135deg, #e6c052 0%, #c99a1a 100%);
+            box-shadow: 0 6px 20px rgba(255, 140, 0, 0.5);
+            background: linear-gradient(135deg, #ff9933 0%, #e67300 100%);
         }
 
         /* Modal de Leitura */
@@ -319,7 +330,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(10, 5, 20, 0.95);
+            background: rgba(10, 10, 10, 0.95);
             display: flex;
             justify-content: center;
             align-items: center;
@@ -335,7 +346,7 @@
         }
 
         .reader-content {
-            background: linear-gradient(135deg, var(--deep-purple) 0%, #1f0938 100%);
+            background: linear-gradient(135deg, var(--deep-gray) 0%, #1f1f1f 100%);
             width: 90%;
             max-width: 900px;
             max-height: 90vh;
@@ -345,8 +356,8 @@
             flex-direction: column;
             transform: translateY(30px);
             transition: var(--transition);
-            box-shadow: 0 0 50px rgba(212, 175, 55, 0.2);
-            border: 1px solid rgba(212, 175, 55, 0.2);
+            box-shadow: 0 0 50px rgba(255, 140, 0, 0.2);
+            border: 1px solid rgba(255, 140, 0, 0.2);
         }
 
         .reader-modal.active .reader-content {
@@ -354,26 +365,26 @@
         }
 
         .reader-header {
-            background: linear-gradient(90deg, var(--deep-purple) 0%, #3a0d5a 100%);
+            background: linear-gradient(90deg, var(--deep-gray) 0%, #2a2a2a 100%);
             color: var(--white);
             padding: 20px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-bottom: 2px solid var(--accent-gold);
+            border-bottom: 2px solid var(--accent-orange);
         }
 
         .reader-title {
             font-size: 1.8rem;
             font-weight: 600;
-            color: var(--accent-gold);
+            color: var(--accent-yellow);
             text-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
         }
 
         .btn-close {
             background: transparent;
             border: none;
-            color: var(--light-gold);
+            color: var(--light-yellow);
             font-size: 1.8rem;
             cursor: pointer;
             transition: var(--transition);
@@ -387,7 +398,7 @@
 
         .btn-close:hover {
             color: var(--white);
-            text-shadow: 0 0 10px var(--accent-gold);
+            text-shadow: 0 0 10px var(--accent-yellow);
             transform: rotate(90deg);
         }
 
@@ -406,7 +417,7 @@
 
         .reader-footer {
             padding: 20px;
-            background: rgba(26, 10, 46, 0.8);
+            background: rgba(10, 10, 10, 0.8);
             display: flex;
             justify-content: space-between;
             border-top: 1px solid rgba(212, 175, 55, 0.2);
@@ -414,8 +425,8 @@
 
         .btn-nav {
             background: transparent;
-            color: var(--accent-gold);
-            border: 2px solid var(--accent-gold);
+            color: var(--accent-yellow);
+            border: 2px solid var(--accent-yellow);
             padding: 12px 25px;
             border-radius: 8px;
             font-weight: 600;
@@ -434,7 +445,7 @@
 
         .btn-nav:hover:not(:disabled) {
             background: rgba(212, 175, 55, 0.1);
-            text-shadow: 0 0 8px var(--accent-gold);
+            text-shadow: 0 0 8px var(--accent-yellow);
         }
 
         /* Responsividade */
@@ -447,7 +458,7 @@
                 width: 100%;
                 height: 400px;
                 border-right: none;
-                border-bottom: 2px solid var(--accent-gold);
+                border-bottom: 2px solid var(--accent-orange);
             }
             
             .novel-title {
@@ -549,7 +560,7 @@
             position: absolute;
             top: 10px;
             right: 10px;
-            background: var(--accent-red);
+            background: var(--accent-orange);
             color: white;
             border-radius: 50%;
             width: 24px;
@@ -566,20 +577,20 @@
             grid-column: 1 / -1;
             text-align: center;
             padding: 40px;
-            background: rgba(45, 10, 69, 0.5);
+            background: rgba(26, 26, 26, 0.5);
             border-radius: 15px;
-            border: 2px dashed rgba(212, 175, 55, 0.3);
+            border: 2px dashed rgba(255, 140, 0, 0.3);
         }
         
         .no-chapters i {
             font-size: 3rem;
-            color: var(--accent-gold);
+            color: var(--accent-yellow);
             margin-bottom: 20px;
         }
         
         .no-chapters h3 {
             font-size: 1.8rem;
-            color: var(--light-gold);
+            color: var(--light-yellow);
             margin-bottom: 15px;
         }
         
@@ -600,7 +611,7 @@
             width: 50px;
             height: 50px;
             border: 5px solid rgba(212, 175, 55, 0.3);
-            border-top: 5px solid var(--accent-gold);
+            border-top: 5px solid var(--accent-yellow);
             border-radius: 50%;
             animation: spin 1s linear infinite;
             margin: 0 auto 20px;
@@ -610,47 +621,48 @@
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
+
+        .missing-info {
+            color: var(--accent-orange);
+            font-weight: bold;
+            background-color: rgba(255, 140, 0, 0.1);
+            padding: 5px 10px;
+            border-radius: 5px;
+            margin: 5px 0;
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <header>
             <div class="logo">
-                <i class="fas fa-moon"></i>
-                <span>Midnight Novels</span>
+                <i class="fas fa-crown"></i>
+                <span>Reign Of RPG's</span>
             </div>
-            <button class="btn-voltar">
-                <i class="fas fa-arrow-left"></i>
-                Voltar
-            </button>
+<button class="btn-voltar" onclick="window.location.href='../../index.html'">
+    <i class="fas fa-arrow-left"></i>
+    Voltar
+</button>
         </header>
 
         <div class="novel-header">
             <div class="capa-container">
-                <img src="https://images.unsplash.com/photo-1589998059171-988d887df646?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80" alt="Capa da Light Novel" class="capa">
+                <img id="novel-cover" src="" alt="Capa da Light Novel" class="capa">
             </div>
             <div class="novel-info">
-                <h1 class="novel-title">Crônicas da Lua Sangrenta</h1>
+                <h1 class="novel-title" id="novel-title">Carregando...</h1>
                 <div class="novel-author">
                     <i class="fas fa-pen-nib"></i>
-                    <span>Autor: Kazuki Takahashi</span>
+                    <span>Autor: <a id="author-link" href="#" target="_blank"><span id="novel-author">Carregando...</span></a></span>
                 </div>
-                <p class="novel-synopsis">
-                    Em um reino onde a lua brilha com uma luz rubra, uma maldição ancestral assola a linhagem real. Aya, uma jovem com o raro poder de manipular sombras lunares, é forçada a uma jornada perigosa quando descobre ser a última descendente da família amaldiçoada. Entre alianças traiçoeiras e criaturas da noite, ela precisa desvendar segredos enterrados há séculos antes que a próxima lua sangrenta consuma sua alma. Uma saga de magia sombria, sacrifício e redenção.
+                <p class="novel-synopsis" id="novel-synopsis">
+                    Carregando sinopse...
                 </p>
                 
                 <div class="stats">
                     <div class="stat-item">
                         <div class="stat-value" id="total-chapters">0</div>
                         <div class="stat-label">Capítulos</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-value">4.8</div>
-                        <div class="stat-label">Avaliação</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-value">3.7K</div>
-                        <div class="stat-label">Leituras</div>
                     </div>
                 </div>
             </div>
@@ -697,202 +709,357 @@
     </div>
 
     <footer>
-        <p>© 2025 Midnight Novels. Todos os direitos reservados.</p>
+        <p>© 2025 Reign Of RPG's. Todos os direitos reservados.</p>
     </footer>
+    
+<script>
+    // Referências do DOM
+    const chaptersContainer = document.getElementById('chapters-container');
+    const readerModal = document.getElementById('reader-modal');
+    const readerTitle = document.getElementById('reader-title');
+    const readerBody = document.getElementById('reader-content');
+    const btnClose = document.getElementById('btn-close');
+    const btnPrev = document.getElementById('btn-prev');
+    const btnNext = document.getElementById('btn-next');
+    const totalChapters = document.getElementById('total-chapters');
+    const novelTitle = document.getElementById('novel-title');
+    const novelAuthor = document.getElementById('novel-author');
+    const authorLink = document.getElementById('author-link');
+    const novelSynopsis = document.getElementById('novel-synopsis');
+    const novelCover = document.getElementById('novel-cover');
+    
+    // Variáveis de estado
+    let currentChapter = null;
+    let allChapters = [];
+    let currentChapterIndex = 0; // Índice do array (0-based)
+    let novelData = null;
+    let maxChapterLoaded = 0;
 
-    <script>
-        // Referências do DOM
-        const chaptersContainer = document.getElementById('chapters-container');
-        const readerModal = document.getElementById('reader-modal');
-        const readerTitle = document.getElementById('reader-title');
-        const readerBody = document.getElementById('reader-content');
-        const btnClose = document.getElementById('btn-close');
-        const btnPrev = document.getElementById('btn-prev');
-        const btnNext = document.getElementById('btn-next');
-        const totalChapters = document.getElementById('total-chapters');
-        
-        // Capítulo atual no leitor
-        let currentChapter = null;
-        let allChapters = [];
-        let currentChapterIndex = 1;
+    // Função para obter o ID da pasta atual
+    function getCurrentNovelId() {
+        const pathParts = window.location.pathname.split('/');
+        const indexPos = pathParts.indexOf('index.html');
+        if (indexPos > 0) {
+            return parseInt(pathParts[indexPos - 1]);
+        }
+        return null;
+    }
 
-        // Função para carregar um capítulo específico
-        async function carregarCapitulo(id) {
-            try {
-                const response = await fetch(`./Capitulos/cap${id}.json`);
-                
-                if (!response.ok) {
-                    throw new Error(`Capítulo ${id} não encontrado`);
-                }
-                
-                return await response.json();
-            } catch (error) {
-                console.error(error.message);
-                return null;
+    // Função para carregar os dados da novel
+    async function loadNovelData() {
+        const novelId = getCurrentNovelId();
+        if (!novelId) {
+            console.error('Não foi possível determinar o ID da novel');
+            return null;
+        }
+
+        try {
+            const response = await fetch('../AllNovels.json');
+            if (!response.ok) {
+                throw new Error('Não foi possível carregar os dados das novels');
             }
+            
+            const allNovels = await response.json();
+            const novel = allNovels.find(n => n.id === novelId);
+            
+            if (!novel) {
+                throw new Error(`Novel com ID ${novelId} não encontrada`);
+            }
+            
+            return novel;
+        } catch (error) {
+            console.error('Erro ao carregar dados da novel:', error);
+            return null;
+        }
+    }
+
+    // Função para atualizar a UI com os dados da novel
+    function updateNovelUI(data) {
+        if (!data) {
+            novelTitle.textContent = 'Informações não disponíveis';
+            novelAuthor.textContent = 'Autor desconhecido';
+            novelSynopsis.textContent = 'Sinopse não disponível';
+            novelCover.src = 'https://via.placeholder.com/250x350?text=Capa+Não+Disponível';
+            authorLink.href = '#';
+            return;
         }
 
-        // Função para carregar todos os capítulos sequencialmente
-        async function carregarTodosCapitulos() {
-            const capitulos = [];
-            let id = 1;
-            let capitulo;
-            
-            do {
-                capitulo = await carregarCapitulo(id);
-                if (capitulo) {
-                    capitulos.push(capitulo);
-                    id++;
-                }
-            } while (capitulo !== null);
-            
-            return capitulos;
+        // Atualizar título
+        document.title = data.name + ' | Reign Of RPG\'s';
+        novelTitle.textContent = data.name || '<span class="missing-info">Nome não disponível</span>';
+        
+        // Atualizar autor
+        if (data.author && data.authorUrl) {
+            novelAuthor.textContent = data.author;
+            authorLink.href = data.authorUrl;
+        } else if (data.author) {
+            novelAuthor.textContent = data.author;
+            authorLink.href = '#';
+        } else {
+            novelAuthor.innerHTML = '<span class="missing-info">Autor não disponível</span>';
+            authorLink.href = '#';
         }
+        
+        // Atualizar sinopse
+        novelSynopsis.textContent = data.sinopse || 'Sinopse não disponível.';
+        
+        // Atualizar capa
+        if (data.cover) {
+            novelCover.src = data.cover;
+            novelCover.alt = `Capa de ${data.name}`;
+        } else {
+            novelCover.src = 'https://via.placeholder.com/250x350?text=Capa+Não+Disponível';
+            novelCover.alt = 'Capa não disponível';
+        }
+    }
 
-        // Função para renderizar capítulos
-        function renderizarCapitulos(capitulos) {
-            if (!capitulos || capitulos.length === 0) {
-                chaptersContainer.innerHTML = `
-                    <div class="no-chapters">
-                        <i class="fas fa-book-open"></i>
-                        <h3>Nenhum Capítulo Encontrado</h3>
-                        <p>Os capítulos serão exibidos aqui quando estiverem disponíveis. Verifique se existem arquivos na pasta ./Capitulos/ no formato cap*.json</p>
+    // Função para carregar um capítulo específico
+    async function carregarCapitulo(id) {
+        try {
+            const response = await fetch(`./Capitulos/cap${id}.json`);
+            
+            if (!response.ok) {
+                throw new Error(`Capítulo ${id} não encontrado`);
+            }
+            
+            const capData = await response.json();
+            // Garante que o capítulo tenha um ID correto
+            capData.Id = id;
+            return capData;
+        } catch (error) {
+            console.error(error.message);
+            return null;
+        }
+    }
+
+    // Função para carregar todos os capítulos sequencialmente
+    async function carregarTodosCapitulos() {
+        const capitulos = [];
+        let id = 1;
+        let capitulo;
+        
+        do {
+            capitulo = await carregarCapitulo(id);
+            if (capitulo) {
+                capitulos.push(capitulo);
+                maxChapterLoaded = id;
+                id++;
+            }
+        } while (capitulo !== null);
+        
+        return capitulos;
+    }
+
+    // Função para renderizar capítulos
+    function renderizarCapitulos(capitulos) {
+        if (!capitulos || capitulos.length === 0) {
+            chaptersContainer.innerHTML = `
+                <div class="no-chapters">
+                    <i class="fas fa-book-open"></i>
+                    <h3>Nenhum Capítulo Encontrado</h3>
+                    <p>Os capítulos serão exibidos aqui quando estiverem disponíveis. Verifique se existem arquivos na pasta ./Capitulos/ no formato cap*.json</p>
+                </div>
+            `;
+            totalChapters.textContent = "0";
+            return;
+        }
+        
+        chaptersContainer.innerHTML = '';
+        
+        capitulos.forEach((cap, index) => {
+            const chapterNumber = index + 1; // Exibe começando do 1
+            const badges = [];
+            if (cap.IsNew) badges.push(`<span class="badge badge-new">Novo</span>`);
+            if (cap.IsHot) badges.push(`<span class="badge badge-hot">Destaque</span>`);
+            if (cap.IsFinal) badges.push(`<span class="badge badge-final">Final</span>`);
+            
+            // Criar preview do conteúdo (primeiras 50 palavras)
+            const preview = cap.Content.replace(/<br>/g, ' ').replace(/<\/?[^>]+(>|$)/g, "");
+            const words = preview.split(' ');
+            const shortPreview = words.length > 50 ? words.slice(0, 50).join(' ') + '...' : preview;
+            
+            const chapterEl = document.createElement('div');
+            chapterEl.className = 'chapter-card';
+            chapterEl.innerHTML = `
+                <div class="chapter-header">
+                    <div class="chapter-number">Capítulo ${chapterNumber}</div>
+                    <h3 class="chapter-title">${cap.Titulo}</h3>
+                    <div class="chapter-date">
+                        <i class="far fa-calendar"></i>
+                        ${cap.Date}
                     </div>
-                `;
-                totalChapters.textContent = "0";
+                    <div class="chapter-badges">
+                        ${badges.join('')}
+                    </div>
+                </div>
+                <div class="chapter-content">
+                    <p class="chapter-preview">${shortPreview}</p>
+                    <button class="btn-read" data-id="${chapterNumber}">
+                        <i class="fas fa-book-reader"></i>
+                        Ler Capítulo
+                    </button>
+                </div>
+            `;
+            
+            chaptersContainer.appendChild(chapterEl);
+        });
+        
+        // Atualizar contador de capítulos
+        totalChapters.textContent = capitulos.length;
+        
+        // Adicionar event listeners aos botões "Ler"
+        document.querySelectorAll('.btn-read').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const id = parseInt(btn.getAttribute('data-id'));
+                abrirCapitulo(id);
+            });
+        });
+    }
+
+    // Função para abrir um capítulo no modal
+    async function abrirCapitulo(id) {
+        // Ajusta para índice do array (começa em 0)
+        const arrayIndex = id - 1;
+        
+        // Verifica se já temos o capítulo carregado
+        if (arrayIndex >= 0 && arrayIndex < allChapters.length) {
+            currentChapter = allChapters[arrayIndex];
+            currentChapterIndex = arrayIndex;
+            mostrarCapituloNoModal();
+            return;
+        }
+        
+        // Se o capítulo não estiver carregado, tenta carregá-lo
+        try {
+            const cap = await carregarCapitulo(id);
+            if (!cap) {
+                alert('Capítulo não encontrado');
                 return;
             }
             
-            chaptersContainer.innerHTML = '';
-            
-            capitulos.forEach(cap => {
-                const badges = [];
-                if (cap.IsNew) badges.push(`<span class="badge badge-new">Novo</span>`);
-                if (cap.IsHot) badges.push(`<span class="badge badge-hot">Destaque</span>`);
-                if (cap.IsFinal) badges.push(`<span class="badge badge-final">Final</span>`);
-                
-                // Criar preview do conteúdo (primeiras 50 palavras)
-                const preview = cap.Content.replace(/<br>/g, ' ').replace(/<\/?[^>]+(>|$)/g, "");
-                const words = preview.split(' ');
-                const shortPreview = words.length > 50 ? words.slice(0, 50).join(' ') + '...' : preview;
-                
-                const chapterEl = document.createElement('div');
-                chapterEl.className = 'chapter-card';
-                chapterEl.innerHTML = `
-                    <div class="chapter-header">
-                        <div class="chapter-number">Capítulo ${cap.Id}</div>
-                        <h3 class="chapter-title">${cap.Titulo}</h3>
-                        <div class="chapter-date">
-                            <i class="far fa-calendar"></i>
-                            ${cap.Date}
-                        </div>
-                        <div class="chapter-badges">
-                            ${badges.join('')}
-                        </div>
-                    </div>
-                    <div class="chapter-content">
-                        <p class="chapter-preview">${shortPreview}</p>
-                        <button class="btn-read" data-id="${cap.Id}">
-                            <i class="fas fa-book-reader"></i>
-                            Ler Capítulo
-                        </button>
-                    </div>
-                `;
-                
-                chaptersContainer.appendChild(chapterEl);
-            });
-            
-            // Atualizar contador de capítulos
-            totalChapters.textContent = capitulos.length;
-            
-            // Adicionar event listeners aos botões "Ler"
-            document.querySelectorAll('.btn-read').forEach(btn => {
-                btn.addEventListener('click', () => {
-                    const id = parseInt(btn.getAttribute('data-id'));
-                    abrirCapitulo(id);
-                });
-            });
-        }
-
-        // Função para abrir um capítulo no modal
-        async function abrirCapitulo(id) {
-            // Tentar encontrar o capítulo na memória
-            let cap = allChapters.find(c => c.Id === id);
-            
-            // Se não encontrado, carregar do servidor
-            if (!cap) {
-                cap = await carregarCapitulo(id);
-                if (!cap) return;
+            // Atualiza a lista de capítulos se necessário
+            if (id > maxChapterLoaded) {
+                allChapters.push(cap);
+                maxChapterLoaded = id;
+                renderizarCapitulos(allChapters);
             }
             
             currentChapter = cap;
-            currentChapterIndex = id;
-            
-            readerTitle.textContent = `Capítulo ${cap.Id}: ${cap.Titulo}`;
-            readerBody.innerHTML = `<p>${cap.Content}</p>`;
-            
-            // Atualizar botões de navegação
-            btnPrev.disabled = id === 1;
-            btnNext.disabled = false; // Sempre ativo, pois não sabemos se há próximo
-            
-            // Mostrar modal
-            readerModal.classList.add('active');
-            document.body.style.overflow = 'hidden';
+            currentChapterIndex = id - 1;
+            mostrarCapituloNoModal();
+        } catch (error) {
+            console.error('Erro ao carregar capítulo:', error);
+            alert('Erro ao carregar o capítulo');
         }
+    }
 
-        // Fechar leitor
-        function fecharLeitor() {
-            readerModal.classList.remove('active');
-            document.body.style.overflow = 'auto';
-        }
-
-        // Navegação entre capítulos
-        btnPrev.addEventListener('click', () => {
-            if (currentChapterIndex > 1) {
-                abrirCapitulo(currentChapterIndex - 1);
-            }
-        });
-
-        btnNext.addEventListener('click', () => {
-            abrirCapitulo(currentChapterIndex + 1);
-        });
-
-        // Event listeners
-        btnClose.addEventListener('click', fecharLeitor);
+    // Mostra o capítulo atual no modal
+    function mostrarCapituloNoModal() {
+        if (!currentChapter) return;
         
-        // Fechar ao clicar fora do conteúdo
-        readerModal.addEventListener('click', (e) => {
-            if (e.target === readerModal) {
-                fecharLeitor();
-            }
-        });
+        const displayNumber = currentChapterIndex + 1; // Mostra número começando do 1
+        readerTitle.textContent = `Capítulo ${displayNumber}: ${currentChapter.Titulo}`;
+        readerBody.innerHTML = `<p>${currentChapter.Content}</p>`;
+        
+        // Atualizar botões de navegação
+        btnPrev.disabled = currentChapterIndex === 0;
+        btnNext.disabled = false; // Sempre ativo, tentará carregar o próximo
+        
+        // Mostrar modal
+        readerModal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
 
-        // Fechar com ESC
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && readerModal.classList.contains('active')) {
-                fecharLeitor();
-            }
-        });
+    // Fechar leitor
+    function fecharLeitor() {
+        readerModal.classList.remove('active');
+        document.body.style.overflow = 'auto';
+    }
 
-        // Inicialização
-        async function init() {
-            try {
-                allChapters = await carregarTodosCapitulos();
-                renderizarCapitulos(allChapters);
-            } catch (error) {
-                console.error('Erro ao carregar capítulos:', error);
-                chaptersContainer.innerHTML = `
-                    <div class="no-chapters">
-                        <i class="fas fa-exclamation-triangle"></i>
-                        <h3>Erro ao Carregar Capítulos</h3>
-                        <p>${error.message}</p>
-                    </div>
-                `;
-            }
+    // Navegação entre capítulos
+    btnPrev.addEventListener('click', () => {
+        if (currentChapterIndex > 0) {
+            currentChapterIndex--;
+            currentChapter = allChapters[currentChapterIndex];
+            mostrarCapituloNoModal();
         }
+    });
 
-        // Iniciar o carregamento
-        init();
-    </script>
+    btnNext.addEventListener('click', async () => {
+        const nextChapterId = currentChapterIndex + 2; // +1 para índice e +1 para próximo
+        
+        // Verifica se já temos o próximo capítulo carregado
+        if (nextChapterId - 1 < allChapters.length) {
+            currentChapterIndex++;
+            currentChapter = allChapters[currentChapterIndex];
+            mostrarCapituloNoModal();
+            return;
+        }
+        
+        // Tenta carregar o próximo capítulo
+        try {
+            const cap = await carregarCapitulo(nextChapterId);
+            if (!cap) {
+                btnNext.disabled = true;
+                return;
+            }
+            
+            // Adiciona ao array de capítulos
+            allChapters.push(cap);
+            maxChapterLoaded = nextChapterId;
+            currentChapterIndex++;
+            currentChapter = cap;
+            
+            // Atualiza a lista de capítulos
+            renderizarCapitulos(allChapters);
+            mostrarCapituloNoModal();
+        } catch (error) {
+            console.error('Erro ao carregar próximo capítulo:', error);
+            btnNext.disabled = true;
+        }
+    });
+
+    // Event listeners
+    btnClose.addEventListener('click', fecharLeitor);
+    
+    // Fechar ao clicar fora do conteúdo
+    readerModal.addEventListener('click', (e) => {
+        if (e.target === readerModal) {
+            fecharLeitor();
+        }
+    });
+
+    // Fechar com ESC
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && readerModal.classList.contains('active')) {
+            fecharLeitor();
+        }
+    });
+
+    // Inicialização
+    async function init() {
+        try {
+            // Carregar dados da novel
+            novelData = await loadNovelData();
+            updateNovelUI(novelData);
+            
+            // Carregar capítulos
+            allChapters = await carregarTodosCapitulos();
+            renderizarCapitulos(allChapters);
+        } catch (error) {
+            console.error('Erro ao carregar dados:', error);
+            chaptersContainer.innerHTML = `
+                <div class="no-chapters">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <h3>Erro ao Carregar Dados</h3>
+                    <p>${error.message}</p>
+                </div>
+            `;
+        }
+    }
+    
+    // Iniciar o carregamento
+    init();
+</script>
 </body>
 </html>
