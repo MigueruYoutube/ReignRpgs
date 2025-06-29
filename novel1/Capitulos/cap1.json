@@ -1,0 +1,9 @@
+{
+    "Id": 2,
+    "Titulo": "Título do Capítulo",
+    "Date": "01 Jan, 2023",
+    "Content": "<p>Conteúdo HTML do capítulo...</p>",
+    "IsNew": true,
+    "IsHot": false,
+    "IsFinal": false
+}
