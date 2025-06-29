@@ -1,0 +1,82 @@
+[
+  {
+    "id": 1,
+    "name": "Kaisen: O Último Guerreiro",
+    "sinopse": "Em um mundo devastado por demônios, Kaisen é o último guerreiro capaz de enfrentar a escuridão. Com poderes ancestrais despertando, ele deve encontrar as relíquias sagradas para salvar a humanidade.",
+    "cover": "https://img.freepik.com/free-psd/book-cover-mockup_125540-572.jpg",
+    "category": ["ação", "aventura", "fantasia"],
+    "IsNew": true,
+    "IsPopular": true,
+    "IsCompleted": false
+  },
+  {
+    "id": 2,
+    "name": "Crônicas do Rei Demônio",
+    "sinopse": "Um jovem herdeiro descobre ser a reencarnação do Rei Demônio e precisa equilibrar seu poder sombrio com sua humanidade enquanto luta contra caçadores de demônios.",
+    "cover": "https://img.freepik.com/free-psd/book-hardcover-mockup_125540-560.jpg",
+    "category": ["fantasia", "drama", "dark fantasy"],
+    "IsNew": false,
+    "IsPopular": true,
+    "IsCompleted": false
+  },
+  {
+    "id": 3,
+    "name": "Jardim das Lembranças Perdidas",
+    "sinopse": "Uma história emocionante sobre uma jovem que descobre um jardim mágico onde pode acessar memórias de vidas passadas, revelando segredos de família enterrados há gerações.",
+    "cover": "https://img.freepik.com/free-psd/book-cover-mockup_125540-576.jpg",
+    "category": ["romance", "drama", "sobrenatural"],
+    "IsNew": true,
+    "IsPopular": false,
+    "IsCompleted": false
+  },
+  {
+    "id": 4,
+    "name": "O Alquimista Errante",
+    "sinopse": "Um alquimista imortal viaja por mundos paralelos em busca do segredo para quebrar sua maldição, ajudando pessoas com seus conhecimentos alquímicos.",
+    "cover": "https://img.freepik.com/free-psd/book-cover-mockup_125540-573.jpg",
+    "category": ["isekai", "aventura", "fantasia"],
+    "IsNew": false,
+    "IsPopular": true,
+    "IsCompleted": true
+  },
+  {
+    "id": 5,
+    "name": "Necromante da Academia Real",
+    "sinopse": "Na prestigiada Academia Real de Magia, um jovem descobre ter o raro dom da necromancia e deve escondê-lo enquanto investiga uma conspiração que ameaça o reino.",
+    "cover": "https://img.freepik.com/free-psd/book-cover-mockup_125540-571.jpg",
+    "category": ["fantasia", "mistério", "magia"],
+    "IsNew": true,
+    "IsPopular": true,
+    "IsCompleted": false
+  },
+  {
+    "id": 6,
+    "name": "A Princesa e o Espadachim",
+    "sinopse": "Uma princesa em fuga e um espadachim sem memória se unem em uma jornada para recuperar o trono roubado, descobrindo segredos que mudarão seus destinos.",
+    "cover": "https://img.freepik.com/free-psd/book-cover-mockup_125540-574.jpg",
+    "category": ["romance", "aventura", "drama"],
+    "IsNew": false,
+    "IsPopular": false,
+    "IsCompleted": true
+  },
+  {
+    "id": 7,
+    "name": "Reencarnado como um Slime",
+    "sinopse": "Um homem moderno reencarna em um mundo de fantasia como um slime fraco, mas com habilidades únicas que o levam a se tornar um dos seres mais poderosos.",
+    "cover": "https://img.freepik.com/free-psd/book-cover-mockup_125540-575.jpg",
+    "category": ["isekai", "comédia", "aventura"],
+    "IsNew": false,
+    "IsPopular": true,
+    "IsCompleted": false
+  },
+  {
+    "id": 8,
+    "name": "O Trono das Sombras",
+    "sinopse": "Guerra política, intriga e magia negra se entrelaçam quando três famílias nobres disputam o controle do misterioso Trono das Sombras.",
+    "cover": "https://img.freepik.com/free-psd/book-cover-mockup_125540-577.jpg",
+    "category": ["dark fantasy", "drama", "político"],
+    "IsNew": true,
+    "IsPopular": false,
+    "IsCompleted": false
+  }
+]
