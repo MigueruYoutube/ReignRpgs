@@ -897,7 +897,7 @@ function converterData(dataStr) {
             
             while (true) {
                 try {
-                    const response = await fetch(`./Novels/${novelId}/Capitulos/cap${id}.json`);
+                    const response = await fetch(`Novels/${novelId}/Capitulos/cap${id}.json`);
                     if (!response.ok) {
                         break;
                     }
