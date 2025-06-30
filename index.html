@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NovelVerse - Seu Portal de Novels</title>
+    <title>Reign Of Rpg's - Novels</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
     <style>
@@ -36,6 +36,36 @@
             line-height: 1.6;
             min-height: 100vh;
             padding-bottom: 50px;
+        }
+
+        /* Welcome Notification */
+        .welcome-notification {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--primary);
+            color: white;
+            padding: 8px 20px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            z-index: 2000;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            opacity: 0;
+            transition: opacity 0.5s ease, top 0.5s ease;
+            font-size: 0.6rem;
+            pointer-events: none; /* Permite clicar através da notificação */
+        }
+
+        .welcome-notification.show {
+            opacity: 1;
+            top: 20px;
+        }
+
+        .welcome-notification i {
+            font-size: 0.6rem;
         }
 
         /* Header */
@@ -209,6 +239,7 @@
             height: 100%;
             position: relative;
             flex-shrink: 0;
+            cursor: pointer;
         }
 
         .slide-image {
@@ -220,14 +251,13 @@
             left: 0;
         }
 
-        .slide-image::after {
-            content: '';
+        .slide-overlay {
             position: absolute;
-            bottom: 0;
+            top: 0;
             left: 0;
             right: 0;
-            height: 60%;
-            background: linear-gradient(transparent, rgba(0, 0, 0, 0.9));
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.3);
         }
 
         .slide-content {
@@ -235,15 +265,15 @@
             bottom: 0;
             left: 0;
             right: 0;
-            padding: 30px;
-            padding-top: 80px;
+            padding: 20px;
+            padding-top: 60px;
             z-index: 2;
         }
 
         .slide-badges {
             display: flex;
             gap: 10px;
-            margin-bottom: 15px;
+            margin-bottom: 10px;
         }
 
         .slide-badge {
@@ -255,6 +285,7 @@
 
         .badge-new {
             background: var(--primary);
+            color: white;
         }
 
         .badge-popular {
@@ -264,47 +295,50 @@
 
         .badge-completed {
             background: var(--red);
+            color: white;
         }
 
         .slide-title {
-            font-size: 2.2rem;
-            margin-bottom: 10px;
+            font-size: 1.5rem;
+            margin-bottom: 8px;
             color: white;
             text-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
         }
 
-        .slide-description {
+        .slide-meta {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 10px;
+            font-size: 0.6rem;
             color: var(--gray);
-            margin-bottom: 20px;
+        }
+
+        .slide-meta .date {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .slide-meta .date i {
+            font-size: 0.5rem;
+        }
+
+        .slide-description {
+            color: white;
+            margin-bottom: 15px;
             max-width: 600px;
             display: -webkit-box;
             -webkit-line-clamp: 2;
             -webkit-box-orient: vertical;
             overflow: hidden;
             text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
-        }
-
-        .slide-link {
-            display: inline-block;
-            padding: 10px 25px;
-            background: var(--primary);
-            color: white;
-            text-decoration: none;
-            border-radius: 5px;
-            font-weight: 500;
-            transition: var(--transition);
-        }
-
-        .slide-link:hover {
-            background: var(--primary-dark);
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(156, 39, 176, 0.4);
+            font-size: 0.9rem;
         }
 
         .carousel-controls {
             position: absolute;
-            bottom: 30px;
-            right: 30px;
+            bottom: 20px;
+            right: 20px;
             display: flex;
             gap: 10px;
             z-index: 3;
@@ -340,6 +374,7 @@
             transition: var(--transition);
             box-shadow: var(--shadow);
             position: relative;
+            cursor: pointer;
         }
 
         .novel-card:hover {
@@ -397,6 +432,24 @@
             overflow: hidden;
         }
 
+        .card-meta {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.6rem;
+            color: var(--gray);
+            margin-bottom: 8px;
+        }
+
+        .card-meta .date {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .card-meta .date i {
+            font-size: 0.5rem;
+        }
+
         .card-categories {
             display: flex;
             flex-wrap: wrap;
@@ -419,26 +472,8 @@
             -webkit-line-clamp: 2;
             -webkit-box-orient: vertical;
             overflow: hidden;
-            margin-bottom: 15px;
+            margin-bottom: 10px;
             min-height: 40px;
-        }
-
-        .card-link {
-            display: block;
-            width: 100%;
-            padding: 8px;
-            background: var(--primary);
-            color: white;
-            text-align: center;
-            text-decoration: none;
-            border-radius: 5px;
-            font-size: 0.9rem;
-            font-weight: 500;
-            transition: var(--transition);
-        }
-
-        .card-link:hover {
-            background: var(--primary-dark);
         }
 
         /* Footer */
@@ -600,12 +635,12 @@
             }
             
             .slide-title {
-                font-size: 1.8rem;
+                font-size: 1.3rem;
             }
             
             .slide-content {
-                padding: 20px;
-                padding-top: 60px;
+                padding: 15px;
+                padding-top: 50px;
             }
             
             .novels-grid {
@@ -634,7 +669,7 @@
             }
             
             .slide-title {
-                font-size: 1.5rem;
+                font-size: 1.2rem;
             }
             
             .section-title {
@@ -664,43 +699,50 @@
         .slide {
             scroll-snap-align: start;
         }
-    :root {
-    --orange: #ffd700;
-}
 
-.filters {
-    display: inline-block;
-}
+        :root {
+            --orange: #ffd700;
+        }
 
-#filterSelect {
-    appearance: none;
-    -webkit-appearance: none;
-    -moz-appearance: none;
+        .filters {
+            display: inline-block;
+        }
 
-    background: transparent;
-    border: none;
-    color: var(--orange);
-    font-weight: 500;
-    font-size: 18px;
-    cursor: pointer;
-    padding: 0;
-    margin: 0;
-    outline: none;
-    text-decoration: none;
-}
+        #filterSelect {
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
 
-/* Remove a seta nativa no Chrome */
-#filterSelect::-ms-expand {
-    display: none;
-}
+            background: transparent;
+            border: none;
+            color: var(--orange);
+            font-weight: 500;
+            font-size: 1rem;
+            cursor: pointer;
+            padding: 0;
+            margin: 0;
+            outline: none;
+            text-decoration: none;
+        }
 
-/* Efeito ao passar o mouse */
-#filterSelect:hover {
-    text-decoration: underline;
-}
+        /* Remove a seta nativa no Chrome */
+        #filterSelect::-ms-expand {
+            display: none;
+        }
+
+        /* Efeito ao passar o mouse */
+        #filterSelect:hover {
+            text-decoration: underline;
+        }
     </style>
 </head>
 <body>
+    <!-- Welcome Notification -->
+    <div class="welcome-notification" id="welcomeNotification">
+        <i class="fas fa-book-open"></i>
+        <span>Bem vindo ao Reign of Rpg's!</span>
+    </div>
+    
     <!-- Header -->
     <header>
         <a href="#" class="logo">
@@ -732,7 +774,7 @@
                     <i class="fas fa-fire"></i>
                     Populares
                 </h2>
-                <a href="#" class="section-link">
+                <a href="./PopularNovels.html" class="section-link">
                     Ver todos <i class="fas fa-chevron-right"></i>
                 </a>
             </div>
@@ -783,9 +825,8 @@
                 <h3>Sobre Nós</h3>
                 <p>Reign Of Rpg's é um universo completo dedicado à criação de bots para Discord, mundos de RPG e histórias envolventes de ficção. Atualizamos regularmente com novas experiências e conteúdos.</p>
                   <div class="social-links">
-                    <a href="#" class="social-link"><i class="fab fa-discord"></i></a>
-                    <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
-                    <a href="https://github.com" class="social-link"><i class="fab fa-github"></i></a>
+                    <a href="https://discord.gg/P8CnCTqNV3" class="social-link"><i class="fab fa-discord"></i></a>
+                    <a href="https://github.com/MigueruYoutube" class="social-link"><i class="fab fa-github"></i></a>
                 </div>
             </div>
             
@@ -793,25 +834,25 @@
                 <h3>Links Rápidos</h3>
                 <ul class="footer-links">
                     <li><a href="#"><i class="fas fa-chevron-right"></i> Página Inicial</a></li>
-                    <li><a href="#"><i class="fas fa-chevron-right"></i> Novels Populares</a></li>
-                    <li><a href="#"><i class="fas fa-chevron-right"></i> Atualizações</a></li>
-                    <li><a href="#"><i class="fas fa-chevron-right"></i> Sugerir Novel</a></li>
+                    <li><a href="./PopularNovels.html"><i class="fas fa-chevron-right"></i> Novels Populares</a></li>
+                    <li><a href="./NewNovels.html"><i class="fas fa-chevron-right"></i> Lançados Recentemente</a></li>
+                    <li><a href="https://discord.com/channels/790817989200314380/1388900523637211228"><i class="fas fa-chevron-right"></i> Sugerir Novel</a></li>
                 </ul>
             </div>
             
             <div class="footer-section">
                 <h3>Ajuda</h3>
                 <ul class="footer-links">
-                    <li><a href="#"><i class="fas fa-chevron-right"></i> Como ler</a></li>
-                    <li><a href="#"><i class="fas fa-chevron-right"></i> Reportar erro</a></li>
-                    <li><a href="#"><i class="fas fa-chevron-right"></i> Termos de Uso</a></li>
-                    <li><a href="#"><i class="fas fa-chevron-right"></i> Privacidade</a></li>
+                    <li><a href="./redirects/comoler.html"><i class="fas fa-chevron-right"></i> Como ler</a></li>
+                    <li><a href="https://discord.com/channels/790817989200314380/1378164709940924446"><i class="fas fa-chevron-right"></i> Reportar erro</a></li>
+                    <li><a href="./redirects/termos.html"><i class="fas fa-chevron-right"></i> Termos de Uso</a></li>
+                    <li><a href="./redirects/privacidade.html"><i class="fas fa-chevron-right"></i> Privacidade</a></li>
                 </ul>
             </div>
         </div>
         
         <div class="copyright">
-            &copy; 2023 NovelVerse. Todos os direitos reservados.
+            &copy; 2025 Reign Of Rpg's. Todos os direitos reservados.
         </div>
     </footer>
 
@@ -825,6 +866,7 @@
         const filterSelect = document.getElementById('filterSelect');
         const categoriesNav = document.getElementById('categoriesNav');
         const navLinks = document.querySelectorAll('.nav-link');
+        const welcomeNotification = document.getElementById('welcomeNotification');
         
         // Variáveis do carrossel
         let currentSlide = 0;
@@ -833,6 +875,66 @@
         let allCategories = new Set();
         let startX, moveX;
         let isDragging = false;
+
+        // Função para converter data no formato bonito com ícone
+function converterData(dataStr) {
+    const meses = [
+        'jan', 'fev', 'mar', 'abr', 'mai', 'jun',
+        'jul', 'ago', 'set', 'out', 'nov', 'dez'
+    ];
+
+    // Divide a data e ignora a hora
+    const [dataParte] = dataStr.split(',');
+    const [dia, mes, ano] = dataParte.split('/');
+
+    return `<i class="fas fa-calendar-alt"></i> ${dia} ${meses[parseInt(mes) - 1]}, ${ano}`;
+}
+
+        // Função para contar capítulos de um novel
+        async function contarCapitulos(novelId) {
+            let count = 0;
+            let id = 1;
+            
+            while (true) {
+                try {
+                    const response = await fetch(`./Novels/${novelId}/Capitulos/cap${id}.json`);
+                    if (!response.ok) {
+                        break;
+                    }
+                    count++;
+                    id++;
+                } catch (error) {
+                    break;
+                }
+            }
+            
+            return count;
+        }
+
+        // Função para mostrar notificação de boas-vindas
+        function showWelcomeNotification() {
+    // Mostrar a notificação
+    setTimeout(() => {
+        welcomeNotification.classList.add('show');
+    }, 1000);
+    
+    // Esconder e remover após 3 segundos
+    setTimeout(() => {
+        if (welcomeNotification) {
+            welcomeNotification.remove();
+        }
+    }, 4000);
+    
+    // Verificar se é mobile para vibrar
+    if ('vibrate' in navigator && window.innerWidth <= 768) {
+        navigator.vibrate([200, 100, 200]);
+    } else {
+        // Tocar som de notificação no desktop
+        const notificationSound = new Audio('https://assets.mixkit.co/sfx/preview/mixkit-alarm-digital-clock-beep-989.mp3');
+        notificationSound.volume = 0.3;
+        notificationSound.play().catch(e => console.log('Não foi possível tocar o som:', e));
+    }
+}
 
         // Função para buscar os novels
         async function fetchNovels() {
@@ -847,6 +949,12 @@
                 
                 if (!data || data.length === 0) {
                     throw new Error('Nenhum novel disponível');
+                }
+                
+                // Contar capítulos para cada novel
+                for (let novel of data) {
+                    const chaptersCount = await contarCapitulos(novel.id);
+                    novel.chapters = chaptersCount;
                 }
                 
                 return data;
@@ -910,6 +1018,42 @@
             return string.charAt(0).toUpperCase() + string.slice(1);
         }
 
+        // Função para converter data no formato "dd/mm/yyyy, HH:mm" para timestamp
+        function parseBrazilianDate(dateStr) {
+            const [datePart, timePart] = dateStr.split(', ');
+            const [day, month, year] = datePart.split('/').map(Number);
+            const [hours, minutes] = timePart.split(':').map(Number);
+            
+            // Criar data no fuso horário de São Paulo (GMT-3)
+            // Nota: O JavaScript usa o fuso horário do cliente, então precisamos ajustar
+            const date = new Date(year, month - 1, day, hours, minutes);
+            
+            // Ajustar para o fuso horário de São Paulo (GMT-3)
+            // Como o JavaScript já usa o fuso horário local, precisamos compensar
+            // Vamos assumir que o date no JSON está em GMT-3 (horário de SP)
+            const timezoneOffset = date.getTimezoneOffset(); // em minutos
+            const spOffset = 180; // GMT-3 = 180 minutos
+            const adjustedDate = new Date(date.getTime() + (timezoneOffset + spOffset) * 60000);
+            
+            return adjustedDate.getTime();
+        }
+
+        // Função para verificar se um novel é novo (lançado nos últimos 30 dias)
+        function isNovelNew(novel) {
+            if (!novel.date) return false;
+            
+            try {
+                const releaseDate = parseBrazilianDate(novel.date);
+                const now = new Date().getTime();
+                const thirtyDaysInMs = 30 * 24 * 60 * 60 * 1000;
+                
+                return (now - releaseDate) <= thirtyDaysInMs;
+            } catch (e) {
+                console.error('Erro ao verificar data do novel:', e);
+                return false;
+            }
+        }
+
         // Função para renderizar o carrossel
         function renderCarousel(novels) {
             // Filtrar apenas novels populares (IsPopular = true)
@@ -936,9 +1080,9 @@
                 const slide = document.createElement('div');
                 slide.className = 'slide';
                 
-                // Gerar badges
+                // Gerar badges - agora verificando a data
                 const badges = [];
-                if (novel.IsNew) badges.push({text: 'Novo', cls: 'badge-new'});
+                if (isNovelNew(novel)) badges.push({text: 'Novo', cls: 'badge-new'});
                 if (novel.IsPopular) badges.push({text: 'Popular', cls: 'badge-popular'});
                 if (novel.IsCompleted) badges.push({text: 'Completo', cls: 'badge-completed'});
                 
@@ -949,15 +1093,22 @@
                 // Conteúdo do slide
                 slide.innerHTML = `
                     <img src="${novel.cover}" alt="${novel.name}" class="slide-image">
+                    <div class="slide-overlay"></div>
                     <div class="slide-content">
                         <div class="slide-badges">
                             ${badgesHtml}
                         </div>
                         <h2 class="slide-title">${novel.name}</h2>
-                        <p class="slide-description">${novel.sinopse}</p>
-                        <a href="./Novels/${novel.id}/index.html" class="slide-link">Ler Agora</a>
-                    </div>
+                       <div class="slide-meta">
+    <span>${converterData(novel.date) || 'Data não disponível'}</span>
+    <span>${novel.chapters || 0} capítulos</span>
+</div>
                 `;
+                
+                // Adicionar evento de clique para redirecionar
+                slide.addEventListener('click', () => {
+                    window.location.href = `./Novels/${novel.id}/index.html`;
+                });
                 
                 slidesContainer.appendChild(slide);
                 
@@ -1026,9 +1177,9 @@
                 );
             }
             
-            // Filtro de status
+            // Filtro de status - agora verificando a data para "new"
             if (statusFilter === 'new') {
-                filteredNovels = filteredNovels.filter(novel => novel.IsNew);
+                filteredNovels = filteredNovels.filter(novel => isNovelNew(novel));
             } else if (statusFilter === 'popular') {
                 filteredNovels = filteredNovels.filter(novel => novel.IsPopular);
             } else if (statusFilter === 'completed') {
@@ -1059,9 +1210,9 @@
                 const card = document.createElement('div');
                 card.className = 'novel-card';
                 
-                // Gerar badges
+                // Gerar badges - agora verificando a data
                 let badgesHtml = '';
-                if (novel.IsNew) {
+                if (isNovelNew(novel)) {
                     badgesHtml += '<span class="card-badge badge-new">Novo</span>';
                 }
                 if (novel.IsPopular) {
@@ -1088,13 +1239,21 @@
                     </div>
                     <div class="card-content">
                         <h3 class="card-title">${novel.name}</h3>
+<div class="card-meta">
+    <span>${converterData(novel.date) || 'N/D'}</span>
+    <span>${novel.chapters || 0} caps</span>
+</div>
                         <div class="card-categories">
                             ${categoriesHtml}
                         </div>
                         <p class="card-info">${novel.sinopse}</p>
-                        <a href="./Novels/${novel.id}/index.html" class="card-link">Ler Agora</a>
                     </div>
                 `;
+                
+                // Adicionar evento de clique para redirecionar
+                card.addEventListener('click', () => {
+                    window.location.href = `./Novels/${novel.id}/index.html`;
+                });
                 
                 novelsContainer.appendChild(card);
             });
@@ -1164,6 +1323,9 @@
         // Carregar dados quando a página carregar
         window.addEventListener('DOMContentLoaded', async () => {
             try {
+                // Mostrar notificação de boas-vindas
+                showWelcomeNotification();
+                
                 // Buscar dados
                 allNovels = await fetchNovels();
                 

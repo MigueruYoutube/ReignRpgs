@@ -2,12 +2,13 @@
   {
     "id": 1,
     "name": "Guerreiro Imortal: A lenda de Kaisen",
+    "date": "29/06/2025, 14:42",
     "author": "Migueru",
     "authorUrl": "https://www.instagram.com/_miguel.kayky_?igsh=MWJ1eXMzaGFwazl2",
-    "sinopse": "Após perder o irmão em um acidente trágico, Kaisen se entrega ao desespero e tira a própria vida… Mas ele volta. Agora, imortal e caçado, Kaisen precisa descobrir por que a morte o rejeitou — e o que realmente aconteceu com seu irmão.",
-    "cover": "https://imgur.com/a/tN1ABjS#bmvMNVg",
+    "sinopse": "Kaisen perdeu seu irmão numa tragédia que despedaçou sua alma — mas quando ele mesmo sucumbiu à morte, algo impossível aconteceu. Seu corpo foi tomado pela alma de Modrith, um mago espadachim lendário e traído há mil anos, dando a Kaisen um poder inimaginável e uma segunda chance sombria. Agora, com duas almas lutando dentro dele, Kaisen desperta uma força que desafia as regras da vida e da morte. Entre magia ancestral e lâminas afiadas, ele terá que dominar essa nova existência para sobreviver a um mundo que não perdoa",
+    "cover": "https://i.imgur.com/bmvMNVg.png",
     "category": ["ação", "aventura", "drama", "fantasia sombria", "mistério", "sobrenatural"],
-    "IsNew": true,
+    "IsNew": false,
     "IsPopular": true,
     "IsCompleted": false
 }
