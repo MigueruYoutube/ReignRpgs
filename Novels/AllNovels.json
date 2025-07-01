@@ -8,7 +8,18 @@
     "sinopse": "Kaisen perdeu seu irmão numa tragédia que despedaçou sua alma — mas quando ele mesmo sucumbiu à morte, algo impossível aconteceu. Seu corpo foi tomado pela alma de Modrith, um mago espadachim lendário e traído há mil anos, dando a Kaisen um poder inimaginável e uma segunda chance sombria. Agora, com duas almas lutando dentro dele, Kaisen desperta uma força que desafia as regras da vida e da morte. Entre magia ancestral e lâminas afiadas, ele terá que dominar essa nova existência para sobreviver a um mundo que não perdoa",
     "cover": "https://i.imgur.com/bmvMNVg.png",
     "category": ["ação", "aventura", "drama", "fantasia sombria", "mistério", "sobrenatural"],
-    "IsNew": false,
+    "IsPopular": true,
+    "IsCompleted": false
+},
+    {
+    "id": 2,
+    "name": "Cicatrizes de Sangue",
+    "date": "30/06/2025, 23:36",
+    "author": "Migueru",
+    "authorUrl": "https://www.instagram.com/_miguel.kayky_?igsh=MWJ1eXMzaGFwazl2",
+    "sinopse": "Em um mundo onde o sangue clama por vingança, Victor Kane caça o mafioso Dante Moretti após seu irmão ser brutalmente assassinado. Na trilha, ele enfrenta um submundo de tráfico, corrupção e canibalismo — onde aliados armam tanto quanto inimigos, e a verdade corta mais fundo que qualquer lâmina.",
+        "cover": "https://i.imgur.com/on0TuUc.png",
+    "category": ["ação", "suspense psicológico", "drama", "crime", "mistério"],
     "IsPopular": true,
     "IsCompleted": false
 }
