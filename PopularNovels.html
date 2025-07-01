@@ -55,28 +55,64 @@
         /* Botão Voltar */
         .back-button {
             position: fixed;
-            top: 1.25rem;
-            left: 1.25rem;
             background-color: var(--secondary);
             color: var(--dark);
             border: none;
-            padding: 0.625rem 0.9375rem;
-            border-radius: 0.3125rem;
+            padding: 0.625rem 1.25rem;
+            border-radius: 3.125rem;
             cursor: pointer;
-            font-weight: bold;
-            z-index: 1000;
+            font-weight: 600;
+            z-index: 1001;
             transition: var(--transition);
             box-shadow: var(--shadow);
             display: flex;
             align-items: center;
-            gap: 0.3125rem;
+            gap: 0.5rem;
             font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05rem;
         }
 
         .back-button:hover {
             background-color: var(--primary);
             color: var(--light);
-            transform: translateX(-0.1875rem);
+            transform: translateY(-0.1875rem);
+            box-shadow: 0 0.25rem 0.9375rem rgba(156, 39, 176, 0.4);
+        }
+
+        .back-button:active {
+            transform: translateY(0);
+        }
+
+        .back-button i {
+            transition: var(--transition);
+        }
+
+        .back-button:hover i {
+            transform: translateX(-0.25rem);
+        }
+
+        /* Desktop - Botão no canto superior direito */
+        @media (min-width: 769px) {
+            .back-button {
+                top: 1.25rem;
+                right: 1.25rem;
+                left: auto;
+            }
+            
+            .header-actions {
+                margin-right: 120px; /* Espaço para o botão */
+            }
+        }
+
+        /* Mobile - Botão no canto inferior direito */
+        @media (max-width: 768px) {
+            .back-button {
+                bottom: 1.25rem;
+                right: 1.25rem;
+                top: auto;
+                left: auto;
+            }
         }
 
         /* Header */
@@ -106,7 +142,7 @@
 
         .logo span {
             color: var(--secondary);
-            margin: 0 -0.5625rem 0 0;
+            margin: 0 -0.5625rem 0 -0.56rem;
         }
 
         .logo i {
@@ -117,6 +153,7 @@
             display: flex;
             gap: 0.9375rem;
             align-items: center;
+            position: relative;
         }
 
         .search-container {
@@ -183,17 +220,17 @@
             margin-top: 1.875rem;
         }
 
-.novel-card {
-    background: var(--card-bg);
-    border-radius: var(--border-radius);
-    overflow: hidden;
-    transition: var(--transition);
-    box-shadow: var(--shadow);
-    position: relative;
-    display: grid;
-    grid-template-columns: 15rem 1fr; /* Aumenta o espaço da imagem */
-    min-height: 11.25rem;
-}
+        .novel-card {
+            background: var(--card-bg);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            transition: var(--transition);
+            box-shadow: var(--shadow);
+            position: relative;
+            display: grid;
+            grid-template-columns: 15rem 1fr;
+            min-height: 11.25rem;
+        }
 
         .novel-card:hover {
             transform: translateY(-0.3125rem);
@@ -201,41 +238,42 @@
             box-shadow: 0 0.625rem 1.5625rem rgba(0, 0, 0, 0.4);
         }
 
-.card-img-container {
-    position: relative;
-    height: 100%;
-    overflow: hidden;
-}
+        .card-img-container {
+            position: relative;
+            height: 100%;
+            overflow: hidden;
+        }
 
-.card-img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: var(--transition);
-}
+        .card-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
 
-.card-img-container::after {
-    content: '';
-    position: absolute;
-    right: 0;
-    top: 0;
-    width: 6rem; /* Aumenta o degradê para cobrir mais a imagem */
-    height: 100%;
-    background: linear-gradient(90deg, transparent, var(--card-bg));
-}
+        .card-img-container::after {
+            content: '';
+            position: absolute;
+            right: 0;
+            top: 0;
+            width: 6rem;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, var(--card-bg));
+        }
+
         .novel-card:hover .card-img {
             transform: scale(1.1);
         }
 
-     .card-content {
-    padding: 1rem 0.95rem;
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
-    margin-left: -4.5rem; /* Faz o conteúdo avançar sobre a imagem */
-    z-index: 2;
-    position: relative;
-}
+        .card-content {
+            padding: 1rem 0.95rem;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            margin-left: -4.5rem;
+            z-index: 2;
+            position: relative;
+        }
 
         .card-title {
             font-size: 1.1rem;
@@ -314,26 +352,26 @@
             align-items: center;
         }
 
-.popular-badge, .completed-badge, .new-badge {
-    color: var(--light);
-    padding: 0.1875rem 0.5rem;
-    border-radius: 0.3125rem;
-    font-weight: bold;
-    white-space: nowrap;
-    font-size: 0.4rem;
-}
+        .popular-badge, .completed-badge, .new-badge {
+            color: var(--light);
+            padding: 0.1875rem 0.5rem;
+            border-radius: 0.3125rem;
+            font-weight: bold;
+            white-space: nowrap;
+            font-size: 0.4rem;
+        }
 
-.popular-badge {
-    background: var(--orange);
-}
+        .popular-badge {
+            background: var(--orange);
+        }
 
-.completed-badge {
-    background: var(--red);
-}
+        .completed-badge {
+            background: var(--red);
+        }
 
-.new-badge {
-    background: var(--primary);
-}
+        .new-badge {
+            background: var(--primary);
+        }
 
         /* Loading */
         .loading {
@@ -375,49 +413,48 @@
         }
 
         /* Responsividade - Apenas para mobile portrait */
-   @media (max-width: 48rem) and (orientation: portrait) {
+        @media (max-width: 48rem) and (orientation: portrait) {
+            .popular-badge,
+            .completed-badge,
+            .new-badge, .card-category {
+                font-size: 0.6rem;
+            }
+             
+            .card-info {
+                font-size: 0.7rem;
+            }
 
-.popular-badge,
-.completed-badge,
-.new-badge, .card-category {
-    font-size: 0.6rem;
-}
-     
-.card-info {
-  font-size: 0.7rem;
-}
+            .novels-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .novel-card {
+                grid-template-columns: 1fr;
+                min-height: auto;
+            }
+            
+            .card-img-container {
+                height: 12.5rem;
+            }
+            
+            .card-img-container::after {
+                display: none;
+            }
+            
+            .card-content {
+                padding: 1.5rem;
+                margin-left: 0;
+            }
 
-    .novels-grid {
-        grid-template-columns: 1fr;
-    }
-    
-    .novel-card {
-        grid-template-columns: 1fr; /* Layout em uma coluna só */
-        min-height: auto;
-    }
-    
-    .card-img-container {
-        height: 12.5rem; /* Altura da capa padrão no mobile */
-    }
-    
-    .card-img-container::after {
-        display: none; /* Remove o degradê lateral no mobile */
-    }
-    
-    .card-content {
-        padding: 1.5rem;
-        margin-left: 0; /* Conteúdo não invade a imagem no mobile */
-    }
-
-    .search-container {
-        width: 9.375rem;
-    }
-    
-    .back-button {
-        padding: 0.5rem 0.75rem;
-        font-size: 0.875rem;
-    }
-}
+            .search-container {
+                width: 9.375rem;
+            }
+            
+            .back-button {
+                padding: 0.5rem 0.75rem;
+                font-size: 0.875rem;
+            }
+        }
     </style>
 </head>
 <body>
@@ -427,7 +464,7 @@
 
     <!-- Header -->
     <header>
-        <a href="#" class="logo">
+        <a href="./index.html" class="logo">
             <i class="fas fa-book"></i>ReignOf<span>Rpg</span>
         </a>
         
@@ -464,6 +501,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const searchInput = document.getElementById('searchInput');
     
     let allNovels = [];
+    let popularNovels = [];
 
     function parseDateBr(dateString) {
         const meses = ['jan', 'fev', 'mar', 'abr', 'mai', 'jun', 'jul', 'ago', 'set', 'out', 'nov', 'dez'];
@@ -548,22 +586,20 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    async function filterHotNovels(novels) {
+    async function processNovels(novels) {
         const processedNovels = [];
         
         for (const novel of novels) {
-            if (novel.IsPopular) {
-                const isNew = novel.date ? isNovelNew(novel.date) : false;
-                const formattedDate = novel.date ? formatDate(novel.date) : 'Data desconhecida';
-                const chapterCount = novel.id ? await getChapterCount(novel.id) : 0;
-                
-                processedNovels.push({
-                    ...novel,
-                    formattedDate: formattedDate,
-                    isNew: isNew,
-                    chapterCount: chapterCount
-                });
-            }
+            const isNew = novel.date ? isNovelNew(novel.date) : false;
+            const formattedDate = novel.date ? formatDate(novel.date) : 'Data desconhecida';
+            const chapterCount = novel.id ? await getChapterCount(novel.id) : 0;
+            
+            processedNovels.push({
+                ...novel,
+                formattedDate: formattedDate,
+                isNew: isNew,
+                chapterCount: chapterCount
+            });
         }
         
         return processedNovels;
@@ -598,10 +634,7 @@ document.addEventListener('DOMContentLoaded', function() {
         if (filter) {
             const searchTerm = filter.toLowerCase();
             filteredNovels = filteredNovels.filter(novel => 
-                novel.name.toLowerCase().includes(searchTerm) || 
-                novel.author.toLowerCase().includes(searchTerm) ||
-                novel.sinopse.toLowerCase().includes(searchTerm) ||
-                novel.category.some(cat => cat.toLowerCase().includes(searchTerm))
+                novel.name.toLowerCase().includes(searchTerm)
             );
         }
         
@@ -609,7 +642,7 @@ document.addEventListener('DOMContentLoaded', function() {
             novelsContainer.innerHTML = `
                 <div class="empty-state" style="grid-column: 1/-1; text-align: center; padding: 2.5rem 1.25rem; background: rgba(0,0,0,0.2); border-radius: var(--border-radius);">
                     <i class="fas fa-search" style="font-size: 2rem; color: var(--light-gray); margin-bottom: 0.9375rem;"></i>
-                    <h3 style="margin-bottom: 0.625rem;">Nenhum novel em destaque encontrado</h3>
+                    <h3 style="margin-bottom: 0.625rem;">Nenhum novel encontrado</h3>
                     <p style="color: var(--light-gray);">Tente ajustar sua pesquisa</p>
                 </div>
             `;
@@ -680,8 +713,17 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     searchInput.addEventListener('input', (e) => {
-        const filtered = filterHotNovels(allNovels);
-        renderNovelCards(filtered, e.target.value);
+        const searchTerm = e.target.value.trim();
+        if (searchTerm === '') {
+            // Se a barra de pesquisa estiver vazia, mostrar todas as novels populares
+            renderNovelCards(popularNovels);
+        } else {
+            // Filtrar novels populares pelo nome (qualquer parte do nome)
+            const filtered = popularNovels.filter(novel => 
+                novel.name.toLowerCase().includes(searchTerm.toLowerCase())
+            );
+            renderNovelCards(filtered);
+        }
     });
 
     (async function() {
@@ -689,11 +731,16 @@ document.addEventListener('DOMContentLoaded', function() {
             const novels = await fetchNovels();
             allNovels = novels;
             
-            const hotNovels = await filterHotNovels(novels);
+            // Processar todas as novels para obter datas formatadas e contagem de capítulos
+            const processedNovels = await processNovels(novels);
+            
+            // Filtrar apenas as novels populares
+            popularNovels = processedNovels.filter(novel => novel.IsPopular);
             
             loadingIndicator.style.display = 'none';
             
-            renderNovelCards(hotNovels);
+            // Mostrar apenas as novels populares inicialmente
+            renderNovelCards(popularNovels);
         } catch (error) {
             alert('Erro ao carregar novels: ' + error.message);
             loadingIndicator.style.display = 'none';

@@ -55,28 +55,64 @@
         /* Botão Voltar */
         .back-button {
             position: fixed;
-            top: 1.25rem;
-            left: 1.25rem;
             background-color: var(--secondary);
             color: var(--dark);
             border: none;
-            padding: 0.625rem 0.9375rem;
-            border-radius: 0.3125rem;
+            padding: 0.625rem 1.25rem;
+            border-radius: 3.125rem;
             cursor: pointer;
-            font-weight: bold;
-            z-index: 1000;
+            font-weight: 600;
+            z-index: 1001;
             transition: var(--transition);
             box-shadow: var(--shadow);
             display: flex;
             align-items: center;
-            gap: 0.3125rem;
+            gap: 0.5rem;
             font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05rem;
         }
 
         .back-button:hover {
             background-color: var(--primary);
             color: var(--light);
-            transform: translateX(-0.1875rem);
+            transform: translateY(-0.1875rem);
+            box-shadow: 0 0.25rem 0.9375rem rgba(156, 39, 176, 0.4);
+        }
+
+        .back-button:active {
+            transform: translateY(0);
+        }
+
+        .back-button i {
+            transition: var(--transition);
+        }
+
+        .back-button:hover i {
+            transform: translateX(-0.25rem);
+        }
+
+        /* Desktop - Botão no canto superior direito */
+        @media (min-width: 769px) {
+            .back-button {
+                top: 1.25rem;
+                right: 1.25rem;
+                left: auto;
+            }
+            
+            .header-actions {
+                margin-right: 120px; /* Espaço para o botão */
+            }
+        }
+
+        /* Mobile - Botão no canto inferior direito */
+        @media (max-width: 768px) {
+            .back-button {
+                bottom: 1.25rem;
+                right: 1.25rem;
+                top: auto;
+                left: auto;
+            }
         }
 
         /* Header */
@@ -106,7 +142,7 @@
 
         .logo span {
             color: var(--secondary);
-            margin: 0 -0.5625rem 0 0;
+            margin: 0 -0.5625rem 0 -0.56rem;
         }
 
         .logo i {
@@ -117,6 +153,7 @@
             display: flex;
             gap: 0.9375rem;
             align-items: center;
+            position: relative;
         }
 
         .search-container {
@@ -421,13 +458,14 @@
     </style>
 </head>
 <body>
+
     <button class="back-button" onclick="window.location.href='./index.html'">
         <i class="fas fa-arrow-left"></i> Voltar
     </button>
 
     <!-- Header -->
     <header>
-        <a href="#" class="logo">
+        <a href="./index.html" class="logo">
             <i class="fas fa-book"></i>ReignOf<span>Rpg</span>
         </a>
         
@@ -464,6 +502,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const searchInput = document.getElementById('searchInput');
     
     let allNovels = [];
+    let filteredNovels = []; // Armazenará as novels já filtradas por data
 
     function parseDateBr(dateString) {
         const meses = ['jan', 'fev', 'mar', 'abr', 'mai', 'jun', 'jul', 'ago', 'set', 'out', 'nov', 'dez'];
@@ -616,36 +655,33 @@ document.addEventListener('DOMContentLoaded', function() {
     function renderNovelCards(novels, filter = '') {
         novelsContainer.innerHTML = '';
         
-        let filteredNovels = [...novels];
+        let displayNovels = [...novels]; // Usamos as novels já pré-filtradas por data
         
         if (filter) {
             const searchTerm = filter.toLowerCase();
-            filteredNovels = filteredNovels.filter(novel => 
-                novel.name.toLowerCase().includes(searchTerm) || 
-                novel.author.toLowerCase().includes(searchTerm) ||
-                novel.sinopse.toLowerCase().includes(searchTerm) ||
-                novel.category.some(cat => cat.toLowerCase().includes(searchTerm))
+            displayNovels = displayNovels.filter(novel => 
+                novel.name.toLowerCase().includes(searchTerm)
             );
         }
         
-        if (filteredNovels.length === 0) {
+        if (displayNovels.length === 0) {
             novelsContainer.innerHTML = `
                 <div class="empty-state" style="grid-column: 1/-1; text-align: center; padding: 2.5rem 1.25rem; background: rgba(0,0,0,0.2); border-radius: var(--border-radius);">
                     <i class="fas fa-search" style="font-size: 2rem; color: var(--light-gray); margin-bottom: 0.9375rem;"></i>
-                    <h3 style="margin-bottom: 0.625rem;">Nenhum novel novo encontrado</h3>
+                    <h3 style="margin-bottom: 0.625rem;">Nenhum novel encontrado</h3>
                     <p style="color: var(--light-gray);">Tente ajustar sua pesquisa</p>
                 </div>
             `;
             return;
         }
         
-        filteredNovels.sort((a, b) => {
+        displayNovels.sort((a, b) => {
             const dateA = a.date ? parseDateBr(a.date) : new Date(0);
             const dateB = b.date ? parseDateBr(b.date) : new Date(0);
             return dateB - dateA;
         });
         
-        filteredNovels.forEach(novel => {
+        displayNovels.forEach(novel => {
             const card = document.createElement('div');
             card.className = 'novel-card';
             
@@ -703,8 +739,8 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     searchInput.addEventListener('input', (e) => {
-        const filtered = filterNewNovels(allNovels);
-        renderNovelCards(filtered, e.target.value);
+        const searchTerm = e.target.value.trim();
+        renderNovelCards(filteredNovels, searchTerm); // Sempre pesquisa apenas nas novels já filtradas por data
     });
 
     (async function() {
@@ -712,11 +748,12 @@ document.addEventListener('DOMContentLoaded', function() {
             const novels = await fetchNovels();
             allNovels = novels;
             
-            const newNovels = await filterNewNovels(novels);
+            filteredNovels = await filterNewNovels(novels); // Armazena as novels filtradas por data
             
             loadingIndicator.style.display = 'none';
             
-            renderNovelCards(newNovels);
+            // Mostra apenas as novels dentro do limite de data
+            renderNovelCards(filteredNovels);
         } catch (error) {
             alert('Erro ao carregar novels: ' + error.message);
             loadingIndicator.style.display = 'none';
