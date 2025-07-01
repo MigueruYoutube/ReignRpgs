@@ -3,24 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Reign Of Rpg's - Novels</title>
+    <title>Reign Of Rpg's - Novels Novas</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary: #9c27b0;
-            --primary-dark: #7b1fa2;
-            --secondary: #ffd700;
-            --dark: #121212;
-            --darker: #0a0a0a;
+            /* Nova paleta de cores */
+            --dark-gray: #0a0a0a;       /* Cinza escuro */
+            --vibrant-purple: #9c27b0;  /* Roxo vibrante */
+            --gold: #ffd700;           /* Dourado */
+            --red: #ff3333;            /* Vermelho */
+            --orange: #ff9933;          /* Laranja */
+            
+            /* Cores auxiliares */
+            --darker: #1a1a1a;
             --light: #ffffff;
-            --gray: #b0b0b0;
-            --red: #f44336;
-            --card-bg: rgba(30, 30, 30, 0.8);
-            --card-hover: rgba(50, 50, 50, 0.8);
+            --light-gray: #cccccc;
+            
+            /* Aplicação das cores */
+            --primary: var(--vibrant-purple);
+            --primary-dark: #7b1fa2;
+            --secondary: var(--gold);
+            --dark: var(--dark-gray);
+            --card-bg: rgb(26,26,26, 0.9);
+            --card-hover: rgb(30,30,30, 0.9);
+            
+            /* Variáveis de layout */
             --transition: all 0.3s ease;
-            --border-radius: 8px;
-            --shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            --border-radius: 0.5rem;
+            --shadow: 0 0.3125rem 0.9375rem rgba(0, 0, 0, 0.3);
+            
+            /* Tamanho base para rem (1rem = 16px) */
+            font-size: 16px;
         }
 
         * {
@@ -35,19 +49,19 @@
             color: var(--light);
             line-height: 1.6;
             min-height: 100vh;
-            padding-bottom: 50px;
+            padding-bottom: 3.125rem;
         }
 
         /* Botão Voltar */
         .back-button {
             position: fixed;
-            top: 20px;
-            left: 20px;
+            top: 1.25rem;
+            left: 1.25rem;
             background-color: var(--secondary);
             color: var(--dark);
             border: none;
-            padding: 10px 15px;
-            border-radius: 5px;
+            padding: 0.625rem 0.9375rem;
+            border-radius: 0.3125rem;
             cursor: pointer;
             font-weight: bold;
             z-index: 1000;
@@ -55,28 +69,29 @@
             box-shadow: var(--shadow);
             display: flex;
             align-items: center;
-            gap: 5px;
+            gap: 0.3125rem;
+            font-size: 1rem;
         }
 
         .back-button:hover {
             background-color: var(--primary);
             color: var(--light);
-            transform: translateX(-3px);
+            transform: translateX(-0.1875rem);
         }
 
         /* Header */
         header {
-            background: rgba(10, 10, 10, 0.95);
-            backdrop-filter: blur(10px);
-            padding: 15px 5%;
+            background: rgba(26, 26, 26, 0.95);
+            backdrop-filter: blur(0.625rem);
+            padding: 0.9375rem 5%;
             position: sticky;
             top: 0;
             z-index: 1000;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-            border-bottom: 1px solid rgba(156, 39, 176, 0.3);
+            box-shadow: 0 0.125rem 0.625rem rgba(0, 0, 0, 0.3);
+            border-bottom: 0.0625rem solid rgba(156, 39, 176, 0.3);
         }
 
         .logo {
@@ -85,13 +100,13 @@
             color: var(--light);
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 0.625rem;
             text-decoration: none;
         }
 
         .logo span {
             color: var(--secondary);
-            margin: 0px -9px 0px;
+            margin: 0 -0.5625rem 0 0;
         }
 
         .logo i {
@@ -100,20 +115,20 @@
 
         .header-actions {
             display: flex;
-            gap: 15px;
+            gap: 0.9375rem;
             align-items: center;
         }
 
         .search-container {
             position: relative;
-            width: 250px;
+            width: 15.625rem;
         }
 
         #searchInput {
             width: 100%;
-            padding: 12px 15px 12px 45px;
-            border-radius: 50px;
-            border: 2px solid rgba(255, 255, 255, 0.1);
+            padding: 0.75rem 0.9375rem 0.75rem 2.8125rem;
+            border-radius: 3.125rem;
+            border: 0.125rem solid rgba(255, 255, 255, 0.1);
             background: rgba(0, 0, 0, 0.3);
             color: var(--light);
             font-size: 1rem;
@@ -128,16 +143,16 @@
 
         .search-icon {
             position: absolute;
-            left: 15px;
+            left: 0.9375rem;
             top: 50%;
             transform: translateY(-50%);
-            color: var(--gray);
+            color: var(--light-gray);
         }
 
         /* Main Content */
         .container {
-            max-width: 1400px;
-            margin: 30px auto;
+            max-width: 87.5rem;
+            margin: 1.875rem auto;
             padding: 0 5%;
         }
 
@@ -145,7 +160,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 20px;
+            margin-bottom: 1.25rem;
         }
 
         .section-title {
@@ -153,7 +168,7 @@
             font-weight: 700;
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 0.625rem;
         }
 
         .section-title i {
@@ -163,9 +178,9 @@
         /* Novels Grid */
         .novels-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 25px;
-            margin-top: 30px;
+            grid-template-columns: repeat(auto-fill, minmax(18.75rem, 1fr));
+            gap: 1.5625rem;
+            margin-top: 1.875rem;
         }
 
         .novel-card {
@@ -176,14 +191,14 @@
             box-shadow: var(--shadow);
             position: relative;
             display: grid;
-            grid-template-columns: 120px 1fr;
-            min-height: 180px; /* Altura mínima para desktop */
+            grid-template-columns: 15rem 1fr;
+            min-height: 11.25rem;
         }
 
         .novel-card:hover {
-            transform: translateY(-5px);
+            transform: translateY(-0.3125rem);
             background: var(--card-hover);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+            box-shadow: 0 0.625rem 1.5625rem rgba(0, 0, 0, 0.4);
         }
 
         .card-img-container {
@@ -199,78 +214,78 @@
             transition: var(--transition);
         }
 
-        /* Gradiente apenas para desktop */
-        @media (min-width: 769px) {
-            .card-img-container::after {
-                content: '';
-                position: absolute;
-                right: 0;
-                top: 0;
-                width: 30px;
-                height: 100%;
-                background: linear-gradient(90deg, transparent, var(--card-bg));
-            }
+        .card-img-container::after {
+            content: '';
+            position: absolute;
+            right: 0;
+            top: 0;
+            width: 6rem;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, var(--card-bg));
         }
 
         .novel-card:hover .card-img {
-            transform: scale(1.05);
+            transform: scale(1.1);
         }
 
         .card-content {
-            padding: 15px;
+            padding: 1rem 0.95rem;
             display: flex;
             flex-direction: column;
             overflow: hidden;
+            margin-left: -4.5rem;
+            z-index: 2;
+            position: relative;
         }
 
         .card-title {
             font-size: 1.1rem;
             font-weight: 600;
-            margin-bottom: 8px;
+            margin-bottom: 0.3rem;
             color: var(--light);
             display: -webkit-box;
             -webkit-line-clamp: 2;
             -webkit-box-orient: vertical;
             overflow: hidden;
             text-overflow: ellipsis;
-            min-height: 2.4em; /* Garante espaço para 2 linhas */
+            min-height: 2.4em;
             line-height: 1.2;
         }
 
         .card-author {
             font-size: 0.85rem;
             color: var(--secondary);
-            margin-bottom: 10px;
+            margin-bottom: 0.625rem;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
         }
 
         .card-sinopse {
-            color: var(--gray);
-            font-size: 0.85rem;
+            color: var(--light-gray);
+            font-size: 0.75rem;
             flex-grow: 1;
             display: -webkit-box;
             -webkit-line-clamp: 3;
             -webkit-box-orient: vertical;
             overflow: hidden;
-            margin-bottom: 15px;
+            margin-bottom: 0.9375rem;
             line-height: 1.4;
         }
 
         .card-categories {
             display: flex;
             flex-wrap: wrap;
-            gap: 5px;
-            margin-bottom: 15px;
+            gap: 0.3125rem;
+            margin-bottom: 0.9375rem;
         }
 
         .card-category {
-            font-size: 0.7rem;
-            padding: 3px 8px;
-            background: rgba(156, 39, 176, 0.2);
-            color: var(--primary);
-            border-radius: 30px;
+            font-size: 0.5rem;
+            padding: 0.1875rem 0.5rem;
+            background: rgba(156, 39, 176, 0.4);
+            color: var(--light-gray);
+            border-radius: 1.875rem;
             text-transform: lowercase;
         }
 
@@ -281,64 +296,63 @@
             margin-top: auto;
         }
 
-        .update-time {
-            font-size: 0.75rem;
-            color: var(--secondary);
+        .card-info {
+            display: flex;
+            gap: 0.5rem;
+            align-items: center;
+            font-size: 0.5rem;
+            color: var(--light-gray);
+        }
+
+        .chapter-count::before {
+            content: "•";
+            margin: 0 0.25rem;
         }
 
         .badges-container {
             display: flex;
-            gap: 5px;
+            gap: 0.3125rem;
             align-items: center;
+        }
+
+        .popular-badge, .completed-badge, .new-badge {
+            color: var(--light);
+            padding: 0.1875rem 0.5rem;
+            border-radius: 0.3125rem;
+            font-weight: bold;
+            white-space: nowrap;
+            font-size: 0.4rem;
+        }
+
+        .popular-badge {
+            background: var(--orange);
+        }
+
+        .completed-badge {
+            background: var(--red);
         }
 
         .new-badge {
             background: var(--primary);
-            color: var(--light);
-            padding: 3px 8px;
-            border-radius: 5px;
-            font-size: 0.7rem;
-            font-weight: bold;
-            white-space: nowrap;
-        }
-
-        .popular-badge {
-            background: orange;
-            color: var(--light);
-            padding: 3px 8px;
-            border-radius: 5px;
-            font-size: 0.7rem;
-            font-weight: bold;
-            white-space: nowrap;
-        }
-
-        .completed-badge {
-            background: blue;
-            color: var(--light);
-            padding: 3px 8px;
-            border-radius: 5px;
-            font-size: 0.7rem;
-            font-weight: bold;
-            white-space: nowrap;
         }
 
         /* Loading */
         .loading {
             text-align: center;
-            padding: 50px 0;
+            padding: 3.125rem 0;
             font-size: 1.2rem;
-            color: var(--gray);
+            color: var(--light-gray);
         }
 
         .loading-spinner {
             display: inline-block;
-            width: 50px;
-            height: 50px;
-            border: 5px solid rgba(156, 39, 176, 0.3);
+            width: 3.125rem;
+            height: 3.125rem;
+            border: 0.3125rem solid rgba(156, 39, 176, 0.3);
             border-radius: 50%;
             border-top-color: var(--primary);
             animation: spin 1s ease-in-out infinite;
-            margin-bottom: 20px;
+            margin-bottom: 1.25rem;
         }
 
         @keyframes spin {
@@ -347,63 +361,61 @@
 
         /* Error Message */
         .error-message {
-            background: rgba(244, 67, 54, 0.2);
-            border: 1px solid var(--red);
+            background: rgba(255, 51, 51, 0.2);
+            border: 0.0625rem solid var(--red);
             border-radius: var(--border-radius);
-            padding: 30px;
+            padding: 1.875rem;
             text-align: center;
-            margin: 50px 0;
+            margin: 3.125rem 0;
         }
 
         .error-message i {
             font-size: 3rem;
             color: var(--red);
-            margin-bottom: 20px;
+            margin-bottom: 1.25rem;
         }
 
-        /* Responsividade */
-        @media (max-width: 768px) {
+        /* Responsividade - Apenas para mobile portrait */
+        @media (max-width: 48rem) and (orientation: portrait) {
+            .popular-badge,
+            .completed-badge,
+            .new-badge, .card-category {
+                font-size: 0.6rem;
+            }
+             
+            .card-info {
+                font-size: 0.7rem;
+            }
+
             .novels-grid {
                 grid-template-columns: 1fr;
             }
             
-            .novel-card {
-                grid-template-columns: 100px 1fr;
-                min-height: 160px;
-            }
-            
-            .search-container {
-                width: 200px;
-            }
-        }
-
-        @media (max-width: 480px) {
             .novel-card {
                 grid-template-columns: 1fr;
                 min-height: auto;
             }
             
             .card-img-container {
-                height: 200px;
+                height: 12.5rem;
             }
             
+            .card-img-container::after {
+                display: none;
+            }
+            
+            .card-content {
+                padding: 1.5rem;
+                margin-left: 0;
+            }
+
             .search-container {
-                width: 150px;
+                width: 9.375rem;
             }
             
             .back-button {
-                padding: 8px 12px;
-                font-size: 14px;
-            }
-        }
-
-        @media (min-width: 1024px) and (orientation: landscape) {
-            .novel-card {
-                min-height: 200px;
-            }
-            
-            .card-img-container {
-                min-width: 150px;
+                padding: 0.5rem 0.75rem;
+                font-size: 0.875rem;
             }
         }
     </style>
@@ -431,8 +443,8 @@
     <div class="container">
         <div class="section-header">
             <h2 class="section-title">
-                <i class="fas fa-book-open"></i>
-                Novels Recentes
+                <i class="fas fa-star"></i>
+                Novels Novas
             </h2>
         </div>
         
@@ -453,77 +465,131 @@ document.addEventListener('DOMContentLoaded', function() {
     
     let allNovels = [];
 
-    function getCurrentSaoPauloTime() {
-        const now = new Date();
-        const offset = -3 * 60;
-        return new Date(now.getTime() + (offset - now.getTimezoneOffset()) * 60000);
+    function parseDateBr(dateString) {
+        const meses = ['jan', 'fev', 'mar', 'abr', 'mai', 'jun', 'jul', 'ago', 'set', 'out', 'nov', 'dez'];
+        const spTimeZone = 'America/Sao_Paulo';
+
+        let dia, mes, ano, hora, minuto;
+
+        // Formato 1: 25 jan, 2025 - 14:56
+        if (dateString.includes(',') && dateString.includes('-')) {
+            const [dataPart, horaPart] = dateString.split(' - ');
+            const [d, m, a] = dataPart.replace(',', '').split(' ');
+            dia = parseInt(d);
+            mes = meses.indexOf(m.toLowerCase());
+            ano = parseInt(a);
+            [hora, minuto] = horaPart.split(':').map(Number);
+        } 
+        
+        // Formato 2: 25/01/2025, 14:56
+        else if (dateString.includes('/') && dateString.includes(',')) {
+            const [dataPart, horaPart] = dateString.split(',');
+            const [d, m, a] = dataPart.split('/').map(Number);
+            dia = d;
+            mes = m - 1;
+            ano = a;
+            [hora, minuto] = horaPart.trim().split(':').map(Number);
+        } 
+        
+        else {
+            return null;
+        }
+
+        // Cria a data em São Paulo corretamente
+        return new Date(Date.UTC(ano, mes, dia, hora, minuto)) || null;
     }
 
-    function parseNovelDate(dateString) {
-        try {
-            const [datePart, timePart] = dateString.split(',');
-            const [day, month, year] = datePart.trim().split('/').map(Number);
-            const [hours, minutes] = timePart.trim().split(':').map(Number);
+    function isDateNew(dateString, diasLimite) {
+        const date = parseDateBr(dateString);
+        if (!date) return false;
 
-            const dateObj = new Date(year, month - 1, day, hours, minutes);
-            return dateObj.getTime();
-        } catch (err) {
-            alert("Erro ao converter data da novel: " + dateString);
+        const now = new Date();
+        const spNow = new Date(now.toLocaleString('en-US', { timeZone: 'America/Sao_Paulo' }));
+
+        const diffTime = Math.abs(spNow - date);
+        const diffDays = diffTime / (1000 * 60 * 60 * 24);
+
+        return diffDays <= diasLimite;
+    }
+
+    // Para Novel (30 dias)
+    function isNovelNew(dateString) {
+        return isDateNew(dateString, 30);
+    }
+
+    function formatDate(dateString) {
+        const date = parseDateBr(dateString);
+        if (!date) return 'Data inválida';
+
+        const dia = String(date.getUTCDate()).padStart(2, '0');
+        const ano = date.getUTCFullYear();
+        const meses = ['jan', 'fev', 'mar', 'abr', 'mai', 'jun', 'jul', 'ago', 'set', 'out', 'nov', 'dez'];
+        const mes = meses[date.getUTCMonth()];
+
+        return `<i class="far fa-calendar"></i> ${dia} ${mes}, ${ano}`;
+    }
+
+    function formatTimeDifference(dateString) {
+        const date = parseDateBr(dateString);
+        if (!date) return 'Data inválida';
+
+        const now = new Date();
+        const spNow = new Date(now.toLocaleString('en-US', { timeZone: 'America/Sao_Paulo' }));
+        
+        const diffTime = Math.abs(spNow - date);
+        const diffMinutes = Math.floor(diffTime / (1000 * 60));
+        
+        if (diffMinutes < 60) {
+            return `Há ${diffMinutes}min`;
+        }
+        
+        const diffHours = Math.floor(diffMinutes / 60);
+        
+        if (diffHours < 24) {
+            return `Há ${diffHours}h`;
+        }
+        
+        const diffDays = Math.floor(diffHours / 24);
+        return `Há ${diffDays}d`;
+    }
+
+    async function getChapterCount(novelId) {
+        try {
+            let capIndex = 1;
+            let chapterCount = 0;
+            
+            while (true) {
+                const response = await fetch(`./Novels/${novelId}/Capitulos/cap${capIndex}.json`);
+                if (!response.ok) break;
+                chapterCount++;
+                capIndex++;
+            }
+            
+            return chapterCount;
+        } catch (error) {
+            console.error(`Erro ao contar capítulos para novel ${novelId}:`, error);
             return 0;
         }
     }
 
-    function filterRecentNovels(novels) {
-    const now = Date.now();
-
-    return novels.filter(novel => {
-        if (!novel.date) return false;
-        const novelTimestamp = parseNovelDate(novel.date);
-        const thirtyDaysInMs = 1000 * 60 * 60 * 24 * 30; // Alterado de 3 para 30 dias
-        return (now - novelTimestamp) <= thirtyDaysInMs;
-    }).map(novel => {
-        const novelTimestamp = parseNovelDate(novel.date);
-        return {
-            ...novel,
-            formattedDate: formatTimeDifference(novelTimestamp)
-        };
-    });
-}
-
-    function formatTimeDifference(novelTimestamp) {
-        const now = Date.now();
-        const diffInMs = now - novelTimestamp;
-        const diffInMinutes = Math.floor(diffInMs / (1000 * 60));
-
-        if (diffInMinutes < 60) {
-            return `Há ${diffInMinutes}min`;
+    async function filterNewNovels(novels) {
+        const processedNovels = [];
+        
+        for (const novel of novels) {
+            if (novel.date && isNovelNew(novel.date)) {
+                const formattedDate = novel.date ? formatTimeDifference(novel.date) : 'Data desconhecida';
+                const chapterCount = novel.id ? await getChapterCount(novel.id) : 0;
+                
+                processedNovels.push({
+                    ...novel,
+                    formattedDate: formattedDate,
+                    isNew: true,
+                    chapterCount: chapterCount
+                });
+            }
         }
-
-        const diffInHours = Math.floor(diffInMinutes / 60);
-
-        if (diffInHours < 24) {
-            return `Há ${diffInHours}h`;
-        }
-
-        const diffInDays = Math.floor(diffInHours / 24);
-        return `Há ${diffInDays}d`;
-    }
-
-    function filterRecentNovels(novels) {
-        const now = Date.now();
-
-        return novels.filter(novel => {
-            if (!novel.date) return false;
-            const novelTimestamp = parseNovelDate(novel.date);
-            const threeDaysInMs = 1000 * 60 * 60 * 24 * 3;
-            return (now - novelTimestamp) <= threeDaysInMs;
-        }).map(novel => {
-            const novelTimestamp = parseNovelDate(novel.date);
-            return {
-                ...novel,
-                formattedDate: formatTimeDifference(novelTimestamp)
-            };
-        });
+        
+        return processedNovels;
     }
 
     async function fetchNovels() {
@@ -564,18 +630,18 @@ document.addEventListener('DOMContentLoaded', function() {
         
         if (filteredNovels.length === 0) {
             novelsContainer.innerHTML = `
-                <div class="empty-state" style="grid-column: 1/-1; text-align: center; padding: 40px 20px; background: rgba(0,0,0,0.2); border-radius: var(--border-radius);">
-                    <i class="fas fa-search" style="font-size: 2rem; color: var(--gray); margin-bottom: 15px;"></i>
-                    <h3 style="margin-bottom: 10px;">Nenhum novel recente encontrado</h3>
-                    <p style="color: var(--gray);">Tente ajustar sua pesquisa</p>
+                <div class="empty-state" style="grid-column: 1/-1; text-align: center; padding: 2.5rem 1.25rem; background: rgba(0,0,0,0.2); border-radius: var(--border-radius);">
+                    <i class="fas fa-search" style="font-size: 2rem; color: var(--light-gray); margin-bottom: 0.9375rem;"></i>
+                    <h3 style="margin-bottom: 0.625rem;">Nenhum novel novo encontrado</h3>
+                    <p style="color: var(--light-gray);">Tente ajustar sua pesquisa</p>
                 </div>
             `;
             return;
         }
         
         filteredNovels.sort((a, b) => {
-            const dateA = parseNovelDate(a.date);
-            const dateB = parseNovelDate(b.date);
+            const dateA = a.date ? parseDateBr(a.date) : new Date(0);
+            const dateB = b.date ? parseDateBr(b.date) : new Date(0);
             return dateB - dateA;
         });
         
@@ -591,13 +657,16 @@ document.addEventListener('DOMContentLoaded', function() {
             }
 
             let badgesHtml = '<div class="badges-container">';
-            badgesHtml += `<span class="new-badge">NOVO</span>`;
+            if (novel.isNew) {
+                badgesHtml += `<span class="new-badge">NOVO</span>`;
+            }
             if (novel.IsPopular) {
                 badgesHtml += `<span class="popular-badge">Popular</span>`;
             }
             if (novel.IsCompleted) {
                 badgesHtml += `<span class="completed-badge">Completo</span>`;
             }
+            
             badgesHtml += '</div>';
 
             card.innerHTML = `
@@ -612,7 +681,10 @@ document.addEventListener('DOMContentLoaded', function() {
                         ${categoriesHtml}
                     </div>
                     <div class="card-footer">
-                        <span class="update-time">${novel.formattedDate}</span>
+                        <div class="card-info">
+                            <span class="update-time">${novel.formattedDate}</span>
+                            ${novel.chapterCount > 0 ? `<span class="chapter-count">${novel.chapterCount} capítulos</span>` : ''}
+                        </div>
                         ${badgesHtml}
                     </div>
                 </div>
@@ -631,7 +703,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     searchInput.addEventListener('input', (e) => {
-        const filtered = filterRecentNovels(allNovels);
+        const filtered = filterNewNovels(allNovels);
         renderNovelCards(filtered, e.target.value);
     });
 
@@ -640,11 +712,11 @@ document.addEventListener('DOMContentLoaded', function() {
             const novels = await fetchNovels();
             allNovels = novels;
             
-            const recentNovels = filterRecentNovels(novels);
+            const newNovels = await filterNewNovels(novels);
             
             loadingIndicator.style.display = 'none';
             
-            renderNovelCards(recentNovels);
+            renderNovelCards(newNovels);
         } catch (error) {
             alert('Erro ao carregar novels: ' + error.message);
             loadingIndicator.style.display = 'none';
