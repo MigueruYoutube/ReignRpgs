@@ -1394,25 +1394,25 @@ async function atualizarVisitantes() {
   const visitasTexto = document.getElementById('visitas-texto');
   
   try {
-    // Monta a URL do hits.sh com base no endereço atual da página
-    // A hits.sh usa o domínio + caminho pra contar
-    // Remove protocolo e adiciona o pathname completo
-    const sitePath = window.location.host + window.location.pathname;
+    // Pega o host e o pathname
+    const host = window.location.host; // migueruyoutube.github.io
+    let pathname = window.location.pathname; // /ReignRpgs/Novels/5/index.html
     
-    // Monta a URL do hits.sh para pegar os dados
-    const hitsUrl = `https://hits.sh/${sitePath}`;
+    // hits.sh não quer barra no final, mas é bom garantir
+    if (pathname.endsWith('/')) {
+      pathname = pathname.slice(0, -1);
+    }
+    
+    const hitsUrl = `https://hits.sh/${host}${pathname}`;
     
     const response = await fetch(hitsUrl);
     if (!response.ok) throw new Error('Erro na resposta da API');
     
     const data = await response.json();
-    
-    // Pega visitantes ou 1 se não tiver
     const visitantes = data.visitors || 1;
     
     visitasTexto.innerHTML = `<i class="fas fa-eye"></i> ${visitantes}`;
   } catch (e) {
-    // Se der erro, mostra 1
     visitasTexto.innerHTML = `<i class="fas fa-eye"></i> 1`;
   }
 }
