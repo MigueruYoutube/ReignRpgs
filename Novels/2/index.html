@@ -572,6 +572,7 @@
         line-height: 1.8;
         font-size: clamp(1rem, 1.1vw, 1.1rem);
         color: var(--light-gray);
+        scroll-behavior: smooth;
     }
 
     .reader-body p {
@@ -1269,6 +1270,12 @@
         // Mostrar modal
         readerModal.classList.add('active');
         document.body.style.overflow = 'hidden';
+        
+        // Scroll para o topo com animação
+        readerBody.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
     }
 
     // Fechar leitor
@@ -1283,6 +1290,12 @@
             currentChapterIndex--;
             currentChapter = allChapters[currentChapterIndex];
             mostrarCapituloNoModal();
+            
+            // Scroll para o topo com animação
+            readerBody.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
         }
     });
 
@@ -1294,6 +1307,12 @@
             currentChapterIndex++;
             currentChapter = allChapters[currentChapterIndex];
             mostrarCapituloNoModal();
+            
+            // Scroll para o topo com animação
+            readerBody.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
             return;
         }
         
@@ -1314,6 +1333,12 @@
             // Atualiza a lista de capítulos
             renderizarCapitulos(allChapters, isSearching);
             mostrarCapituloNoModal();
+            
+            // Scroll para o topo com animação
+            readerBody.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
         } catch (error) {
             console.error('Erro ao carregar próximo capítulo:', error);
             btnNext.disabled = true;
