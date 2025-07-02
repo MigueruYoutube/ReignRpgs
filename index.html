@@ -222,15 +222,20 @@
             text-decoration: underline;
         }
 
+        /* Carousel Section */
+        .carousel-section {
+            margin-bottom: 2.5rem;
+        }
+
         /* Carousel */
         .carousel {
             position: relative;
             border-radius: var(--border-radius);
             overflow: hidden;
-            margin-bottom: 2.5rem;
-            height: 25rem;
-            box-shadow: var(--shadow);
             transition: opacity 0.3s ease, height 0.3s ease, margin 0.3s ease;
+            width: 100%;
+            padding-bottom: 56.25%; /* 16:9 aspect ratio */
+            height: 0;
         }
 
         .carousel.hidden {
@@ -241,8 +246,12 @@
         }
 
         .slides-container {
-            display: flex;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
             height: 100%;
+            display: flex;
             transition: transform 0.5s ease;
             scroll-behavior: smooth;
         }
@@ -262,6 +271,7 @@
             position: absolute;
             top: 0;
             left: 0;
+            z-index: 1;
         }
 
         .slide-overlay {
@@ -270,7 +280,8 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: rgba(0, 0, 0, 0.3);
+            background: linear-gradient(to top, rgb(18,18,18, 1) 0%, rgb(18,18,18, 0) 30%, transparent 100%);
+            z-index: 2;
         }
 
         .slide-content {
@@ -280,7 +291,7 @@
             right: 0;
             padding: 1.25rem;
             padding-top: 3.75rem;
-            z-index: 2;
+            z-index: 3;
         }
 
         .slide-badges {
@@ -344,7 +355,7 @@
             -webkit-line-clamp: 2;
             -webkit-box-orient: vertical;
             overflow: hidden;
-            text-shadow: 0 0.0625rem 0.1875rem rgba(0, 0, 0, 0.5);
+            text-shadow: 0 0.0625rem 0.1875rem rgba(0, 0, 0, 0.1);
             font-size: 0.9rem;
         }
 
@@ -354,7 +365,7 @@
             right: 1.25rem;
             display: flex;
             gap: 0.625rem;
-            z-index: 3;
+            z-index: 4;
         }
 
         .control-btn {
@@ -643,10 +654,6 @@
                 width: 100%;
             }
             
-            .carousel {
-                height: 21.875rem;
-            }
-            
             .slide-title {
                 font-size: 1.3rem;
             }
@@ -676,10 +683,6 @@
             
             .header-actions {
                 flex-wrap: wrap;
-            }
-            
-            .carousel {
-                height: 18.75rem;
             }
             
             .slide-title {
@@ -786,7 +789,7 @@
     <!-- Main Content -->
     <div class="container">
         <!-- Carrossel de Populares -->
-        <section>
+        <section class="carousel-section">
             <div class="section-header">
                 <h2 class="section-title">
                     <i class="fas fa-fire"></i>
