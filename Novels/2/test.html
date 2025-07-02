@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <title>Contador com CounterAPI.dev</title>
+  <style>
+    body {
+      background: #121212;
+      color: #9c27b0;
+      font-family: Arial, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .stat-item {
+      background: rgba(255, 255, 255, 0.05);
+      padding: 15px 25px;
+      border-radius: 12px;
+      box-shadow: 0 0 8px rgba(0,0,0,0.6);
+      text-align: center;
+      user-select: none;
+    }
+    .stat-value {
+      font-size: 48px;
+      font-weight: bold;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .stat-value i {
+      margin-right: 12px;
+    }
+    .stat-label {
+      font-size: 20px;
+      color: #aaa;
+    }
+  </style>
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</head>
+<body>
+
+  <div class="stat-item">
+    <div class="stat-value" id="visitas-texto">
+      <i class="fas fa-eye"></i> Carregando...
+    </div>
+    <div class="stat-label">Leitores</div>
+  </div>
+
+  <script>
+    const TOKEN = 'ut_1AbjkJsKy9YWofzDwIMpVEsnP4aLWlwVo3Nmmv5p';
+
+    function getCurrentNovelId() {
+      // Pega o número da pasta Novels/X do URL
+      const pathParts = window.location.pathname.split('/');
+      const novelsIndex = pathParts.indexOf('Novels');
+      if (novelsIndex >= 0 && pathParts.length > novelsIndex + 1) {
+        return pathParts[novelsIndex + 1];
+      }
+      return null;
+    }
+
+    async function atualizarVisitantes() {
+      const visitasTexto = document.getElementById('visitas-texto');
+      const novelId = getCurrentNovelId();
+      if (!novelId) {
+        visitasTexto.textContent = 'ID da novel não encontrado';
+        return;
+      }
+
+      // Monta a URL do contador com diretório completo
+      const apiUrl = `https://counterapi.dev/api/v1/hit?token=${TOKEN}&namespace=migueruyoutube.github.io&key=ReignRpgs/Novels/1/index.html`;
+
+      try {
+        const response = await fetch(apiUrl);
+        if (!response.ok) throw new Error('Erro ao acessar API');
+
+        const data = await response.json();
+        const count = data.count || 9999;
+
+        visitasTexto.innerHTML = `<i class="fas fa-eye"></i> ${count.toLocaleString()}`;
+      } catch (error) {
+        console.error('Erro ao buscar contador:', error);
+        visitasTexto.innerHTML = `<i class="fas fa-eye"></i> 0`;
+      }
+    }
+
+    // Atualiza o contador ao carregar a página
+    window.addEventListener('load', atualizarVisitantes);
+  </script>
+
+</body>
+</html>

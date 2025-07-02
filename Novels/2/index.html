@@ -833,9 +833,11 @@
                         <div class="stat-label">Lançamento</div>
                     </div>
 <div class="stat-item">
-  <div class="stat-value" id="visitas-texto">Carregando...
+  <div class="stat-value visitors-counter">
+    <i class="fas fa-users"></i>
+    <div id="countervisitor">0</div>
   </div>
-  <div class="stat-label">Leitores</div>
+  <div class="stat-label">Visitantes</div>
 </div>
                 </div>
             </div>
@@ -892,7 +894,8 @@
     <footer>
         <p>© 2025 Reign Of RPG's. Todos os direitos reservados.</p>
     </footer>
-    
+    <!-- Counter Visitor - Cole o código gerado no site -->
+<script src="https://www.countervisitor.com/script.js" data-counter="reignrpgs-novel1"></script>
 <script>
     // Referências do DOM
     const chaptersContainer = document.getElementById('chapters-container');
@@ -1442,42 +1445,6 @@
         }
     });
 
-    // Função para atualizar o contador de visitantes
-    async function atualizarVisitantes() {
-    const visitasTexto = document.getElementById('visitas-texto');
-
-    // Pega o host e o path pra montar a key do CountAPI
-    const host = window.location.host; // ex: migueruyoutube.github.io
-    const pathParts = window.location.pathname.split('/');
-    // Procura o id da novel (assumindo que fica logo antes do 'index.html')
-    const indexPos = pathParts.indexOf('index.html');
-    let novelId = null;
-    if (indexPos > 0) {
-      novelId = pathParts[indexPos - 1];
-    } else {
-      novelId = 'default';
-    }
-
-    // Monta a key e namespace do CountAPI
-    const namespace = 'reignrpgs'; // Pode mudar pra um nome seu aí, tudo minúsculo e sem espaços
-    const key = encodeURIComponent(`/ReignRpgs/Novels/${novelId}/index.html`);
-
-    // URL da API para incrementar e buscar o contador
-    const apiUrl = `https://api.countapi.xyz/hit/${namespace}/${key}`;
-
-    try {
-      const response = await fetch(apiUrl);
-      if (!response.ok) throw new Error('Erro ao buscar contador');
-
-      const data = await response.json();
-      const visitas = data.value || 1;
-
-      visitasTexto.innerHTML = `<i class="fas fa-users"></i> ${visitas}`;
-    } catch (error) {
-      console.error('Erro ao buscar contador:', error);
-      visitasTexto.innerHTML = `<i class="fas fa-users"></i> 1`;
-    }
-  }
 
 
     // Inicialização
@@ -1490,9 +1457,7 @@
             // Carregar capítulos
             allChapters = await carregarTodosCapitulos();
             renderizarCapitulos(allChapters, false);
-            
-            // Atualizar contador de visitantes
-            await atualizarVisitantes();
+          
         } catch (error) {
             console.error('Erro ao carregar dados:', error);
             chaptersContainer.innerHTML = `
