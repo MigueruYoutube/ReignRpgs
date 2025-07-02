@@ -43,7 +43,6 @@
             padding-bottom: 3.125rem;
         }
 
-        /* Welcome Notification */
         .welcome-notification {
             position: fixed;
             top: 1.25rem;
@@ -73,7 +72,6 @@
             font-size: 0.6rem;
         }
 
-        /* Header */
         header {
             background: rgba(10, 10, 10, 0.95);
             backdrop-filter: blur(0.625rem);
@@ -144,7 +142,6 @@
             color: var(--gray);
         }
 
-        /* Navigation */
         .main-nav {
             background: rgba(0, 0, 0, 0.3);
             padding: 0 5%;
@@ -183,7 +180,6 @@
             color: white;
         }
 
-        /* Main Content */
         .container {
             max-width: 87.5rem;
             margin: 1.875rem auto;
@@ -222,19 +218,18 @@
             text-decoration: underline;
         }
 
-        /* Carousel Section */
         .carousel-section {
             margin-bottom: 2.5rem;
+            transition: all 0.3s ease;
         }
 
-        /* Carousel */
         .carousel {
             position: relative;
             border-radius: var(--border-radius);
             overflow: hidden;
-            transition: opacity 0.3s ease, height 0.3s ease, margin 0.3s ease;
+            transition: all 0.3s ease;
             width: 100%;
-            padding-bottom: 56.25%; /* 16:9 aspect ratio */
+            padding-bottom: 56.25%;
             height: 0;
         }
 
@@ -243,6 +238,7 @@
             height: 0;
             margin: 0;
             overflow: hidden;
+            display: none;
         }
 
         .slides-container {
@@ -383,120 +379,11 @@
             transform: scale(1.2);
         }
 
-        /* Novels Grid */
         .novels-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(12.5rem, 1fr));
-            gap: 1.5625rem;
+            grid-template-columns: repeat(auto-fill, minmax(10rem, 1fr));
+            gap: 1.25rem;
             margin-top: 1.875rem;
-        }
-
-        /* Layout específico para desktop/tablet landscape */
-        @media (min-width: 768px) and (orientation: landscape) {
-            .main-content-wrapper {
-                display: flex;
-                gap: 2rem;
-                align-items: flex-start;
-            }
-            
-            .novels-section {
-                flex: 1;
-                min-width: 0; /* Permite que a seção de novels encolha */
-            }
-            
-            .carousel-section {
-                width: 30%;
-                max-width: 400px;
-                position: sticky;
-                top: 100px;
-                margin-bottom: 0;
-            }
-            
-            .carousel {
-                padding-bottom: 75%; /* Aspect ratio mais quadrado */
-                margin-bottom: 1.5rem;
-            }
-            
-            .novels-grid {
-                display: flex;
-                overflow-x: auto;
-                scroll-snap-type: x mandatory;
-                -webkit-overflow-scrolling: touch;
-                padding-bottom: 1rem;
-                gap: 1.5rem;
-                margin-top: 0;
-                scrollbar-width: none; /* Firefox */
-            }
-            
-            .novels-grid::-webkit-scrollbar {
-                display: none; /* Chrome/Safari */
-            }
-            
-            .novel-card {
-                flex: 0 0 250px;
-                scroll-snap-align: start;
-            }
-            
-            /* Quando há pesquisa ativa, volta ao grid normal */
-            .novels-grid.has-search {
-                display: grid;
-                overflow-x: visible;
-                grid-template-columns: repeat(auto-fill, minmax(12.5rem, 1fr));
-            }
-            
-            /* Sobre nós abaixo do carrossel */
-            .about-us-sidebar {
-                margin-top: 1.5rem;
-                background: var(--card-bg);
-                padding: 1.5rem;
-                border-radius: var(--border-radius);
-            }
-            
-            .about-us-sidebar h3 {
-                font-size: 1.3rem;
-                margin-bottom: 1rem;
-                color: white;
-                position: relative;
-                padding-bottom: 0.5rem;
-            }
-            
-            .about-us-sidebar h3::after {
-                content: '';
-                position: absolute;
-                bottom: 0;
-                left: 0;
-                width: 3.125rem;
-                height: 0.1875rem;
-                background: var(--primary);
-            }
-            
-            .about-us-sidebar p {
-                font-size: 0.9rem;
-                margin-bottom: 1rem;
-            }
-            
-            .social-links {
-                display: flex;
-                gap: 0.9375rem;
-            }
-            
-            .social-link {
-                width: 2.5rem;
-                height: 2.5rem;
-                border-radius: 50%;
-                background: rgba(255, 255, 255, 0.1);
-                color: var(--light);
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                font-size: 1.2rem;
-                transition: var(--transition);
-            }
-            
-            .social-link:hover {
-                background: var(--primary);
-                transform: translateY(-0.3125rem);
-            }
         }
 
         .novel-card {
@@ -517,7 +404,7 @@
 
         .card-img-container {
             position: relative;
-            height: 17.5rem;
+            height: 14rem;
             overflow: hidden;
         }
 
@@ -542,21 +429,21 @@
         }
 
         .card-badge {
-            padding: 0.25rem 0.625rem;
+            padding: 0.2rem 0.5rem;
             border-radius: 1.875rem;
-            font-size: 0.75rem;
+            font-size: 0.65rem;
             font-weight: 500;
             text-align: center;
         }
 
         .card-content {
-            padding: 0.9375rem;
+            padding: 0.75rem;
         }
 
         .card-title {
-            font-size: 1.1rem;
+            font-size: 0.95rem;
             font-weight: 600;
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.4rem;
             color: white;
             display: -webkit-box;
             -webkit-line-clamp: 1;
@@ -567,31 +454,31 @@
         .card-meta {
             display: flex;
             justify-content: space-between;
-            font-size: 0.6rem;
+            font-size: 0.55rem;
             color: var(--gray);
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.4rem;
         }
 
         .card-meta .date {
             display: flex;
             align-items: center;
-            gap: 0.25rem;
+            gap: 0.2rem;
         }
 
         .card-meta .date i {
-            font-size: 0.5rem;
+            font-size: 0.45rem;
         }
 
         .card-categories {
             display: flex;
             flex-wrap: wrap;
-            gap: 0.3125rem;
-            margin-bottom: 0.625rem;
+            gap: 0.25rem;
+            margin-bottom: 0.5rem;
         }
 
         .card-category {
-            font-size: 0.7rem;
-            padding: 0.1875rem 0.5rem;
+            font-size: 0.6rem;
+            padding: 0.15rem 0.4rem;
             background: rgba(156, 39, 176, 0.2);
             color: var(--primary);
             border-radius: 1.875rem;
@@ -599,16 +486,69 @@
 
         .card-info {
             color: var(--gray);
-            font-size: 0.85rem;
+            font-size: 0.75rem;
             display: -webkit-box;
             -webkit-line-clamp: 2;
             -webkit-box-orient: vertical;
             overflow: hidden;
-            margin-bottom: 0.625rem;
-            min-height: 2.5rem;
+            margin-bottom: 0.5rem;
+            min-height: 2.2rem;
         }
 
-        /* Footer */
+        .about-us-sidebar {
+            margin-top: 1.5rem;
+            background: var(--card-bg);
+            padding: 1.5rem;
+            border-radius: var(--border-radius);
+        }
+
+        .about-us-sidebar h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: white;
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+
+        .about-us-sidebar h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 3.125rem;
+            height: 0.1875rem;
+            background: var(--primary);
+        }
+
+        .about-us-sidebar p {
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 0.9375rem;
+            margin-top: 1.25rem;
+        }
+
+        .social-link {
+            width: 2.5rem;
+            height: 2.5rem;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            transition: var(--transition);
+        }
+
+        .social-link:hover {
+            background: var(--primary);
+            transform: translateY(-0.3125rem);
+        }
+
         footer {
             background: rgba(10, 10, 10, 0.95);
             padding: 2.5rem 5% 1.25rem;
@@ -664,28 +604,8 @@
             transform: translateX(0.3125rem);
         }
 
-        .social-links {
-            display: flex;
-            gap: 0.9375rem;
-            margin-top: 1.25rem;
-        }
-
-        .social-link {
-            width: 2.5rem;
-            height: 2.5rem;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.1);
-            color: var(--light);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.2rem;
-            transition: var(--transition);
-        }
-
-        .social-link:hover {
-            background: var(--primary);
-            transform: translateY(-0.3125rem);
+        .footer-section.about-footer {
+            display: none;
         }
 
         .copyright {
@@ -697,7 +617,6 @@
             font-size: 0.9rem;
         }
 
-        /* Loading */
         .loading {
             text-align: center;
             padding: 3.125rem 0;
@@ -720,7 +639,6 @@
             to { transform: rotate(360deg); }
         }
 
-        /* Error Message */
         .error-message {
             background: rgba(244, 67, 54, 0.2);
             border: 1px solid var(--red);
@@ -736,7 +654,6 @@
             margin-bottom: 1.25rem;
         }
 
-        /* Empty State */
         .empty-state {
             text-align: center;
             padding: 3.125rem 1.25rem;
@@ -750,34 +667,61 @@
             margin-bottom: 1.25rem;
         }
 
-        /* Responsividade */
-        @media (max-width: 68.75rem) {
+        @media (min-width: 768px) {
+            .main-content-wrapper {
+                display: flex;
+                gap: 2rem;
+                align-items: flex-start;
+            }
+            
+            .novels-section {
+                flex: 1;
+                min-width: 0;
+                order: 2;
+            }
+            
+            .carousel-section {
+                width: 40%;
+                max-width: 500px;
+                position: sticky;
+                top: 100px;
+                margin-bottom: 0;
+                order: 1;
+            }
+            
+            .carousel {
+                padding-bottom: 60%;
+                margin-bottom: 1.5rem;
+            }
+            
             .novels-grid {
-                grid-template-columns: repeat(auto-fill, minmax(11.25rem, 1fr));
+                display: flex;
+                overflow-x: auto;
+                scroll-snap-type: x mandatory;
+                -webkit-overflow-scrolling: touch;
+                padding-bottom: 1rem;
+                gap: 1.25rem;
+                margin-top: 0;
+                scrollbar-width: none;
+            }
+            
+            .novels-grid::-webkit-scrollbar {
+                display: none;
+            }
+            
+            .novel-card {
+                flex: 0 0 220px;
+                scroll-snap-align: start;
+            }
+            
+            .novels-grid.has-search {
+                display: grid;
+                overflow-x: visible;
+                grid-template-columns: repeat(auto-fill, minmax(10rem, 1fr));
             }
         }
 
-        @media (max-width: 48rem) {
-            .search-container {
-                width: 100%;
-            }
-            
-            .slide-title {
-                font-size: 1.3rem;
-            }
-            
-            .slide-content {
-                padding: 0.9375rem;
-                padding-top: 3.125rem;
-            }
-            
-            .novels-grid {
-                grid-template-columns: repeat(auto-fill, minmax(9.375rem, 1fr));
-                gap: 0.9375rem;
-            }
-        }
-
-        @media (max-width: 30rem) {
+        @media (max-width: 767px) {
             .logo {
                 font-size: 1.3rem;
             }
@@ -808,9 +752,41 @@
             .card-img-container {
                 height: 12.5rem;
             }
+            
+            .about-us-sidebar {
+                display: none;
+            }
+            
+            .carousel-section {
+                order: -1;
+                margin-bottom: 1rem;
+                width: 100%;
+            }
+            
+            .footer-section.about-footer {
+                display: block;
+            }
+
+            /* Estilo específico para mobile portrait */
+            @media (orientation: portrait) {
+                .carousel.hidden {
+                    display: none;
+                }
+                
+                .carousel-section.hidden {
+                    display: none;
+                }
+                
+                .novels-section {
+                    margin-top: 0;
+                }
+                
+                .novels-grid {
+                    margin-top: 0.5rem;
+                }
+            }
         }
 
-        /* Touch controls for carousel */
         .slides-container {
             overflow-x: auto;
             scroll-snap-type: x mandatory;
@@ -849,17 +825,14 @@
             text-decoration: none;
         }
 
-        /* Remove a seta nativa no Chrome */
         #filterSelect::-ms-expand {
             display: none;
         }
 
-        /* Efeito ao passar o mouse */
         #filterSelect:hover {
             text-decoration: underline;
         }
 
-        /* Scroll to top for # links */
         a[href="#"] {
             cursor: pointer;
         }
@@ -897,8 +870,42 @@
     <!-- Main Content -->
     <div class="container">
         <div class="main-content-wrapper">
-            <!-- Seção de Novels -->
-            <section class="novels-section">
+            <!-- Seção Lateral (Carrossel - ESQUERDA) -->
+            <aside class="carousel-section" id="carouselSection">
+                <!-- Carrossel de Populares -->
+                <div class="section-header">
+                    <h2 class="section-title">
+                        <i class="fas fa-fire"></i>
+                        Populares
+                    </h2>
+                    <a href="./PopularNovels.html" class="section-link">
+                        Ver todos <i class="fas fa-chevron-right"></i>
+                    </a>
+                </div>
+                
+                <div class="carousel" id="carousel">
+                    <div class="slides-container" id="slidesContainer">
+                        <!-- Slides serão preenchidos pelo JavaScript -->
+                    </div>
+                    
+                    <div class="carousel-controls" id="carouselControls">
+                        <!-- Controles serão preenchidos pelo JavaScript -->
+                    </div>
+                </div>
+                
+                <!-- Sobre Nós na Sidebar (apenas desktop) -->
+                <div class="about-us-sidebar">
+                    <h3>Sobre Nós</h3>
+                    <p>Reign Of Rpg's é um universo completo dedicado à criação de bots para Discord, mundos de RPG e histórias envolventes de ficção. Atualizamos regularmente com novas experiências e conteúdos.</p>
+                    <div class="social-links">
+                        <a href="https://discord.gg/P8CnCTqNV3" class="social-link"><i class="fab fa-discord"></i></a>
+                        <a href="https://github.com/MigueruYoutube" class="social-link"><i class="fab fa-github"></i></a>
+                    </div>
+                </div>
+            </aside>
+            
+            <!-- Seção de Novels (DIREITA) -->
+            <section class="novels-section" id="novelsSection">
                 <!-- Todos os Novels -->
                 <section>
                     <div class="section-header">
@@ -926,50 +933,16 @@
                     </div>
                 </section>
             </section>
-            
-            <!-- Seção Lateral (Carrossel + Sobre Nós) -->
-            <aside class="carousel-section">
-                <!-- Carrossel de Populares -->
-                <div class="section-header">
-                    <h2 class="section-title">
-                        <i class="fas fa-fire"></i>
-                        Populares
-                    </h2>
-                    <a href="./PopularNovels.html" class="section-link">
-                        Ver todos <i class="fas fa-chevron-right"></i>
-                    </a>
-                </div>
-                
-                <div class="carousel" id="carousel">
-                    <div class="slides-container" id="slidesContainer">
-                        <!-- Slides serão preenchidos pelo JavaScript -->
-                    </div>
-                    
-                    <div class="carousel-controls" id="carouselControls">
-                        <!-- Controles serão preenchidos pelo JavaScript -->
-                    </div>
-                </div>
-                
-                <!-- Sobre Nós na Sidebar -->
-                <div class="about-us-sidebar">
-                    <h3>Sobre Nós</h3>
-                    <p>Reign Of Rpg's é um universo completo dedicado à criação de bots para Discord, mundos de RPG e histórias envolventes de ficção. Atualizamos regularmente com novas experiências e conteúdos.</p>
-                    <div class="social-links">
-                        <a href="https://discord.gg/P8CnCTqNV3" class="social-link"><i class="fab fa-discord"></i></a>
-                        <a href="https://github.com/MigueruYoutube" class="social-link"><i class="fab fa-github"></i></a>
-                    </div>
-                </div>
-            </aside>
         </div>
     </div>
     
     <!-- Footer -->
     <footer>
         <div class="footer-content">
-            <div class="footer-section">
+            <div class="footer-section about-footer">
                 <h3>Sobre Nós</h3>
                 <p>Reign Of Rpg's é um universo completo dedicado à criação de bots para Discord, mundos de RPG e histórias envolventes de ficção. Atualizamos regularmente com novas experiências e conteúdos.</p>
-                  <div class="social-links">
+                <div class="social-links">
                     <a href="https://discord.gg/P8CnCTqNV3" class="social-link"><i class="fab fa-discord"></i></a>
                     <a href="https://github.com/MigueruYoutube" class="social-link"><i class="fab fa-github"></i></a>
                 </div>
@@ -1000,8 +973,7 @@
             &copy; 2025 Reign Of Rpg's. Todos os direitos reservados.
         </div>
     </footer>
-
-    <script>
+ <script>
         // Elementos DOM
         const slidesContainer = document.getElementById('slidesContainer');
         const carouselControls = document.getElementById('carouselControls');
@@ -1013,6 +985,8 @@
         const navLinks = document.querySelectorAll('.nav-link');
         const welcomeNotification = document.getElementById('welcomeNotification');
         const carousel = document.getElementById('carousel');
+        const carouselSection = document.getElementById('carouselSection');
+        const novelsSection = document.getElementById('novelsSection');
         
         // Variáveis do carrossel
         let currentSlide = 0;
@@ -1314,12 +1288,11 @@
             // Aplicar filtros
             let filteredNovels = [...novels];
             
-            // Filtro de texto
+            // Filtro de texto - BUSCAR APENAS PELO NAME
             if (filter) {
                 const searchTerm = filter.toLowerCase();
                 filteredNovels = filteredNovels.filter(novel => 
-                    novel.name.toLowerCase().includes(searchTerm) || 
-                    novel.sinopse.toLowerCase().includes(searchTerm)
+                    novel.name.toLowerCase().includes(searchTerm)
                 );
             }
             
@@ -1339,13 +1312,15 @@
                 );
             }
             
-            // Mostrar/ocultar carrossel baseado no filtro de texto
-            if (filter) {
-                carousel.classList.add('hidden');
+            // Mostrar/ocultar carrossel baseado no filtro de texto apenas em mobile portrait
+            const isMobilePortrait = window.innerWidth < 768 && window.matchMedia("(orientation: portrait)").matches;
+            
+            if (filter && isMobilePortrait) {
+                carouselSection.style.display = 'none';
                 clearInterval(autoSlideInterval); // Parar o carrossel automático
             } else {
-                carousel.classList.remove('hidden');
-                startAutoSlide(); // Reiniciar o carrossel automático
+                carouselSection.style.display = 'block';
+                if (!autoSlideInterval) startAutoSlide(); // Reiniciar o carrossel automático se não estiver ativo
             }
             
             // Verificar se há resultados
@@ -1361,7 +1336,7 @@
             }
             
             // Verificar se estamos em desktop/tablet landscape e não há pesquisa ativa
-            const isDesktopLandscape = window.innerWidth >= 768 && window.matchMedia("(orientation: landscape)").matches;
+            const isDesktopLandscape = window.innerWidth >= 768 || window.matchMedia("(orientation: landscape)").matches;
             
             if (isDesktopLandscape && !filter) {
                 // Layout com scroll horizontal
@@ -1401,10 +1376,10 @@
                         </div>
                         <div class="card-content">
                             <h3 class="card-title">${novel.name}</h3>
-<div class="card-meta">
-    <span>${converterData(novel.date) || 'N/D'}</span>
-    <span>${novel.chapters || 0} caps</span>
-</div>
+                            <div class="card-meta">
+                                <span>${converterData(novel.date) || 'N/D'}</span>
+                                <span>${novel.chapters || 0} caps</span>
+                            </div>
                             <div class="card-categories">
                                 ${categoriesHtml}
                             </div>
@@ -1457,10 +1432,10 @@
                         </div>
                         <div class="card-content">
                             <h3 class="card-title">${novel.name}</h3>
-<div class="card-meta">
-    <span>${converterData(novel.date) || 'N/D'}</span>
-    <span>${novel.chapters || 0} caps</span>
-</div>
+                            <div class="card-meta">
+                                <span>${converterData(novel.date) || 'N/D'}</span>
+                                <span>${novel.chapters || 0} caps</span>
+                            </div>
                             <div class="card-categories">
                                 ${categoriesHtml}
                             </div>
