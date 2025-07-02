@@ -391,6 +391,114 @@
             margin-top: 1.875rem;
         }
 
+        /* Layout específico para desktop/tablet landscape */
+        @media (min-width: 768px) and (orientation: landscape) {
+            .main-content-wrapper {
+                display: flex;
+                gap: 2rem;
+                align-items: flex-start;
+            }
+            
+            .novels-section {
+                flex: 1;
+                min-width: 0; /* Permite que a seção de novels encolha */
+            }
+            
+            .carousel-section {
+                width: 30%;
+                max-width: 400px;
+                position: sticky;
+                top: 100px;
+                margin-bottom: 0;
+            }
+            
+            .carousel {
+                padding-bottom: 75%; /* Aspect ratio mais quadrado */
+                margin-bottom: 1.5rem;
+            }
+            
+            .novels-grid {
+                display: flex;
+                overflow-x: auto;
+                scroll-snap-type: x mandatory;
+                -webkit-overflow-scrolling: touch;
+                padding-bottom: 1rem;
+                gap: 1.5rem;
+                margin-top: 0;
+                scrollbar-width: none; /* Firefox */
+            }
+            
+            .novels-grid::-webkit-scrollbar {
+                display: none; /* Chrome/Safari */
+            }
+            
+            .novel-card {
+                flex: 0 0 250px;
+                scroll-snap-align: start;
+            }
+            
+            /* Quando há pesquisa ativa, volta ao grid normal */
+            .novels-grid.has-search {
+                display: grid;
+                overflow-x: visible;
+                grid-template-columns: repeat(auto-fill, minmax(12.5rem, 1fr));
+            }
+            
+            /* Sobre nós abaixo do carrossel */
+            .about-us-sidebar {
+                margin-top: 1.5rem;
+                background: var(--card-bg);
+                padding: 1.5rem;
+                border-radius: var(--border-radius);
+            }
+            
+            .about-us-sidebar h3 {
+                font-size: 1.3rem;
+                margin-bottom: 1rem;
+                color: white;
+                position: relative;
+                padding-bottom: 0.5rem;
+            }
+            
+            .about-us-sidebar h3::after {
+                content: '';
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                width: 3.125rem;
+                height: 0.1875rem;
+                background: var(--primary);
+            }
+            
+            .about-us-sidebar p {
+                font-size: 0.9rem;
+                margin-bottom: 1rem;
+            }
+            
+            .social-links {
+                display: flex;
+                gap: 0.9375rem;
+            }
+            
+            .social-link {
+                width: 2.5rem;
+                height: 2.5rem;
+                border-radius: 50%;
+                background: rgba(255, 255, 255, 0.1);
+                color: var(--light);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 1.2rem;
+                transition: var(--transition);
+            }
+            
+            .social-link:hover {
+                background: var(--primary);
+                transform: translateY(-0.3125rem);
+            }
+        }
+
         .novel-card {
             background: var(--card-bg);
             border-radius: var(--border-radius);
@@ -788,55 +896,71 @@
     
     <!-- Main Content -->
     <div class="container">
-        <!-- Carrossel de Populares -->
-        <section class="carousel-section">
-            <div class="section-header">
-                <h2 class="section-title">
-                    <i class="fas fa-fire"></i>
-                    Populares
-                </h2>
-                <a href="./PopularNovels.html" class="section-link">
-                    Ver todos <i class="fas fa-chevron-right"></i>
-                </a>
-            </div>
+        <div class="main-content-wrapper">
+            <!-- Seção de Novels -->
+            <section class="novels-section">
+                <!-- Todos os Novels -->
+                <section>
+                    <div class="section-header">
+                        <h2 class="section-title">
+                            <i class="fas fa-book-open"></i>
+                            Todos os Novels
+                        </h2>
+                        <div class="filters">
+                            <select id="filterSelect">
+                                <option value="all">Todos</option>
+                                <option value="new">Novos</option>
+                                <option value="popular">Populares</option>
+                                <option value="completed">Completos</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div id="loadingIndicator" class="loading">
+                        <div class="loading-spinner"></div>
+                        <p>Carregando novels...</p>
+                    </div>
+                    
+                    <div class="novels-grid" id="novelsContainer">
+                        <!-- Cards serão preenchidos pelo JavaScript -->
+                    </div>
+                </section>
+            </section>
             
-            <div class="carousel" id="carousel">
-                <div class="slides-container" id="slidesContainer">
-                    <!-- Slides serão preenchidos pelo JavaScript -->
+            <!-- Seção Lateral (Carrossel + Sobre Nós) -->
+            <aside class="carousel-section">
+                <!-- Carrossel de Populares -->
+                <div class="section-header">
+                    <h2 class="section-title">
+                        <i class="fas fa-fire"></i>
+                        Populares
+                    </h2>
+                    <a href="./PopularNovels.html" class="section-link">
+                        Ver todos <i class="fas fa-chevron-right"></i>
+                    </a>
                 </div>
                 
-                <div class="carousel-controls" id="carouselControls">
-                    <!-- Controles serão preenchidos pelo JavaScript -->
+                <div class="carousel" id="carousel">
+                    <div class="slides-container" id="slidesContainer">
+                        <!-- Slides serão preenchidos pelo JavaScript -->
+                    </div>
+                    
+                    <div class="carousel-controls" id="carouselControls">
+                        <!-- Controles serão preenchidos pelo JavaScript -->
+                    </div>
                 </div>
-            </div>
-        </section>
-        
-        <!-- Todos os Novels -->
-        <section>
-            <div class="section-header">
-                <h2 class="section-title">
-                    <i class="fas fa-book-open"></i>
-                    Todos os Novels
-                </h2>
-                <div class="filters">
-                    <select id="filterSelect">
-                        <option value="all">Todos</option>
-                        <option value="new">Novos</option>
-                        <option value="popular">Populares</option>
-                        <option value="completed">Completos</option>
-                    </select>
+                
+                <!-- Sobre Nós na Sidebar -->
+                <div class="about-us-sidebar">
+                    <h3>Sobre Nós</h3>
+                    <p>Reign Of Rpg's é um universo completo dedicado à criação de bots para Discord, mundos de RPG e histórias envolventes de ficção. Atualizamos regularmente com novas experiências e conteúdos.</p>
+                    <div class="social-links">
+                        <a href="https://discord.gg/P8CnCTqNV3" class="social-link"><i class="fab fa-discord"></i></a>
+                        <a href="https://github.com/MigueruYoutube" class="social-link"><i class="fab fa-github"></i></a>
+                    </div>
                 </div>
-            </div>
-            
-            <div id="loadingIndicator" class="loading">
-                <div class="loading-spinner"></div>
-                <p>Carregando novels...</p>
-            </div>
-            
-            <div class="novels-grid" id="novelsContainer">
-                <!-- Cards serão preenchidos pelo JavaScript -->
-            </div>
-        </section>
+            </aside>
+        </div>
     </div>
     
     <!-- Footer -->
@@ -1236,58 +1360,122 @@
                 return;
             }
             
-            // Renderizar cards
-            filteredNovels.forEach(novel => {
-                const card = document.createElement('div');
-                card.className = 'novel-card';
+            // Verificar se estamos em desktop/tablet landscape e não há pesquisa ativa
+            const isDesktopLandscape = window.innerWidth >= 768 && window.matchMedia("(orientation: landscape)").matches;
+            
+            if (isDesktopLandscape && !filter) {
+                // Layout com scroll horizontal
+                novelsContainer.classList.add('has-search');
                 
-                // Gerar badges - agora verificando a data
-                let badgesHtml = '';
-                if (isNovelNew(novel)) {
-                    badgesHtml += '<span class="card-badge badge-new">Novo</span>';
-                }
-                if (novel.IsPopular) {
-                    badgesHtml += '<span class="card-badge badge-popular">Popular</span>';
-                }
-                if (novel.IsCompleted) {
-                    badgesHtml += '<span class="card-badge badge-completed">Completo</span>';
-                }
-                
-                // Gerar categorias
-                let categoriesHtml = '';
-                if (novel.category && novel.category.length > 0) {
-                    categoriesHtml = novel.category.slice(0, 3).map(cat => 
-                        `<span class="card-category">${capitalizeFirstLetter(cat)}</span>`
-                    ).join('');
-                }
-                
-                card.innerHTML = `
-                    <div class="card-img-container">
-                        <img src="${novel.cover}" alt="${novel.name}" class="card-img">
-                        <div class="card-badges">
-                            ${badgesHtml}
+                // Renderizar cards com scroll horizontal
+                filteredNovels.forEach(novel => {
+                    const card = document.createElement('div');
+                    card.className = 'novel-card';
+                    
+                    // Gerar badges - agora verificando a data
+                    let badgesHtml = '';
+                    if (isNovelNew(novel)) {
+                        badgesHtml += '<span class="card-badge badge-new">Novo</span>';
+                    }
+                    if (novel.IsPopular) {
+                        badgesHtml += '<span class="card-badge badge-popular">Popular</span>';
+                    }
+                    if (novel.IsCompleted) {
+                        badgesHtml += '<span class="card-badge badge-completed">Completo</span>';
+                    }
+                    
+                    // Gerar categorias
+                    let categoriesHtml = '';
+                    if (novel.category && novel.category.length > 0) {
+                        categoriesHtml = novel.category.slice(0, 3).map(cat => 
+                            `<span class="card-category">${capitalizeFirstLetter(cat)}</span>`
+                        ).join('');
+                    }
+                    
+                    card.innerHTML = `
+                        <div class="card-img-container">
+                            <img src="${novel.cover}" alt="${novel.name}" class="card-img">
+                            <div class="card-badges">
+                                ${badgesHtml}
+                            </div>
                         </div>
-                    </div>
-                    <div class="card-content">
-                        <h3 class="card-title">${novel.name}</h3>
+                        <div class="card-content">
+                            <h3 class="card-title">${novel.name}</h3>
 <div class="card-meta">
     <span>${converterData(novel.date) || 'N/D'}</span>
     <span>${novel.chapters || 0} caps</span>
 </div>
-                        <div class="card-categories">
-                            ${categoriesHtml}
+                            <div class="card-categories">
+                                ${categoriesHtml}
+                            </div>
+                            <p class="card-info">${novel.sinopse}</p>
                         </div>
-                        <p class="card-info">${novel.sinopse}</p>
-                    </div>
-                `;
-                
-                // Adicionar evento de clique para redirecionar
-                card.addEventListener('click', () => {
-                    window.location.href = `./Novels/${novel.id}/index.html`;
+                    `;
+                    
+                    // Adicionar evento de clique para redirecionar
+                    card.addEventListener('click', () => {
+                        window.location.href = `./Novels/${novel.id}/index.html`;
+                    });
+                    
+                    novelsContainer.appendChild(card);
                 });
+            } else {
+                // Layout padrão com grid
+                novelsContainer.classList.remove('has-search');
                 
-                novelsContainer.appendChild(card);
-            });
+                // Renderizar cards em grid
+                filteredNovels.forEach(novel => {
+                    const card = document.createElement('div');
+                    card.className = 'novel-card';
+                    
+                    // Gerar badges - agora verificando a data
+                    let badgesHtml = '';
+                    if (isNovelNew(novel)) {
+                        badgesHtml += '<span class="card-badge badge-new">Novo</span>';
+                    }
+                    if (novel.IsPopular) {
+                        badgesHtml += '<span class="card-badge badge-popular">Popular</span>';
+                    }
+                    if (novel.IsCompleted) {
+                        badgesHtml += '<span class="card-badge badge-completed">Completo</span>';
+                    }
+                    
+                    // Gerar categorias
+                    let categoriesHtml = '';
+                    if (novel.category && novel.category.length > 0) {
+                        categoriesHtml = novel.category.slice(0, 3).map(cat => 
+                            `<span class="card-category">${capitalizeFirstLetter(cat)}</span>`
+                        ).join('');
+                    }
+                    
+                    card.innerHTML = `
+                        <div class="card-img-container">
+                            <img src="${novel.cover}" alt="${novel.name}" class="card-img">
+                            <div class="card-badges">
+                                ${badgesHtml}
+                            </div>
+                        </div>
+                        <div class="card-content">
+                            <h3 class="card-title">${novel.name}</h3>
+<div class="card-meta">
+    <span>${converterData(novel.date) || 'N/D'}</span>
+    <span>${novel.chapters || 0} caps</span>
+</div>
+                            <div class="card-categories">
+                                ${categoriesHtml}
+                            </div>
+                            <p class="card-info">${novel.sinopse}</p>
+                        </div>
+                    `;
+                    
+                    // Adicionar evento de clique para redirecionar
+                    card.addEventListener('click', () => {
+                        window.location.href = `./Novels/${novel.id}/index.html`;
+                    });
+                    
+                    novelsContainer.appendChild(card);
+                });
+            }
         }
 
         // Função para filtrar novels
@@ -1407,6 +1595,12 @@
                 e.preventDefault();
                 window.scrollTo({top: 0, behavior: 'smooth'});
             });
+        });
+
+        // Redimensionamento da janela
+        window.addEventListener('resize', () => {
+            const activeCategory = document.querySelector('.nav-link.active').dataset.category;
+            filterNovels(searchInput.value, filterSelect.value, activeCategory);
         });
     </script>
 </body>
