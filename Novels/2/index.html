@@ -8,6 +8,27 @@
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600&display=swap" rel="stylesheet">
   
     <style>
+    /* BLOQUEIO DE SELEÇÃO */
+    body {
+        -webkit-user-select: none; /* Safari */
+        -moz-user-select: none; /* Firefox */
+        -ms-user-select: none; /* IE10+/Edge */
+        user-select: none; /* Padrão */
+    }
+    
+    img {
+        pointer-events: none; /* Impede interação com imagens */
+        -webkit-user-drag: none; /* Impede arrastar imagens no Safari */
+    }
+    
+    /* Permite seleção apenas em campos de entrada */
+    input, textarea {
+        -webkit-user-select: text !important;
+        -moz-user-select: text !important;
+        -ms-user-select: text !important;
+        user-select: text !important;
+    }
+
     :root {
         --dark-black: #0a0a0a;
         --deep-gray: #1a1a1a;
@@ -832,13 +853,6 @@
                         <div class="stat-value" id="release-date">-</div>
                         <div class="stat-label">Lançamento</div>
                     </div>
-<div class="stat-item">
-  <div class="stat-value visitors-counter">
-    <i class="fas fa-users"></i>
-    <div id="countervisitor">0</div>
-  </div>
-  <div class="stat-label">Visitantes</div>
-</div>
                 </div>
             </div>
         </div>
@@ -897,6 +911,18 @@
     <!-- Counter Visitor - Cole o código gerado no site -->
 <script src="https://www.countervisitor.com/script.js" data-counter="reignrpgs-novel1"></script>
 <script>
+    // Bloqueia menu de contexto (botão direito)
+    document.addEventListener('contextmenu', function(e) {
+        e.preventDefault();
+    });
+
+    // Bloqueia arrastar imagens
+    document.addEventListener('dragstart', function(e) {
+        if (e.target.tagName === 'IMG') {
+            e.preventDefault();
+        }
+    });
+
     // Referências do DOM
     const chaptersContainer = document.getElementById('chapters-container');
     const readerModal = document.getElementById('reader-modal');
@@ -1444,8 +1470,6 @@
             fecharLeitor();
         }
     });
-
-
 
     // Inicialização
     async function init() {
