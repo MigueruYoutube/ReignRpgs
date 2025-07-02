@@ -785,6 +785,9 @@
         <i class="fas fa-eye"></i> Carregando...
     </div>
     <div class="stat-label">Visitantes</div>
+    <div id="contador" style="display: none;">
+        <img id="hits-img" src="" alt="Visitantes">
+    </div>
 </div>
 </div>
             </div>
@@ -1391,30 +1394,38 @@
     });
 
 async function atualizarVisitantes() {
-  const visitasTexto = document.getElementById('visitas-texto');
-  
-  try {
-    // Pega o host e o pathname
-    const host = window.location.host; // migueruyoutube.github.io
-    let pathname = window.location.pathname; // /ReignRpgs/Novels/5/index.html
-    
-    // hits.sh não quer barra no final, mas é bom garantir
-    if (pathname.endsWith('/')) {
-      pathname = pathname.slice(0, -1);
+    const visitasTexto = document.getElementById('visitas-texto');
+    const hitsImg = document.getElementById('hits-img');
+
+    // Pega o ID da novel da URL igual tua função
+    const pathParts = window.location.pathname.split('/');
+    const indexPos = pathParts.indexOf('index.html');
+    const idNovel = (indexPos > 0) ? pathParts[indexPos - 1] : null;
+
+    if (!idNovel) {
+        console.error('Não foi possível determinar o ID da novel');
+        visitasTexto.innerHTML = `<i class="fas fa-eye"></i> 1`;
+        return;
     }
-    
-    const hitsUrl = `https://hits.sh/${host}${pathname}`;
-    
-    const response = await fetch(hitsUrl);
-    if (!response.ok) throw new Error('Erro na resposta da API');
-    
-    const data = await response.json();
-    const visitantes = data.visitors || 1;
-    
-    visitasTexto.innerHTML = `<i class="fas fa-eye"></i> ${visitantes}`;
-  } catch (e) {
-    visitasTexto.innerHTML = `<i class="fas fa-eye"></i> 1`;
-  }
+
+    // URL base do contador
+    const contadorUrl = `https://hits.sh/migueruyoutube.github.io/ReignRpgs/Novels/${idNovel}/index.html`;
+
+    // Garante que o contador registre a visita
+    hitsImg.src = `${contadorUrl}.svg?style=flat-square&label=Visitantes`;
+
+    try {
+        const response = await fetch(contadorUrl);
+        if (!response.ok) throw new Error('Erro ao buscar visitantes');
+        
+        const data = await response.json();
+        const visitantes = data.visitors || 1;
+        
+        visitasTexto.innerHTML = `<i class="fas fa-eye"></i> ${visitantes}`;
+    } catch (error) {
+        console.error('Erro ao buscar contador:', error);
+        visitasTexto.innerHTML = `<i class="fas fa-eye"></i> 1`;
+    }
 }
 
     // Inicialização
