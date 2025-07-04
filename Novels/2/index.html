@@ -814,6 +814,29 @@
     .fluid-text {
         font-size: calc(var(--min-font-size) + (var(--max-font-size) - var(--min-font-size)) * ((100vw - var(--fluid-min-width)) / (var(--fluid-max-width) - var(--fluid-min-width))));
     }
+    
+    /* Estilos para o Disqus */
+    #disqus_thread {
+        max-width: 75rem;
+        margin: 0 auto;
+        padding: 1.25rem;
+    }
+    
+    /* Ajustes para o tema escuro do Disqus */
+    .disqus-dark {
+        background-color: #1a1a1a !important;
+        color: #e0e0e0 !important;
+    }
+    
+    .disqus-dark .dsq-comment-body,
+    .disqus-dark .dsq-comment-header,
+    .disqus-dark .dsq-textarea {
+        color: #e0e0e0 !important;
+    }
+    
+    .disqus-dark .dsq-post {
+        border-bottom-color: #333 !important;
+    }
 </style>
 </head>
 <body>
@@ -904,6 +927,10 @@
             </div>
         </div>
     </div>
+
+    <!-- Seção de Comentários Disqus -->
+    <div id="disqus_thread"></div>
+    <noscript>Por favor, habilite JavaScript para ver os comentários do <a href="https://disqus.com/?ref_noscript">Disqus.</a></noscript>
 
     <footer>
         <p>© 2025 Reign Of RPG's. Todos os direitos reservados.</p>
@@ -1076,7 +1103,7 @@
         // Atualizar título
         document.title = data.name + ' | Reign Of RPG\'s';
         novelTitle.textContent = data.name || '<span class="missing-info">Nome não disponível</span>';
-        
+   
         // Atualizar autor
         if (data.author && data.authorUrl) {
             novelAuthor.textContent = data.author;
@@ -1128,6 +1155,41 @@
         } else {
             releaseDate.textContent = '-';
         }
+        
+        // Inicia o Disqus após garantir que o título está carregado
+if (!window.disqusLoaded) {
+    var d = document, s = d.createElement('script');
+    
+    // Faz o tratamento do nome
+    var nomeCorrigido = data.name;
+    
+    // Regex para detectar " - Capitulo {numero}" no final
+    var regexCapitulo = /(.*?) - Cap[ií]tulo\s*\d+$/i;
+
+    // Se bater com o formato, corrige
+    if (regexCapitulo.test(nomeCorrigido)) {
+        var match = nomeCorrigido.match(regexCapitulo);
+        if (match && match[1]) {
+            nomeCorrigido = match[1] + ' - ReignOfRpgs';
+        }
+    } else {
+        // Se não tiver "Capitulo", só adiciona o ReignOfRpgs normalmente
+        nomeCorrigido = nomeCorrigido + ' - ReignOfRpgs';
+    }
+
+    window.disqus_config = function () {
+        this.page.url = window.location.href;
+        this.page.identifier = nomeCorrigido;
+        this.page.title = nomeCorrigido;
+    };
+
+    s.src = 'https://reignofrpgs.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    s.setAttribute('data-theme', 'dark');
+    (d.head || d.body).appendChild(s);
+
+    window.disqusLoaded = true;
+}
     }
 
     // Função para carregar um capítulo específico
