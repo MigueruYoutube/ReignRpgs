@@ -8,838 +8,1220 @@
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600&display=swap" rel="stylesheet">
   
     <style>
-    /* BLOQUEIO DE SELEÇÃO */
-    body {
-        -webkit-user-select: none; /* Safari */
-        -moz-user-select: none; /* Firefox */
-        -ms-user-select: none; /* IE10+/Edge */
-        user-select: none; /* Padrão */
+      /* BLOQUEIO DE SELEÇÃO */
+body {
+     
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+img {
+    pointer-events: none;
+    -webkit-user-drag: none;
+}
+
+/* Permite seleção apenas em campos de entrada */
+input, textarea {
+    -webkit-user-select: text !important;
+    -moz-user-select: text !important;
+    -ms-user-select: text !important;
+    user-select: text !important;
+}
+
+:root {
+    --dark-black: #0a0a0a;
+    --deep-gray: #1a1a1a;
+    --accent-purple: #9c27b0;
+    --light-purple: #ba68c8;
+    --dark-purple: #7b1fa2;
+    --white: #ffffff;
+    --light-gray: #e0e0e0;
+    --medium-gray: #8a8a8a;
+    --dark-gray: #333333;
+    --shadow: 0 0.25rem 1.25rem rgba(0, 0, 0, 0.5);
+    --transition: all 0.3s ease;
+    --base-font-size: 1rem;
+    --fluid-min-width: 20rem;
+    --fluid-max-width: 90rem;
+    --card-color: #2d2d2d;
+    --text-color: #e0e0e0;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+html {
+    font-size: 100%;
+    -webkit-text-size-adjust: 100%;
+}
+
+body {
+    background: #0a0a0a;
+    color: var(--light-gray);
+    line-height: 1.6;
+    min-height: 100vh;
+    position: relative;
+    background-attachment: fixed;
+    font-size: calc(var(--base-font-size) + 0.25vw);
+}
+
+select {
+    width: 100%;
+    padding: 0.625rem;
+    font-size: 1rem;
+    border-radius: 0.25rem;
+    border: 0.0625rem solid var(--secondary-color);
+    margin-bottom: 0.625rem;
+    background-color: var(--card-color);
+    color: var(--text-color);
+}
+
+/* Player Desktop */
+.player-container {
+    position: fixed;
+    background-color: var(--card-color);
+    border-radius: 1.875rem;
+    padding: 1.2rem;
+    box-shadow: 0 0.25rem 0.9375rem rgba(0, 0, 0, 0.3);
+    z-index: 1003;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 15.625rem;
+    opacity: 0.4;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    transform: scale(0.7);
+}
+#playerContainer {
+    bottom: auto;
+    right: auto;
+    transition: all 0.3s ease;
+}
+.player-container:hover {
+    opacity: 1;
+}
+
+.player-drag-area {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: 1.875rem;
+    cursor: move;
+    z-index: 1;
+}
+
+.player-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 0.625rem;
+    position: relative;
+    z-index: 2;
+}
+
+.now-playing {
+    font-size: 0.875rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 11.25rem;
+}
+
+.toggle-select-btn {
+    background: rgba(156, 39, 176, 0.2);
+    border: none;
+    color: var(--text-color);
+    cursor: pointer;
+    font-size: 1rem;
+    width: 1.5rem;
+    height: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+}
+
+.toggle-select-btn:hover {
+    background-color: rgba(156, 39, 176, 0.4);
+}
+
+.toggle-select-btn.rotated {
+    transform: rotate(180deg);
+}
+
+.player-select-container {
+    width: 100%;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+    position: relative;
+    z-index: 2;
+}
+
+.player-select-container.show {
+    max-height: 12.5rem;
+    margin-bottom: 0.625rem;
+}
+
+.player-controls {
+    display: flex;
+    gap: 0.625rem;
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    justify-content: center;
+}
+
+.player-btn {
+    background-color: var(--dark-purple);
+    color: white;
+    border: none;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.2s;
+}
+
+.player-btn:hover {
+    background-color: var(--light-purple);
+}
+
+/* Player Mobile */
+.mobile-controls-balloon {
+    display: none;
+    position: fixed;
+    background-color: var(--card-color);
+    border-radius: 1.875rem;
+    padding: 1.2rem;
+    box-shadow: 0 0.25rem 0.9375rem rgba(0, 0, 0, 0.3);
+    z-index: 1003;
+    flex-direction: column;
+    align-items: center;
+    width: 15.625rem;
+    opacity: 0.4;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    transform: scale(0.7);
+}
+
+.mobile-controls-balloon:hover {
+    opacity: 1;
+}
+
+.mobile-controls-balloon .drag-area {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: 1.875rem;
+    cursor: move;
+    z-index: 1;
+}
+
+.mobile-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 0.625rem;
+    position: relative;
+    z-index: 2;
+}
+
+.mobile-now-playing {
+    font-size: 0.875rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 11.25rem;
+}
+
+.mobile-toggle-select-btn {
+    background: rgba(156, 39, 176, 0.2);
+    border: none;
+    color: var(--text-color);
+    cursor: pointer;
+    font-size: 1rem;
+    width: 1.5rem;
+    height: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+}
+
+.mobile-toggle-select-btn:hover {
+    background-color: rgba(156, 39, 176, 0.4);
+}
+
+.mobile-toggle-select-btn.rotated {
+    transform: rotate(180deg);
+}
+
+.mobile-select-container {
+    width: 100%;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+    position: relative;
+    z-index: 2;
+}
+
+.mobile-select-container.show {
+    max-height: 12.5rem;
+    margin-bottom: 0.625rem;
+}
+
+.mobile-controls {
+    display: flex;
+    gap: 0.625rem;
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    justify-content: center;
+}
+
+.mobile-btn {
+    background: none;
+    border: none;
+    font-size: 1.125rem;
+    cursor: pointer;
+    color: var(--dark-purple);
+    width: 2.5rem;
+    height: 2.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: background-color 0.2s;
+}
+
+.mobile-btn:hover {
+    background-color: rgba(156, 39, 176, 0.1);
+}
+
+.mobile-play-btn {
+    font-size: 1.25rem;
+    background-color: var(--dark-purple);
+    color: white;
+}
+
+.mobile-play-btn:hover {
+    background-color: var(--light-purple);
+}
+
+.recommended {
+    color: var(--highlight-color);
+    margin-right: 0.3125rem;
+}
+
+/* Botão de ocultar player */
+.hide-player-btn {
+    position: fixed;
+    z-index: 1004;
+    background-color: var(--dark-purple);
+    color: white;
+    border: none;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    box-shadow: 0 0.125rem 0.3125rem rgba(0, 0, 0, 0.3);
+    opacity: 0; 
+}
+
+.hide-player-btn:hover {
+    background-color: var(--light-purple);
+    transform: scale(1.1);
+    
+}
+
+.hide-player-btn i {
+    transition: transform 0.3s ease;
+}
+
+.hide-player-btn.rotated i {
+    transform: rotate(180deg);
+}
+
+/* Player oculto */
+.player-container.hidden {
+    transform: translateX(-100%) scale(0.7);
+    opacity: 0;
+    pointer-events: none;
+}
+
+.mobile-controls-balloon.hidden {
+    transform: translateX(100%) scale(0.7);
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* Mini player (quando oculto) */
+.mini-player {
+    display: none;
+    position: fixed;
+    z-index: 1005;
+    background-color: var(--dark-purple);
+    color: white;
+    border-radius: 50%;
+    width: 2.5rem;
+    height: 2.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 0.125rem 0.625rem rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
+    opacity: 0.7;
+}
+
+.mini-player:hover {
+    background-color: var(--light-purple);
+    transform: scale(1.05);
+    opacity: 1;
+}
+
+.mini-player i {
+    font-size: 1.25rem;
+}
+
+
+
+/* Posicionamento responsivo */
+@media (max-width: 48rem) {
+    .hide-player-btn {
+        bottom: 1.25rem;
+        left: 1.25rem;
     }
     
-    img {
-        pointer-events: none; /* Impede interação com imagens */
-        -webkit-user-drag: none; /* Impede arrastar imagens no Safari */
+    .mini-player {
+        bottom: 1.25rem;
+        left: 1.25rem;
     }
     
-    /* Permite seleção apenas em campos de entrada */
-    input, textarea {
-        -webkit-user-select: text !important;
-        -moz-user-select: text !important;
-        -ms-user-select: text !important;
-        user-select: text !important;
+    .player-container {
+        display: none;
     }
-
-    :root {
-        --dark-black: #0a0a0a;
-        --deep-gray: #1a1a1a;
-        --accent-purple: #9c27b0;
-        --light-purple: #ba68c8;
-        --dark-purple: #7b1fa2;
-        --white: #ffffff;
-        --light-gray: #e0e0e0;
-        --medium-gray: #8a8a8a;
-        --dark-gray: #333333;
-        --shadow: 0 0.25rem 1.25rem rgba(0, 0, 0, 0.5);
-        --transition: all 0.3s ease;
-        --base-font-size: 1rem;
-        --fluid-min-width: 20rem;
-        --fluid-max-width: 90rem;
-    }
-
-    * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    }
-
-    html {
-        font-size: 100%;
-        -webkit-text-size-adjust: 100%;
-    }
-
-    body {
-        background: linear-gradient(135deg, var(--dark-black) 0%, #0d0d0d 100%);
-        color: var(--light-gray);
-        line-height: 1.6;
-        min-height: 100vh;
-        position: relative;
-        background-attachment: fixed;
-        font-size: calc(var(--base-font-size) + 0.25vw);
-    }
-
-    .container {
-        width: 100%;
-        max-width: 75rem;
-        margin: 0 auto;
-        padding: 1.25rem;
-    }
-
-    header {
+    
+    .mobile-controls-balloon {
         display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 1.25rem 0;
-        position: relative;
-        border-bottom: 1px solid rgba(156, 39, 176, 0.3);
+        right: 1.25rem;
+        bottom: 1.25rem;
     }
+}
 
-    .logo {
-        font-size: clamp(1.5rem, 2vw, 1.8rem);
-        font-weight: 700;
-        color: var(--accent-purple);
+@media (min-width: 48.0625rem) {
+    .hide-player-btn {
+        bottom: 1.25rem;
+        right: 1.25rem;
+    }
+    
+    .mini-player {
+        bottom: 1.25rem;
+        right: 1.25rem;
+        top: auto;
+    }
+    
+    .player-container {
         display: flex;
-        align-items: center;
-        gap: 0.625rem;
-        text-shadow: 0 0 0.625rem rgba(156, 39, 176, 0.5);
+        right: 1.25rem;
+        bottom: 1.25rem;
+        left: auto;
+      
     }
-
-    .logo i {
-        color: var(--light-purple);
+    
+    .mobile-controls-balloon {
+        display: none;
     }
+}
 
-    .btn-voltar {
-        background: transparent;
-        color: var(--accent-purple);
-        border: 0.125rem solid var(--accent-purple);
-        padding: 0.625rem 1.25rem;
-        border-radius: 3.125rem;
-        font-weight: 600;
-        cursor: pointer;
-        transition: var(--transition);
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
-        box-shadow: var(--shadow);
-        font-size: clamp(0.875rem, 1vw, 1rem);
+.container {
+    width: 100%;
+    max-width: 75rem;
+    margin: 0 auto;
+    padding: 1.25rem;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.25rem 0;
+    position: relative;
+    border-bottom: 0.0625rem solid rgba(156, 39, 176, 0.3);
+}
+
+.logo {
+    font-size: clamp(1.5rem, 2vw, 1.8rem);
+    font-weight: 700;
+    color: var(--accent-purple);
+    display: flex;
+    align-items: center;
+    gap: 0.625rem;
+    text-shadow: 0 0 0.625rem rgba(156, 39, 176, 0.5);
+}
+
+.logo i {
+    color: var(--light-purple);
+}
+
+.btn-voltar {
+    background: transparent;
+    color: var(--accent-purple);
+    border: 0.125rem solid var(--accent-purple);
+    padding: 0.625rem 1.25rem;
+    border-radius: 3.125rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    box-shadow: var(--shadow);
+    font-size: clamp(0.875rem, 1vw, 1rem);
+}
+
+.btn-voltar:hover {
+    background: rgba(156, 39, 176, 0.1);
+    transform: translateY(-0.125rem);
+    text-shadow: 0 0 0.5rem var(--accent-purple);
+}
+
+.novel-header {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.875rem;
+    margin: 2.5rem 0;
+    background: rgba(26, 26, 26, 0.7);
+    border-radius: 1.25rem;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    border: 0.0625rem solid rgba(156, 39, 176, 0.2);
+    backdrop-filter: blur(0.625rem);
+    position: relative;
+}
+
+.capa-container {
+    flex: 0 0 28.625rem;
+    height: auto;
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    align-items: stretch;
+}
+
+.capa-container::after {
+    content: '';
+    position: absolute;
+    bottom: -1rem;
+    left: 0;
+    right: 0;
+    height: 3.125rem;
+    background: linear-gradient(to bottom, transparent, var(--deep-gray));
+}
+
+.capa {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: var(--transition);
+}
+
+.novel-info {
+    flex: 1;
+    padding: 1.875rem;
+    min-width: 18.75rem;
+    position: relative;
+    z-index: 1;
+}
+
+.novel-title {
+    font-size: clamp(1.5rem, 3vw, 2.5rem);
+    color: var(--light-purple);
+    margin-bottom: 0.9375rem;
+    text-shadow: 0 0 0.9375rem rgba(156, 39, 176, 0.3);
+}
+
+.novel-author {
+    font-size: clamp(1rem, 1.2vw, 1.2rem);
+    color: var(--light-purple);
+    margin-bottom: 1.25rem;
+    display: flex;
+    align-items: center;
+    gap: 0.625rem;
+}
+
+.novel-author a {
+    color: var(--light-purple);
+    text-decoration: none;
+    transition: var(--transition);
+}
+
+.novel-author a:hover {
+    color: var(--accent-purple);
+    text-decoration: underline;
+}
+
+.novel-synopsis {
+    font-size: clamp(1rem, 1.1vw, 1.1rem);
+    line-height: 1.8;
+    color: var(--light-gray);
+    margin-bottom: 1.5625rem;
+}
+
+.novel-badges {
+    display: flex;
+    gap: 0.625rem;
+    margin-bottom: 1.25rem;
+    flex-wrap: wrap;
+}
+
+.novel-badge {
+    padding: 0.375rem 0.75rem;
+    border-radius: 1.25rem;
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.0625rem;
+}
+
+.badge-popular {
+    background: linear-gradient(135deg, var(--accent-purple) 0%, var(--dark-purple) 100%);
+    color: var(--white);
+    box-shadow: 0 0 0.625rem rgba(156, 39, 176, 0.5);
+}
+
+.badge-completed {
+    background: linear-gradient(135deg, #8a2be2 0%, #4b0082 100%);
+    color: var(--white);
+    box-shadow: 0 0 0.625rem rgba(138, 43, 226, 0.5);
+}
+
+.badge-new {
+    background: linear-gradient(135deg, #4CAF50 0%, #2E7D32 100%);
+    color: var(--white);
+    box-shadow: 0 0 0.625rem rgba(76, 175, 80, 0.5);
+}
+
+.stats {
+    display: flex;
+    gap: 0.625rem;
+    margin-top: 0.9375rem;
+}
+
+.stat-item {
+    background: rgba(156, 39, 176, 0.1);
+    border: 0.0625rem solid rgba(156, 39, 176, 0.3);
+    padding: 0.5rem 0.75rem;
+    border-radius: 0.5rem;
+    text-align: center;
+    flex: 1;
+    transition: var(--transition);
+    position: relative;
+    overflow: hidden;
+}
+
+.stat-item:hover {
+    background: rgba(156, 39, 176, 0.2);
+    transform: translateY(-0.1875rem);
+}
+
+.stat-value {
+    font-size: clamp(1rem, 1.2vw, 1.2rem);
+    font-weight: 700;
+    color: var(--accent-purple);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.stat-label {
+    font-size: 0.75rem;
+    color: var(--medium-gray);
+}
+
+.visitors-counter {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.visitors-counter i {
+    color: var(--light-purple);
+    font-size: 1.1rem;
+}
+
+.visitors-counter::after {
+    content: '';
+    position: absolute;
+    bottom: -0.125rem;
+    left: 0;
+    width: 100%;
+    height: 0.125rem;
+    background: linear-gradient(90deg, transparent, var(--light-purple), transparent);
+    opacity: 0;
+    transition: var(--transition);
+}
+
+.visitors-counter:hover::after {
+    opacity: 1;
+}
+
+.pulse-animation {
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% {
+        text-shadow: 0 0 0 rgba(156, 39, 176, 0.7);
     }
-
-    .btn-voltar:hover {
-        background: rgba(156, 39, 176, 0.1);
-        transform: translateY(-0.125rem);
-        text-shadow: 0 0 0.5rem var(--accent-purple);
+    70% {
+        text-shadow: 0 0 0.625rem rgba(156, 39, 176, 0.7);
     }
-
-    .novel-header {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 1.875rem;
-        margin: 2.5rem 0;
-        background: rgba(26, 26, 26, 0.7);
-        border-radius: 1.25rem;
-        overflow: hidden;
-        box-shadow: var(--shadow);
-        border: 1px solid rgba(156, 39, 176, 0.2);
-        backdrop-filter: blur(0.625rem);
-        position: relative;
+    100% {
+        text-shadow: 0 0 0 rgba(156, 39, 176, 0.7);
     }
+}
 
+.chapters-section {
+    margin: 3.125rem 0;
+}
+
+.section-title {
+    font-size: clamp(1.5rem, 2vw, 2rem);
+    color: var(--light-purple);
+    margin-bottom: 1.875rem;
+    padding-bottom: 0.625rem;
+    border-bottom: 0.1875rem solid rgba(156, 39, 176, 0.3);
+    display: flex;
+    align-items: center;
+    gap: 0.9375rem;
+}
+
+.search-container {
+    display: flex;
+    gap: 0.9375rem;
+    margin-bottom: 1.25rem;
+    flex-wrap: wrap;
+}
+
+.search-input {
+    flex: 1;
+    min-width: 10.625rem;
+    padding: 0.75rem 1.25rem;
+    border-radius: 3.125rem;
+    border: 0.125rem solid var(--accent-purple);
+    background: rgba(26, 26, 26, 0.8);
+    color: var(--light-gray);
+    font-size: 1rem;
+    transition: var(--transition);
+}
+
+.search-input:focus {
+    outline: none;
+    border-color: var(--dark-purple);
+    box-shadow: 0 0 0.625rem rgba(156, 39, 176, 0.3);
+}
+
+.search-button {
+    background: linear-gradient(135deg, var(--accent-purple) 0%, var(--dark-purple) 100%);
+    color: var(--white);
+    border: none;
+    padding: 0.75rem 1.5625rem;
+    border-radius: 3.125rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.search-button:hover {
+    transform: translateY(-0.125rem);
+    box-shadow: 0 0.3125rem 0.9375rem rgba(156, 39, 176, 0.4);
+}
+
+.chapters-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(18.75rem, 1fr));
+    gap: 1.5625rem;
+}
+
+.chapter-card {
+    background: rgba(26, 26, 26, 0.7);
+    border-radius: 0.9375rem;
+    overflow: hidden;
+    transition: var(--transition);
+    box-shadow: var(--shadow);
+    border: 0.0625rem solid rgba(156, 39, 176, 0.1);
+}
+
+.chapter-card:hover {
+    transform: translateY(-0.625rem);
+    box-shadow: 0 0.75rem 1.875rem rgba(0, 0, 0, 0.7);
+    border-color: rgba(156, 39, 176, 0.3);
+}
+
+.chapter-header {
+    padding: 1.25rem;
+    background: linear-gradient(90deg, var(--deep-gray) 0%, #2a2a2a 100%);
+    color: var(--white);
+    border-bottom: 0.125rem solid var(--dark-purple);
+}
+
+.chapter-number {
+    font-size: 0.9rem;
+    color: var(--light-purple);
+}
+
+.chapter-title {
+    font-size: clamp(1rem, 1.4vw, 1.4rem);
+    font-weight: 600;
+    margin: 0.3125rem 0;
+    color: var(--accent-purple);
+}
+
+.chapter-date {
+    font-size: 0.8rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--medium-gray);
+}
+
+.chapter-badges {
+    display: flex;
+    gap: 0.625rem;
+    margin-top: 0.9375rem;
+}
+
+.badge {
+    padding: 0.3125rem 0.625rem;
+    border-radius: 1.25rem;
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.0625rem;
+}
+
+.badge-new {
+    background: linear-gradient(135deg, var(--accent-purple) 0%, var(--dark-purple) 100%);
+    color: var(--white);
+    box-shadow: 0 0 0.5rem rgba(156, 39, 176, 0.5);
+}
+
+.badge-hot {
+    background: linear-gradient(135deg, #8a2be2 0%, #4b0082 100%);
+    color: var(--white);
+    box-shadow: 0 0 0.5rem rgba(138, 43, 226, 0.5);
+}
+
+.badge-final {
+    background: linear-gradient(135deg, #4CAF50 0%, #2E7D32 100%);
+    color: var(--white);
+    box-shadow: 0 0 0.5rem rgba(76, 175, 80, 0.5);
+}
+
+.chapter-content {
+    padding: 1.25rem;
+}
+
+.chapter-preview {
+    color: var(--light-gray);
+    margin-bottom: 1.25rem;
+    font-size: 0.95rem;
+    line-height: 1.7;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.btn-read {
+    background: linear-gradient(135deg, var(--dark-purple) 0%, #6a1b9a 100%);
+    color: var(--white);
+    border: none;
+    padding: 0.75rem 1.25rem;
+    border-radius: 0.5rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: var(--transition);
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+    letter-spacing: 0.0625rem;
+    text-transform: uppercase;
+    box-shadow: 0 0.25rem 0.9375rem rgba(156, 39, 176, 0.3);
+}
+
+.btn-read:hover {
+    transform: translateY(-0.1875rem);
+    box-shadow: 0 0.375rem 1.25rem rgba(156, 39, 176, 0.5);
+    background: linear-gradient(135deg, #9c27b0 0%, #7b1fa2 100%);
+}
+
+.ver-mais-container {
+    width: 100%;
+    position: relative;
+    margin: 2rem 0;
+    text-align: center;
+}
+
+.ver-mais-bar {
+    height: 0.125rem;
+    width: 100%;
+    background: linear-gradient(90deg, 
+        transparent 0%, 
+        rgba(156, 39, 176, 0.8) 20%, 
+        rgba(186, 104, 200, 1) 50%, 
+        rgba(156, 39, 176, 0.8) 80%, 
+        transparent 100%);
+    position: relative;
+    margin-bottom: 0.5rem;
+    box-shadow: 0 0 0.625rem rgba(156, 39, 176, 0.3);
+}
+
+.ver-mais-bar::before {
+    content: '';
+    position: absolute;
+    top: -0.3125rem;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0.625rem;
+    height: 0.625rem;
+    border-radius: 50%;
+    background: rgba(186, 104, 200, 1);
+    box-shadow: 0 0 0.9375rem rgba(186, 104, 200, 0.8);
+}
+
+.ver-mais-text {
+    font-weight: 500;
+    letter-spacing: 0.0625rem;
+    color: #ba68c8;
+    text-shadow: 0 0 0.5rem rgba(156, 39, 176, 0.7);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background: transparent;
+    border: none;
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+}
+
+.ver-mais-text:hover {
+    color: #9c27b0;
+    text-shadow: 0 0 0.75rem rgba(156, 39, 176, 0.9);
+}
+
+.hidden-chapter {
+    display: none;
+}
+
+.reader-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(10, 10, 10, 0.95);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transition: var(--transition);
+}
+
+.reader-modal.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.reader-content {
+    background: linear-gradient(135deg, var(--deep-gray) 0%, #1f1f1f 100%);
+    width: 90%;
+    max-width: 56.25rem;
+    max-height: 90vh;
+    border-radius: 0.9375rem;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transform: translateY(1.875rem);
+    transition: var(--transition);
+    box-shadow: 0 0 3.125rem rgba(156, 39, 176, 0.2);
+    border: 0.0625rem solid rgba(156, 39, 176, 0.2);
+}
+
+.reader-modal.active .reader-content {
+    transform: translateY(0);
+}
+
+.reader-header {
+    background: linear-gradient(90deg, var(--deep-gray) 0%, #2a2a2a 100%);
+    color: var(--white);
+    padding: 1.25rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 0.125rem solid var(--dark-purple);
+}
+
+.reader-title {
+    font-size: clamp(1.2rem, 1.8vw, 1.8rem);
+    font-weight: 600;
+    color: var(--accent-purple);
+    text-shadow: 0 0 0.625rem rgba(156, 39, 176, 0.3);
+}
+
+.btn-close {
+    background: transparent;
+    border: none;
+    color: var(--light-purple);
+    font-size: 1.8rem;
+    cursor: pointer;
+    transition: var(--transition);
+    width: 2.5rem;
+    height: 2.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+}
+
+.btn-close:hover {
+    color: var(--white);
+    text-shadow: 0 0 0.625rem var(--accent-purple);
+    transform: rotate(90deg);
+}
+
+.reader-body {
+    padding: 1.875rem;
+    overflow-y: auto;
+    flex: 1;
+    line-height: 1.8;
+    font-size: clamp(1rem, 1.1vw, 1.1rem);
+    color: var(--light-gray);
+    scroll-behavior: smooth;
+}
+
+.reader-body p {
+    margin-bottom: 1.25rem;
+}
+
+.reader-footer {
+    padding: 1.25rem;
+    background: rgba(10, 10, 10, 0.8);
+    display: flex;
+    justify-content: space-between;
+    border-top: 0.0625rem solid rgba(156, 39, 176, 0.2);
+}
+
+.btn-nav {
+    background: transparent;
+    color: var(--accent-purple);
+    border: 0.125rem solid var(--accent-purple);
+    padding: 0.75rem 1.5625rem;
+    border-radius: 0.5rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+    display: flex;
+    align-items: center;
+    gap: 0.625rem;
+}
+
+.btn-nav:disabled {
+    color: var(--medium-gray);
+    border-color: var(--medium-gray);
+    cursor: not-allowed;
+}
+
+.btn-nav:hover:not(:disabled) {
+    background: rgba(156, 39, 176, 0.1);
+    text-shadow: 0 0 0.5rem var(--accent-purple);
+}
+
+@media (max-width: 48rem) and (orientation: portrait) {
     .capa-container {
-        flex: 0 0 28.625rem;
+        flex: 0 0 100%;
         height: auto;
-        overflow: hidden;
-        position: relative;
-        display: flex;
-        align-items: stretch;
-    }
-
-    .capa-container::after {
-        content: '';
-        position: absolute;
-        bottom: -1rem;
-        left: 0;
-        right: 0;
-        height: 3.125rem;
-        background: linear-gradient(to bottom, transparent, var(--deep-gray));
+        border-bottom: 0.125rem solid var(--dark-purple);
+        justify-content: center;
     }
 
     .capa {
         width: 100%;
-        height: 100%;
+        height: 15rem;
         object-fit: cover;
-        transition: var(--transition);
     }
-
-    .novel-info {
-        flex: 1;
-        padding: 1.875rem;
-        min-width: 18.75rem;
-        position: relative;
-        z-index: 1;
-    }
-
-    .novel-title {
-        font-size: clamp(1.5rem, 3vw, 2.5rem);
-        color: var(--light-purple);
-        margin-bottom: 0.9375rem;
-        text-shadow: 0 0 0.9375rem rgba(156, 39, 176, 0.3);
-    }
-
-    .novel-author {
-        font-size: clamp(1rem, 1.2vw, 1.2rem);
-        color: var(--light-purple);
-        margin-bottom: 1.25rem;
-        display: flex;
-        align-items: center;
-        gap: 0.625rem;
-    }
-
-    .novel-author a {
-        color: var(--light-purple);
-        text-decoration: none;
-        transition: var(--transition);
-    }
-
-    .novel-author a:hover {
-        color: var(--accent-purple);
-        text-decoration: underline;
-    }
-
-    .novel-synopsis {
-        font-size: clamp(1rem, 1.1vw, 1.1rem);
-        line-height: 1.8;
-        color: var(--light-gray);
-        margin-bottom: 1.5625rem;
-    }
-
-    .novel-badges {
-        display: flex;
-        gap: 0.625rem;
-        margin-bottom: 1.25rem;
-        flex-wrap: wrap;
-    }
-
-    .novel-badge {
-        padding: 0.375rem 0.75rem;
-        border-radius: 1.25rem;
-        font-size: 0.8rem;
-        font-weight: 600;
-        text-transform: uppercase;
-        letter-spacing: 1px;
-    }
-
-    .badge-popular {
-        background: linear-gradient(135deg, var(--accent-purple) 0%, var(--dark-purple) 100%);
-        color: var(--white);
-        box-shadow: 0 0 0.625rem rgba(156, 39, 176, 0.5);
-    }
-
-    .badge-completed {
-        background: linear-gradient(135deg, #8a2be2 0%, #4b0082 100%);
-        color: var(--white);
-        box-shadow: 0 0 0.625rem rgba(138, 43, 226, 0.5);
-    }
-
-    .badge-new {
-        background: linear-gradient(135deg, #4CAF50 0%, #2E7D32 100%);
-        color: var(--white);
-        box-shadow: 0 0 0.625rem rgba(76, 175, 80, 0.5);
-    }
-
-    .stats {
-        display: flex;
-        gap: 0.625rem;
-        margin-top: 0.9375rem;
-    }
-
-    .stat-item {
-        background: rgba(156, 39, 176, 0.1);
-        border: 1px solid rgba(156, 39, 176, 0.3);
-        padding: 0.5rem 0.75rem;
-        border-radius: 0.5rem;
-        text-align: center;
-        flex: 1;
-        transition: var(--transition);
-        position: relative;
-        overflow: hidden;
-    }
-
-    .stat-item:hover {
-        background: rgba(156, 39, 176, 0.2);
-        transform: translateY(-0.1875rem);
-    }
-
-    .stat-value {
-        font-size: clamp(1rem, 1.2vw, 1.2rem);
-        font-weight: 700;
-        color: var(--accent-purple);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 0.5rem;
-    }
-
-    .stat-label {
-        font-size: 0.75rem;
-        color: var(--medium-gray);
-    }
-
-    /* Novo estilo para o contador de visitantes */
-    .visitors-counter {
-        position: relative;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 0.5rem;
-    }
-
-    .visitors-counter i {
-        color: var(--light-purple);
-        font-size: 1.1rem;
-    }
-
-    .visitors-counter::after {
-        content: '';
-        position: absolute;
-        bottom: -2px;
-        left: 0;
-        width: 100%;
-        height: 2px;
-        background: linear-gradient(90deg, transparent, var(--light-purple), transparent);
-        opacity: 0;
-        transition: var(--transition);
-    }
-
-    .visitors-counter:hover::after {
-        opacity: 1;
-    }
-
-    .pulse-animation {
-        animation: pulse 2s infinite;
-    }
-
-    @keyframes pulse {
-        0% {
-            text-shadow: 0 0 0 rgba(156, 39, 176, 0.7);
-        }
-        70% {
-            text-shadow: 0 0 10px rgba(156, 39, 176, 0.7);
-        }
-        100% {
-            text-shadow: 0 0 0 rgba(156, 39, 176, 0.7);
-        }
-    }
-
-    .chapters-section {
-        margin: 3.125rem 0;
-    }
-
-    .section-title {
-        font-size: clamp(1.5rem, 2vw, 2rem);
-        color: var(--light-purple);
-        margin-bottom: 1.875rem;
-        padding-bottom: 0.625rem;
-        border-bottom: 0.1875rem solid rgba(156, 39, 176, 0.3);
-        display: flex;
-        align-items: center;
-        gap: 0.9375rem;
-    }
-
-    .search-container {
-        display: flex;
-        gap: 0.9375rem;
-        margin-bottom: 1.25rem;
-        flex-wrap: wrap;
-    }
-
-    .search-input {
-        flex: 1;
-        min-width: 10.625rem;
-        padding: 0.75rem 1.25rem;
-        border-radius: 3.125rem;
-        border: 0.125rem solid var(--accent-purple);
-        background: rgba(26, 26, 26, 0.8);
-        color: var(--light-gray);
-        font-size: 1rem;
-        transition: var(--transition);
-    }
-
-    .search-input:focus {
-        outline: none;
-        border-color: var(--dark-purple);
-        box-shadow: 0 0 0.625rem rgba(156, 39, 176, 0.3);
-    }
-
-    .search-button {
-        background: linear-gradient(135deg, var(--accent-purple) 0%, var(--dark-purple) 100%);
-        color: var(--white);
-        border: none;
-        padding: 0.75rem 1.5625rem;
-        border-radius: 3.125rem;
-        font-weight: 600;
-        cursor: pointer;
-        transition: var(--transition);
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
-    }
-
-    .search-button:hover {
-        transform: translateY(-0.125rem);
-        box-shadow: 0 0.3125rem 0.9375rem rgba(156, 39, 176, 0.4);
-    }
-
-    .chapters-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(18.75rem, 1fr));
-        gap: 1.5625rem;
-    }
-
-    .chapter-card {
-        background: rgba(26, 26, 26, 0.7);
-        border-radius: 0.9375rem;
-        overflow: hidden;
-        transition: var(--transition);
-        box-shadow: var(--shadow);
-        border: 1px solid rgba(156, 39, 176, 0.1);
-    }
-
-    .chapter-card:hover {
-        transform: translateY(-0.625rem);
-        box-shadow: 0 0.75rem 1.875rem rgba(0, 0, 0, 0.7);
-        border-color: rgba(156, 39, 176, 0.3);
-    }
-
-    .chapter-header {
-        padding: 1.25rem;
-        background: linear-gradient(90deg, var(--deep-gray) 0%, #2a2a2a 100%);
-        color: var(--white);
-        border-bottom: 0.125rem solid var(--dark-purple);
-    }
-
-    .chapter-number {
-        font-size: 0.9rem;
-        color: var(--light-purple);
-    }
-
-    .chapter-title {
-        font-size: clamp(1rem, 1.4vw, 1.4rem);
-        font-weight: 600;
-        margin: 0.3125rem 0;
-        color: var(--accent-purple);
-    }
-
-    .chapter-date {
-        font-size: 0.8rem;
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
-        color: var(--medium-gray);
-    }
-
-    .chapter-badges {
-        display: flex;
-        gap: 0.625rem;
-        margin-top: 0.9375rem;
-    }
-
-    .badge {
-        padding: 0.3125rem 0.625rem;
-        border-radius: 1.25rem;
-        font-size: 0.7rem;
-        font-weight: 600;
-        text-transform: uppercase;
-        letter-spacing: 1px;
-    }
-
-    .badge-new {
-        background: linear-gradient(135deg, var(--accent-purple) 0%, var(--dark-purple) 100%);
-        color: var(--white);
-        box-shadow: 0 0 0.5rem rgba(156, 39, 176, 0.5);
-    }
-
-    .badge-hot {
-        background: linear-gradient(135deg, #8a2be2 0%, #4b0082 100%);
-        color: var(--white);
-        box-shadow: 0 0 0.5rem rgba(138, 43, 226, 0.5);
-    }
-
-    .badge-final {
-        background: linear-gradient(135deg, #4CAF50 0%, #2E7D32 100%);
-        color: var(--white);
-        box-shadow: 0 0 0.5rem rgba(76, 175, 80, 0.5);
-    }
-
-    .chapter-content {
-        padding: 1.25rem;
-    }
-
-    .chapter-preview {
-        color: var(--light-gray);
-        margin-bottom: 1.25rem;
-        font-size: 0.95rem;
-        line-height: 1.7;
-        display: -webkit-box;
-        -webkit-line-clamp: 3;
-        -webkit-box-orient: vertical;
-        overflow: hidden;
-    }
-
-    .btn-read {
-        background: linear-gradient(135deg, var(--dark-purple) 0%, #6a1b9a 100%);
-        color: var(--white);
-        border: none;
-        padding: 0.75rem 1.25rem;
-        border-radius: 0.5rem;
-        font-weight: 700;
-        cursor: pointer;
-        transition: var(--transition);
-        width: 100%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        gap: 0.5rem;
-        letter-spacing: 1px;
-        text-transform: uppercase;
-        box-shadow: 0 0.25rem 0.9375rem rgba(156, 39, 176, 0.3);
-    }
-
-    .btn-read:hover {
-        transform: translateY(-0.1875rem);
-        box-shadow: 0 0.375rem 1.25rem rgba(156, 39, 176, 0.5);
-        background: linear-gradient(135deg, #9c27b0 0%, #7b1fa2 100%);
-    }
-
-    /* Estilo para o botão Ver Mais */
-    .ver-mais-container {
-        width: 100%;
-        position: relative;
-        margin: 2rem 0;
-        text-align: center;
-    }
-    
-    .ver-mais-bar {
-        height: 2px;
-        width: 100%;
-        background: linear-gradient(90deg, 
-            transparent 0%, 
-            rgba(156, 39, 176, 0.8) 20%, 
-            rgba(186, 104, 200, 1) 50%, 
-            rgba(156, 39, 176, 0.8) 80%, 
-            transparent 100%);
-        position: relative;
-        margin-bottom: 0.5rem;
-        box-shadow: 0 0 10px rgba(156, 39, 176, 0.3);
-    }
-    
-    .ver-mais-bar::before {
-        content: '';
-        position: absolute;
-        top: -5px;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 10px;
-        height: 10px;
-        border-radius: 50%;
-        background: rgba(186, 104, 200, 1);
-        box-shadow: 0 0 15px rgba(186, 104, 200, 0.8);
-    }
-    
-    .ver-mais-text {
-        
-        font-weight: 500;
-        letter-spacing: 1px;
-        color: #ba68c8;
-        text-shadow: 0 0 8px rgba(156, 39, 176, 0.7);
-        cursor: pointer;
-        transition: all 0.3s ease;
-        background: transparent;
-        border: none;
-        padding: 0.5rem 1rem;
-        font-size: 1rem;
-    }
-    
-    .ver-mais-text:hover {
-        color: #9c27b0;
-        text-shadow: 0 0 12px rgba(156, 39, 176, 0.9);
-    }
-    
-    /* Classe para capítulos escondidos */
-    .hidden-chapter {
-        display: none;
-    }
-
-    /* Modal de Leitura */
-    .reader-modal {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(10, 10, 10, 0.95);
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        z-index: 1000;
-        opacity: 0;
-        visibility: hidden;
-        transition: var(--transition);
-    }
-
-    .reader-modal.active {
-        opacity: 1;
-        visibility: visible;
-    }
-
-    .reader-content {
-        background: linear-gradient(135deg, var(--deep-gray) 0%, #1f1f1f 100%);
-        width: 90%;
-        max-width: 56.25rem;
-        max-height: 90vh;
-        border-radius: 0.9375rem;
-        overflow: hidden;
-        display: flex;
-        flex-direction: column;
-        transform: translateY(1.875rem);
-        transition: var(--transition);
-        box-shadow: 0 0 3.125rem rgba(156, 39, 176, 0.2);
-        border: 1px solid rgba(156, 39, 176, 0.2);
-    }
-
-    .reader-modal.active .reader-content {
-        transform: translateY(0);
-    }
-
-    .reader-header {
-        background: linear-gradient(90deg, var(--deep-gray) 0%, #2a2a2a 100%);
-        color: var(--white);
-        padding: 1.25rem;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        border-bottom: 0.125rem solid var(--dark-purple);
-    }
-
-    .reader-title {
-        font-size: clamp(1.2rem, 1.8vw, 1.8rem);
-        font-weight: 600;
-        color: var(--accent-purple);
-        text-shadow: 0 0 0.625rem rgba(156, 39, 176, 0.3);
-    }
-
-    .btn-close {
-        background: transparent;
-        border: none;
-        color: var(--light-purple);
-        font-size: 1.8rem;
-        cursor: pointer;
-        transition: var(--transition);
-        width: 2.5rem;
-        height: 2.5rem;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        border-radius: 50%;
-    }
-
-    .btn-close:hover {
-        color: var(--white);
-        text-shadow: 0 0 0.625rem var(--accent-purple);
-        transform: rotate(90deg);
-    }
-
-    .reader-body {
-        padding: 1.875rem;
-        overflow-y: auto;
-        flex: 1;
-        line-height: 1.8;
-        font-size: clamp(1rem, 1.1vw, 1.1rem);
-        color: var(--light-gray);
-        scroll-behavior: smooth;
-    }
-
-    .reader-body p {
-        margin-bottom: 1.25rem;
-    }
-
-    .reader-footer {
-        padding: 1.25rem;
-        background: rgba(10, 10, 10, 0.8);
-        display: flex;
-        justify-content: space-between;
-        border-top: 1px solid rgba(156, 39, 176, 0.2);
-    }
-
-    .btn-nav {
-        background: transparent;
-        color: var(--accent-purple);
-        border: 0.125rem solid var(--accent-purple);
-        padding: 0.75rem 1.5625rem;
-        border-radius: 0.5rem;
-        font-weight: 600;
-        cursor: pointer;
-        transition: var(--transition);
-        display: flex;
-        align-items: center;
-        gap: 0.625rem;
-    }
-
-    .btn-nav:disabled {
-        color: var(--medium-gray);
-        border-color: var(--medium-gray);
-        cursor: not-allowed;
-    }
-
-    .btn-nav:hover:not(:disabled) {
-        background: rgba(156, 39, 176, 0.1);
-        text-shadow: 0 0 0.5rem var(--accent-purple);
-    }
-
-    /* Mobile Portrait - Barra de separação */
-    @media (max-width: 48rem) and (orientation: portrait) {
-        .capa-container {
-            flex: 0 0 100%;
-            height: auto;
-            border-bottom: 0.125rem solid var(--dark-purple);
-            justify-content: center; /* Centraliza a imagem */
-        }
-
-        .capa {
-            width: 100%;
-            height: 15rem;
-            object-fit: cover;
-        }
-    }
-
-    /* Animations */
-    @keyframes fadeIn {
-        from { opacity: 0; transform: translateY(1.25rem); }
-        to { opacity: 1; transform: translateY(0); }
-    }
-
-    .chapter-card {
-        animation: fadeIn 0.5s ease-out;
-        animation-fill-mode: both;
-    }
-
-    /* Delay para animação dos cards */
-    .chapter-card:nth-child(1) { animation-delay: 0.1s; }
-    .chapter-card:nth-child(2) { animation-delay: 0.2s; }
-    .chapter-card:nth-child(3) { animation-delay: 0.3s; }
-    .chapter-card:nth-child(4) { animation-delay: 0.4s; }
-    .chapter-card:nth-child(5) { animation-delay: 0.5s; }
-    .chapter-card:nth-child(6) { animation-delay: 0.6s; }
-
-    footer {
-        text-align: center;
-        padding: 1.875rem 0;
-        color: var(--medium-gray);
-        font-size: 0.9rem;
-        margin-top: 3.125rem;
-        border-top: 1px solid rgba(156, 39, 176, 0.1);
-    }
-
-    /* Efeitos de brilho */
-    .glow {
-        text-shadow: 0 0 0.625rem rgba(156, 39, 176, 0.7);
-    }
-
-    /* Indicador de capítulos */
-    .chapters-count {
-        position: absolute;
-        top: 0.625rem;
-        right: 0.625rem;
-        background: var(--dark-purple);
-        color: white;
-        border-radius: 50%;
-        width: 1.25rem;
-        height: 1.25rem;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 0.7rem;
-        font-weight: bold;
-    }
-    
-    /* Mensagem de nenhum capítulo */
-    .no-chapters {
-        grid-column: 1 / -1;
-        text-align: center;
-        padding: 2.5rem;
-        background: rgba(26, 26, 26, 0.5);
-        border-radius: 0.9375rem;
-        border: 0.125rem dashed rgba(156, 39, 176, 0.3);
-    }
-    
-    .no-chapters i {
-        font-size: 3rem;
-        color: var(--accent-purple);
-        margin-bottom: 1.25rem;
-    }
-    
-    .no-chapters h3 {
-        font-size: 1.8rem;
-        color: var(--light-purple);
-        margin-bottom: 0.9375rem;
-    }
-    
-    .no-chapters p {
-        color: var(--light-gray);
-        max-width: 37.5rem;
-        margin: 0 auto;
-    }
-    
-    /* Loading */
-    .loading {
-        grid-column: 1 / -1;
-        text-align: center;
-        padding: 2.5rem;
-    }
-    
-    .spinner {
-        width: 3.125rem;
-        height: 3.125rem;
-        border: 0.3125rem solid rgba(156, 39, 176, 0.3);
-        border-top: 0.3125rem solid var(--accent-purple);
-        border-radius: 50%;
-        animation: spin 1s linear infinite;
-        margin: 0 auto 1.25rem;
-    }
-    
-    @keyframes spin {
-        0% { transform: rotate(0deg); }
-        100% { transform: rotate(360deg); }
-    }
-
-    .missing-info {
-        color: var(--accent-purple);
-        font-weight: bold;
-        background-color: rgba(156, 39, 176, 0.1);
-        padding: 0.3125rem 0.625rem;
-        border-radius: 0.3125rem;
-        margin: 0.3125rem 0;
-    }
-
-    /* Fluid Typography */
-    .fluid-text {
-        font-size: calc(var(--min-font-size) + (var(--max-font-size) - var(--min-font-size)) * ((100vw - var(--fluid-min-width)) / (var(--fluid-max-width) - var(--fluid-min-width))));
-    }
-    
-    /* Estilos para o Disqus */
-    #disqus_thread {
-        max-width: 75rem;
-        margin: 0 auto;
-        padding: 1.25rem;
-    }
-    
-    /* Ajustes para o tema escuro do Disqus */
-    .disqus-dark {
-        background-color: #1a1a1a !important;
-        color: #e0e0e0 !important;
-    }
-    
-    .disqus-dark .dsq-comment-body,
-    .disqus-dark .dsq-comment-header,
-    .disqus-dark .dsq-textarea {
-        color: #e0e0e0 !important;
-    }
-    
-    .disqus-dark .dsq-post {
-        border-bottom-color: #333 !important;
-    }
-</style>
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(1.25rem); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.chapter-card {
+    animation: fadeIn 0.5s ease-out;
+    animation-fill-mode: both;
+}
+
+.chapter-card:nth-child(1) { animation-delay: 0.1s; }
+.chapter-card:nth-child(2) { animation-delay: 0.2s; }
+.chapter-card:nth-child(3) { animation-delay: 0.3s; }
+.chapter-card:nth-child(4) { animation-delay: 0.4s; }
+.chapter-card:nth-child(5) { animation-delay: 0.5s; }
+.chapter-card:nth-child(6) { animation-delay: 0.6s; }
+
+footer {
+    text-align: center;
+    padding: 1.875rem 0;
+    color: var(--medium-gray);
+    font-size: 0.9rem;
+    margin-top: 3.125rem;
+    border-top: 0.0625rem solid rgba(156, 39, 176, 0.1);
+}
+
+.glow {
+    text-shadow: 0 0 0.625rem rgba(156, 39, 176, 0.7);
+}
+
+.chapters-count {
+    position: absolute;
+    top: 0.625rem;
+    right: 0.625rem;
+    background: var(--dark-purple);
+    color: white;
+    border-radius: 50%;
+    width: 1.25rem;
+    height: 1.25rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.7rem;
+    font-weight: bold;
+}
+
+.no-chapters {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 2.5rem;
+    background: rgba(26, 26, 26, 0.5);
+    border-radius: 0.9375rem;
+    border: 0.125rem dashed rgba(156, 39, 176, 0.3);
+}
+
+.no-chapters i {
+    font-size: 3rem;
+    color: var(--accent-purple);
+    margin-bottom: 1.25rem;
+}
+
+.no-chapters h3 {
+    font-size: 1.8rem;
+    color: var(--light-purple);
+    margin-bottom: 0.9375rem;
+}
+
+.no-chapters p {
+    color: var(--light-gray);
+    max-width: 37.5rem;
+    margin: 0 auto;
+}
+
+.loading {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 2.5rem;
+}
+
+.spinner {
+    width: 3.125rem;
+    height: 3.125rem;
+    border: 0.3125rem solid rgba(156, 39, 176, 0.3);
+    border-top: 0.3125rem solid var(--accent-purple);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin: 0 auto 1.25rem;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.missing-info {
+    color: var(--accent-purple);
+    font-weight: bold;
+    background-color: rgba(156, 39, 176, 0.1);
+    padding: 0.3125rem 0.625rem;
+    border-radius: 0.3125rem;
+    margin: 0.3125rem 0;
+}
+
+.fluid-text {
+    font-size: calc(var(--min-font-size) + (var(--max-font-size) - var(--min-font-size)) * ((100vw - var(--fluid-min-width)) / (var(--fluid-max-width) - var(--fluid-min-width))));
+}
+
+#disqus_thread {
+    max-width: 75rem;
+    margin: 0 auto;
+    padding: 1.25rem;
+}
+
+.disqus-dark {
+    background-color: #1a1a1a !important;
+    color: #e0e0e0 !important;
+}
+
+.disqus-dark .dsq-comment-body,
+.disqus-dark .dsq-comment-header,
+.disqus-dark .dsq-textarea {
+    color: #e0e0e0 !important;
+}
+
+.disqus-dark .dsq-post {
+    border-bottom-color: #333 !important;
+}
+    </style>
 </head>
 <body>
+    <!-- Botão de ocultar/mostrar player -->
+    <button class="hide-player-btn" id="hidePlayerBtn">
+        <i class="fas fa-chevron-down"></i>
+    </button>
+
+    <!-- Mini player (aparece quando o player está oculto) -->
+    <div class="mini-player hidden" id="miniPlayer">
+        <i class="fas fa-music"></i>
+    </div>
+
     <div class="container">
         <header>
             <div class="logo">
@@ -851,7 +1233,52 @@
                 Voltar
             </button>
         </header>
-
+        
+        <!-- Player Desktop -->
+        <div class="player-container" id="playerContainer">
+            <div class="player-drag-area"></div>
+            <audio id="audioPlayer" loop></audio>
+            
+            <div class="player-header">
+                <div class="now-playing" id="nowPlaying">Nenhuma música selecionada</div>
+                <button class="toggle-select-btn" id="toggleSelectBtn"><i class="fas fa-chevron-up"></i></button>
+            </div>
+            
+            <div class="player-select-container" id="playerSelectContainer">
+                <select id="musicSelect">
+                    <option value="">Selecione uma música...</option>
+                </select>
+            </div>
+            
+            <div class="player-controls">
+                <button class="player-btn" id="prevBtn"><i class="fas fa-step-backward"></i></button>
+                <button class="player-btn" id="playPauseBtn"><i class="fas fa-play"></i></button>
+                <button class="player-btn" id="nextBtn"><i class="fas fa-step-forward"></i></button>
+            </div>
+        </div>
+        
+        <!-- Player Mobile -->
+        <div class="mobile-controls-balloon" id="mobileControls">
+            <div class="drag-area"></div>
+            
+            <div class="mobile-header">
+                <div class="mobile-now-playing" id="mobileNowPlaying">Nenhuma música selecionada</div>
+                <button class="mobile-toggle-select-btn" id="mobileToggleSelectBtn"><i class="fas fa-chevron-up"></i></button>
+            </div>
+            
+            <div class="mobile-select-container" id="mobileSelectContainer">
+                <select id="mobileMusicSelect">
+                    <option value="">Selecione uma música...</option>
+                </select>
+            </div>
+            
+            <div class="mobile-controls">
+                <button class="mobile-btn" id="mobilePrevBtn"><i class="fas fa-step-backward"></i></button>
+                <button class="mobile-btn mobile-play-btn" id="mobilePlayPauseBtn"><i class="fas fa-play"></i></button>
+                <button class="mobile-btn" id="mobileNextBtn"><i class="fas fa-step-forward"></i></button>
+            </div>
+        </div>
+        
         <div class="novel-header">
             <div class="capa-container">
                 <img id="novel-cover" src="" alt="Capa da Light Novel" class="capa">
@@ -935,9 +1362,8 @@
     <footer>
         <p>© 2025 Reign Of RPG's. Todos os direitos reservados.</p>
     </footer>
-    <!-- Counter Visitor - Cole o código gerado no site -->
-<script src="https://www.countervisitor.com/script.js" data-counter="reignrpgs-novel1"></script>
-<script>
+    
+    <script>
     // Bloqueia menu de contexto (botão direito)
     document.addEventListener('contextmenu', function(e) {
         e.preventDefault();
@@ -950,7 +1376,39 @@
         }
     });
 
-    // Referências do DOM
+    // Referências do DOM para o player de música
+    const musicSelect = document.getElementById('musicSelect');
+    const mobileMusicSelect = document.getElementById('mobileMusicSelect');
+    const audioPlayer = document.getElementById('audioPlayer');
+    const playPauseBtn = document.getElementById('playPauseBtn');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const nowPlaying = document.getElementById('nowPlaying');
+    const mobileNowPlaying = document.getElementById('mobileNowPlaying');
+    const playerContainer = document.getElementById('playerContainer');
+    const mobilePlayPauseBtn = document.getElementById('mobilePlayPauseBtn');
+    const mobilePrevBtn = document.getElementById('mobilePrevBtn');
+    const mobileNextBtn = document.getElementById('mobileNextBtn');
+    const mobileControls = document.getElementById('mobileControls');
+    const playerDragArea = document.querySelector('.player-drag-area');
+    const mobileDragArea = document.querySelector('.mobile-controls-balloon .drag-area');
+    const toggleSelectBtn = document.getElementById('toggleSelectBtn');
+    const mobileToggleSelectBtn = document.getElementById('mobileToggleSelectBtn');
+    const playerSelectContainer = document.getElementById('playerSelectContainer');
+    const mobileSelectContainer = document.getElementById('mobileSelectContainer');
+    const hidePlayerBtn = document.getElementById('hidePlayerBtn');
+    const miniPlayer = document.getElementById('miniPlayer');
+
+    // Variáveis de estado do player de música
+    let allMusics = [];
+    let recommendedMusics = [];
+    let currentMusicIndex = -1;
+    let isDragging = false;
+    let offsetX, offsetY;
+    let isSelectVisible = false;
+    let isPlayerHidden = false;
+
+    // Referências do DOM para o leitor de novel
     const chaptersContainer = document.getElementById('chapters-container');
     const readerModal = document.getElementById('reader-modal');
     const readerTitle = document.getElementById('reader-title');
@@ -970,7 +1428,7 @@
     const searchButton = document.getElementById('search-button');
     const visitorsCount = document.getElementById('visitors-count');
     
-    // Variáveis de estado
+    // Variáveis de estado do leitor de novel
     let currentChapter = null;
     let allChapters = [];
     let displayedChapters = [];
@@ -980,7 +1438,379 @@
     let isSearching = false;
     let currentSearchTerm = '';
 
-    // Função para obter o ID da pasta atual
+    // Funções do player de música
+    function getCurrentPageId() {
+        const pathParts = window.location.pathname.split('/');
+        for (let i = pathParts.length - 1; i >= 0; i--) {
+            const part = pathParts[i];
+            if (/^\d+$/.test(part)) {
+                return parseInt(part);
+            }
+        }
+        return null;
+    }
+
+    async function fetchMusicData() {
+        try {
+            const baseUrl = window.location.href.replace(/\/[^/]*$/, '/');
+            const jsonUrl = new URL('../../Musics/AllMusics.json', baseUrl).href;
+            
+            const response = await fetch(jsonUrl);
+            if (!response.ok) {
+                throw new Error('Falha ao buscar dados das músicas');
+            }
+            
+            return await response.json();
+        } catch (error) {
+            console.error('Erro ao buscar dados das músicas:', error);
+            return [];
+        }
+    }
+
+    async function fetchRecommendedMusics() {
+        try {
+            const currentPageId = getCurrentPageId();
+            if (!currentPageId) return [];
+            
+            const baseUrl = window.location.href.replace(/\/[^/]*$/, '/');
+            const jsonUrl = new URL('../AllNovels.json', baseUrl).href;
+            
+            const response = await fetch(jsonUrl);
+            if (!response.ok) {
+                throw new Error('Falha ao buscar músicas recomendadas');
+            }
+            
+            const data = await response.json();
+            const novelData = data.find(item => item.id === currentPageId);
+            
+            return novelData ? novelData.recommended : [];
+        } catch (error) {
+            console.error('Erro ao buscar músicas recomendadas:', error);
+            return [];
+        }
+    }
+
+    async function loadMusics() {
+        const [musics, recommended] = await Promise.all([
+            fetchMusicData(),
+            fetchRecommendedMusics()
+        ]);
+        
+        allMusics = musics;
+        recommendedMusics = recommended;
+        
+        musicSelect.innerHTML = '<option value="">Selecione uma música...</option>';
+        mobileMusicSelect.innerHTML = '<option value="">Selecione uma música...</option>';
+        
+        recommendedMusics.forEach(recommendedId => {
+            const musicInfo = allMusics.find(m => m.id === recommendedId);
+            if (musicInfo) {
+                const option = document.createElement('option');
+                option.value = musicInfo.id;
+                option.textContent = `⭐ ${musicInfo.name}`;
+                option.dataset.recommended = true;
+                musicSelect.appendChild(option.cloneNode(true));
+                mobileMusicSelect.appendChild(option);
+            }
+        });
+        
+        allMusics.forEach(musicInfo => {
+            const isRecommended = recommendedMusics.includes(musicInfo.id);
+            if (!isRecommended) {
+                const option = document.createElement('option');
+                option.value = musicInfo.id;
+                option.textContent = musicInfo.name;
+                musicSelect.appendChild(option.cloneNode(true));
+                mobileMusicSelect.appendChild(option);
+            }
+        });
+    }
+
+    function playSelectedMusic(event = null) {
+        let selectedMusicId;
+
+        if (event && event.target) {
+            selectedMusicId = event.target.value;
+        } else {
+            selectedMusicId = musicSelect.value || mobileMusicSelect.value;
+        }
+
+        if (!selectedMusicId) {
+            audioPlayer.pause();
+            nowPlaying.textContent = 'Nenhuma música selecionada';
+            mobileNowPlaying.textContent = 'Nenhuma música selecionada';
+            updatePlayButtons('play');
+            currentMusicIndex = -1;
+            return;
+        }
+
+        musicSelect.value = selectedMusicId;
+        mobileMusicSelect.value = selectedMusicId;
+
+        currentMusicIndex = Array.from(musicSelect.options).findIndex(
+            opt => opt.value === selectedMusicId
+        );
+
+        const musicInfo = allMusics.find(m => m.id == selectedMusicId);
+        if (!musicInfo) return;
+
+        const baseUrl = window.location.href.replace(/\/[^/]*$/, '/');
+        const musicPath = new URL(`../../Musics/${selectedMusicId}.mp3`, baseUrl).href;
+
+        audioPlayer.src = musicPath;
+        audioPlayer.play()
+            .then(() => {
+                updatePlayButtons('pause');
+                nowPlaying.textContent = musicInfo.name;
+                mobileNowPlaying.textContent = musicInfo.name;
+            })
+            .catch(error => {
+                console.error('Erro ao reproduzir música:', error);
+                nowPlaying.textContent = 'Erro ao reproduzir';
+                mobileNowPlaying.textContent = 'Erro ao reproduzir';
+            });
+    }
+
+    function updatePlayButtons(state) {
+        const playIcon = playPauseBtn.querySelector('i');
+        const mobilePlayIcon = mobilePlayPauseBtn.querySelector('i');
+        
+        if (state === 'play') {
+            playPauseBtn.title = 'Play';
+            playIcon.classList.remove('fa-pause');
+            playIcon.classList.add('fa-play');
+            mobilePlayPauseBtn.title = 'Play';
+            mobilePlayIcon.classList.remove('fa-pause');
+            mobilePlayIcon.classList.add('fa-play');
+        } else {
+            playPauseBtn.title = 'Pause';
+            playIcon.classList.remove('fa-play');
+            playIcon.classList.add('fa-pause');
+            mobilePlayPauseBtn.title = 'Pause';
+            mobilePlayIcon.classList.remove('fa-play');
+            mobilePlayIcon.classList.add('fa-pause');
+        }
+    }
+
+    function playNextMusic() {
+        if (musicSelect.options.length <= 1) return;
+        
+        let nextIndex = currentMusicIndex + 1;
+        if (nextIndex >= musicSelect.options.length) {
+            nextIndex = 1;
+        }
+        
+        musicSelect.selectedIndex = nextIndex;
+        mobileMusicSelect.selectedIndex = nextIndex;
+        playSelectedMusic();
+    }
+
+    function playPreviousMusic() {
+        if (musicSelect.options.length <= 1) return;
+        
+        let prevIndex = currentMusicIndex - 1;
+        if (prevIndex <= 0) {
+            prevIndex = musicSelect.options.length - 1;
+        }
+        
+        musicSelect.selectedIndex = prevIndex;
+        mobileMusicSelect.selectedIndex = prevIndex;
+        playSelectedMusic();
+    }
+
+    function togglePlayPause() {
+        if (audioPlayer.paused) {
+            if (audioPlayer.src) {
+                audioPlayer.play();
+                updatePlayButtons('pause');
+            } else if (musicSelect.options.length > 1) {
+                musicSelect.selectedIndex = 1;
+                mobileMusicSelect.selectedIndex = 1;
+                playSelectedMusic();
+            }
+        } else {
+            audioPlayer.pause();
+            updatePlayButtons('play');
+        }
+    }
+
+    function toggleSelectMenu() {
+        isSelectVisible = !isSelectVisible;
+        
+        if (isSelectVisible) {
+            playerSelectContainer.classList.add('show');
+            mobileSelectContainer.classList.add('show');
+            toggleSelectBtn.classList.add('rotated');
+            mobileToggleSelectBtn.classList.add('rotated');
+        } else {
+            playerSelectContainer.classList.remove('show');
+            mobileSelectContainer.classList.remove('show');
+            toggleSelectBtn.classList.remove('rotated');
+            mobileToggleSelectBtn.classList.remove('rotated');
+        }
+    }
+
+    function startDrag(e) {
+        isDragging = true;
+        const rect = playerContainer.getBoundingClientRect();
+        
+        if (e.type === 'mousedown') {
+            offsetX = e.clientX - rect.left;
+            offsetY = e.clientY - rect.top;
+            document.addEventListener('mousemove', drag);
+            document.addEventListener('mouseup', stopDrag);
+        } else {
+            e.preventDefault();
+            const touch = e.touches[0];
+            offsetX = touch.clientX - rect.left;
+            offsetY = touch.clientY - rect.top;
+            document.addEventListener('touchmove', drag, { passive: false });
+            document.addEventListener('touchend', stopDrag);
+        }
+        
+        playerContainer.style.transition = 'none';
+    }
+    function drag(e) {
+        if (!isDragging) return;
+        e.preventDefault();
+        
+        let clientX, clientY;
+        
+        if (e.type === 'mousemove') {
+            clientX = e.clientX;
+            clientY = e.clientY;
+        } else {
+            const touch = e.touches[0];
+            clientX = touch.clientX;
+            clientY = touch.clientY;
+        }
+        
+        const newLeft = clientX - offsetX;
+        const newTop = clientY - offsetY;
+        const maxLeft = window.innerWidth - playerContainer.offsetWidth;
+        const maxTop = window.innerHeight - playerContainer.offsetHeight;
+        
+        playerContainer.style.left = `${Math.max(0, Math.min(newLeft, maxLeft))}px`;
+        playerContainer.style.top = `${Math.max(0, Math.min(newTop, maxTop))}px`;
+        playerContainer.style.right = 'auto';
+        playerContainer.style.bottom = 'auto';
+    }
+    
+    function stopDrag() {
+        isDragging = false;
+        document.removeEventListener('mousemove', drag);
+        document.removeEventListener('mouseup', stopDrag);
+        document.removeEventListener('touchmove', drag);
+        document.removeEventListener('touchend', stopDrag);
+        
+        playerContainer.style.transition = 'all 0.3s ease';
+    }
+    
+    function startMobileDrag(e) {
+        e.stopPropagation();
+        const rect = mobileControls.getBoundingClientRect();
+        
+        if (e.type === 'mousedown') {
+            offsetX = e.clientX - rect.left;
+            offsetY = e.clientY - rect.top;
+            document.addEventListener('mousemove', mobileDrag);
+            document.addEventListener('mouseup', stopMobileDrag);
+        } else {
+            const touch = e.touches[0];
+            offsetX = touch.clientX - rect.left;
+            offsetY = touch.clientY - rect.top;
+            document.addEventListener('touchmove', mobileDrag, { passive: false });
+            document.addEventListener('touchend', stopMobileDrag);
+        }
+        
+        mobileControls.style.transition = 'none';
+    }
+    function mobileDrag(e) {
+        e.preventDefault();
+        let clientX, clientY;
+        
+        if (e.type === 'mousemove') {
+            clientX = e.clientX;
+            clientY = e.clientY;
+        } else {
+            const touch = e.touches[0];
+            clientX = touch.clientX;
+            clientY = touch.clientY;
+        }
+        
+        const newLeft = clientX - offsetX;
+        const newTop = clientY - offsetY;
+        const maxLeft = window.innerWidth - mobileControls.offsetWidth;
+        const maxTop = window.innerHeight - mobileControls.offsetHeight;
+        
+        mobileControls.style.left = `${Math.max(0, Math.min(newLeft, maxLeft))}px`;
+        mobileControls.style.top = `${Math.max(0, Math.min(newTop, maxTop))}px`;
+        mobileControls.style.right = 'auto';
+        mobileControls.style.bottom = 'auto';
+    }
+    function stopMobileDrag() {
+        document.removeEventListener('mousemove', mobileDrag);
+        document.removeEventListener('mouseup', stopMobileDrag);
+        document.removeEventListener('touchmove', mobileDrag);
+        document.removeEventListener('touchend', stopMobileDrag);
+        
+        mobileControls.style.transition = 'all 0.3s ease';
+    }
+
+    // Funções do botão de ocultar player
+    function togglePlayerVisibility() {
+    const isCurrentlyHidden = playerContainer.classList.contains('hidden');
+
+    if (isCurrentlyHidden) {
+        // Mostrar players
+        playerContainer.classList.remove('hidden');
+        mobileControls.classList.remove('hidden');
+        
+        // Ocultar mini player
+        miniPlayer.classList.add('hidden');
+        
+        // Rotacionar ícone de volta
+        hidePlayerBtn.classList.remove('rotated');
+
+        // No mobile, voltar o player para a posição original
+        if (window.innerWidth <= 768) {
+            mobileControls.style.transform = 'scale(0.7)';
+        }
+    } else {
+        // Ocultar players
+        playerContainer.classList.add('hidden');
+        mobileControls.classList.add('hidden');
+        
+        // Mostrar mini player
+        miniPlayer.classList.remove('hidden');
+        
+        // Rotacionar ícone
+        hidePlayerBtn.classList.add('rotated');
+
+        // No mobile, mover o player para fora da tela
+        if (window.innerWidth <= 768) {
+            mobileControls.style.transform = 'translateX(100%) scale(0.7)';
+        }
+    }
+}
+
+    function checkScreenSize() {
+        if (window.innerWidth <= 768) {
+            // Mobile
+            playerContainer.style.display = 'none';
+            mobileControls.style.display = 'flex';
+            playerContainer.classList.add('hidden');
+            mobileControls.classList.add('hidden');
+        } else {
+            // Desktop
+            playerContainer.style.display = 'flex';
+            mobileControls.style.display = 'none';
+            playerContainer.classList.add('hidden');
+            mobileControls.classList.add('hidden');
+        }
+    }
+
+    // Funções do leitor de novel
     function getCurrentNovelId() {
         const pathParts = window.location.pathname.split('/');
         const indexPos = pathParts.indexOf('index.html');
@@ -990,7 +1820,6 @@
         return null;
     }
 
-    // Função para carregar os dados da novel
     async function loadNovelData() {
         const novelId = getCurrentNovelId();
         if (!novelId) {
@@ -1018,14 +1847,12 @@
         }
     }
 
-    // Funções para parse e verificação de datas
     function parseDateBr(dateString) {
         const meses = ['jan', 'fev', 'mar', 'abr', 'mai', 'jun', 'jul', 'ago', 'set', 'out', 'nov', 'dez'];
         const spTimeZone = 'America/Sao_Paulo';
 
         let dia, mes, ano, hora, minuto;
 
-        // Formato 1: 25 jan, 2025 - 14:56
         if (dateString.includes(',') && dateString.includes('-')) {
             const [dataPart, horaPart] = dateString.split(' - ');
             const [d, m, a] = dataPart.replace(',', '').split(' ');
@@ -1033,23 +1860,17 @@
             mes = meses.indexOf(m.toLowerCase());
             ano = parseInt(a);
             [hora, minuto] = horaPart.split(':').map(Number);
-        } 
-        
-        // Formato 2: 25/01/2025, 14:56
-        else if (dateString.includes('/') && dateString.includes(',')) {
+        } else if (dateString.includes('/') && dateString.includes(',')) {
             const [dataPart, horaPart] = dateString.split(',');
             const [d, m, a] = dataPart.split('/').map(Number);
             dia = d;
             mes = m - 1;
             ano = a;
             [hora, minuto] = horaPart.trim().split(':').map(Number);
-        } 
-        
-        else {
+        } else {
             return null;
         }
 
-        // Cria a data em São Paulo corretamente
         return new Date(Date.UTC(ano, mes, dia, hora, minuto)) || null;
     }
 
@@ -1066,17 +1887,14 @@
         return diffDays <= diasLimite;
     }
 
-    // Para Novel (30 dias)
     function isNovelNew(dateString) {
         return isDateNew(dateString, 30);
     }
 
-    // Para Capítulo (3 dias)
     function isChapterNew(dateString) {
         return isDateNew(dateString, 3);
     }
 
-    // Formata a data para exibição
     function formatDate(dateString) {
         const date = parseDateBr(dateString);
         if (!date) return 'Data inválida';
@@ -1089,7 +1907,6 @@
         return `<i class="far fa-calendar"></i> ${dia} ${mes}, ${ano}`;
     }
 
-    // Função para atualizar a UI com os dados da novel
     function updateNovelUI(data) {
         if (!data) {
             novelTitle.textContent = 'Informações não disponíveis';
@@ -1100,11 +1917,9 @@
             return;
         }
 
-        // Atualizar título
         document.title = data.name + ' | Reign Of RPG\'s';
         novelTitle.textContent = data.name || '<span class="missing-info">Nome não disponível</span>';
    
-        // Atualizar autor
         if (data.author && data.authorUrl) {
             novelAuthor.textContent = data.author;
             authorLink.href = data.authorUrl;
@@ -1116,10 +1931,8 @@
             authorLink.href = '#';
         }
         
-        // Atualizar sinopse
         novelSynopsis.textContent = data.sinopse || 'Sinopse não disponível.';
         
-        // Atualizar capa
         if (data.cover) {
             novelCover.src = data.cover;
             novelCover.alt = `Capa de ${data.name}`;
@@ -1128,7 +1941,6 @@
             novelCover.alt = 'Capa não disponível';
         }
         
-        // Atualizar badges da novel
         novelBadges.innerHTML = '';
         if (data.IsPopular) {
             const badge = document.createElement('span');
@@ -1149,50 +1961,42 @@
             novelBadges.appendChild(badge);
         }
         
-        // Atualizar data de lançamento
         if (data.date) {
             releaseDate.innerHTML = formatDate(data.date);
         } else {
             releaseDate.textContent = '-';
         }
         
-        // Inicia o Disqus após garantir que o título está carregado
-if (!window.disqusLoaded) {
-    var d = document, s = d.createElement('script');
-    
-    // Faz o tratamento do nome
-    var nomeCorrigido = data.name;
-    
-    // Regex para detectar " - Capitulo {numero}" no final
-    var regexCapitulo = /(.*?) - Cap[ií]tulo\s*\d+$/i;
+        if (!window.disqusLoaded) {
+            var d = document, s = d.createElement('script');
+            
+            var nomeCorrigido = data.name;
+            var regexCapitulo = /(.*?) - Cap[ií]tulo\s*\d+$/i;
 
-    // Se bater com o formato, corrige
-    if (regexCapitulo.test(nomeCorrigido)) {
-        var match = nomeCorrigido.match(regexCapitulo);
-        if (match && match[1]) {
-            nomeCorrigido = match[1] + ' - ReignOfRpgs';
+            if (regexCapitulo.test(nomeCorrigido)) {
+                var match = nomeCorrigido.match(regexCapitulo);
+                if (match && match[1]) {
+                    nomeCorrigido = match[1] + ' - ReignOfRpgs';
+                }
+            } else {
+                nomeCorrigido = nomeCorrigido + ' - ReignOfRpgs';
+            }
+
+            window.disqus_config = function () {
+                this.page.url = window.location.href;
+                this.page.identifier = nomeCorrigido;
+                this.page.title = nomeCorrigido;
+            };
+
+            s.src = 'https://reignofrpgs.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', +new Date());
+            s.setAttribute('data-theme', 'dark');
+            (d.head || d.body).appendChild(s);
+
+            window.disqusLoaded = true;
         }
-    } else {
-        // Se não tiver "Capitulo", só adiciona o ReignOfRpgs normalmente
-        nomeCorrigido = nomeCorrigido + ' - ReignOfRpgs';
     }
 
-    window.disqus_config = function () {
-        this.page.url = window.location.href;
-        this.page.identifier = nomeCorrigido;
-        this.page.title = nomeCorrigido;
-    };
-
-    s.src = 'https://reignofrpgs.disqus.com/embed.js';
-    s.setAttribute('data-timestamp', +new Date());
-    s.setAttribute('data-theme', 'dark');
-    (d.head || d.body).appendChild(s);
-
-    window.disqusLoaded = true;
-}
-    }
-
-    // Função para carregar um capítulo específico
     async function carregarCapitulo(id) {
         try {
             const response = await fetch(`./Capitulos/cap${id}.json`);
@@ -1202,7 +2006,6 @@ if (!window.disqusLoaded) {
             }
             
             const capData = await response.json();
-            // Garante que o capítulo tenha um ID correto
             capData.Id = id;
             return capData;
         } catch (error) {
@@ -1211,7 +2014,6 @@ if (!window.disqusLoaded) {
         }
     }
 
-    // Função para carregar todos os capítulos sequencialmente
     async function carregarTodosCapitulos() {
         const capitulos = [];
         let id = 1;
@@ -1229,7 +2031,6 @@ if (!window.disqusLoaded) {
         return capitulos;
     }
 
-    // Função para filtrar capítulos com base no termo de pesquisa
     function filterChapters(searchTerm) {
         if (!searchTerm.trim()) {
             return allChapters;
@@ -1245,7 +2046,6 @@ if (!window.disqusLoaded) {
         });
     }
 
-    // Função para criar o elemento "Ver Mais"
     function createVerMaisElement() {
         const container = document.createElement('div');
         container.className = 'ver-mais-container';
@@ -1255,24 +2055,20 @@ if (!window.disqusLoaded) {
             <button class="ver-mais-text">Ver Mais</button>
         `;
         
-        // Adiciona o event listener para o botão
         const verMaisBtn = container.querySelector('.ver-mais-text');
         verMaisBtn.addEventListener('click', () => {
-            // Mostra todos os capítulos escondidos
             const hiddenChapters = document.querySelectorAll('.hidden-chapter');
             hiddenChapters.forEach(chapter => {
                 chapter.classList.remove('hidden-chapter');
                 chapter.style.display = 'block';
             });
             
-            // Remove o botão "Ver Mais"
             container.remove();
         });
         
         return container;
     }
 
-    // Função para renderizar capítulos com o sistema "Ver Mais"
     function renderizarCapitulos(capitulos, isSearch = false) {
         if (!capitulos || capitulos.length === 0) {
             chaptersContainer.innerHTML = `
@@ -1286,29 +2082,21 @@ if (!window.disqusLoaded) {
             return;
         }
         
-        // Limpar o container
         chaptersContainer.innerHTML = '';
-        
-        // Remove o container "Ver Mais" anterior se existir
         document.querySelector('.ver-mais-container')?.remove();
         
-        // Se for uma pesquisa, mostra todos os resultados
         if (isSearch) {
             displayedChapters = capitulos;
         } else {
-            // Se não for pesquisa, mostra os primeiros 4 capítulos e esconde os demais
             displayedChapters = capitulos;
             
-            // Se houver mais de 4 capítulos, adiciona o botão "Ver Mais"
             if (capitulos.length > 4) {
-                // Adiciona a classe hidden-chapter para os capítulos além do 4º
                 for (let i = 4; i < capitulos.length; i++) {
                     capitulos[i].hidden = true;
                 }
             }
         }
         
-        // Renderizar todos os capítulos (os escondidos terão display:none via CSS)
         displayedChapters.forEach((cap, index) => {
             const chapterNumber = cap.Id;
             const badges = [];
@@ -1319,7 +2107,6 @@ if (!window.disqusLoaded) {
             if (cap.IsHot) badges.push(`<span class="badge badge-hot">Destaque</span>`);
             if (cap.IsFinal) badges.push(`<span class="badge badge-final">Final</span>`);
             
-            // Criar preview do conteúdo (primeiras 50 palavras)
             const preview = cap.Content.replace(/<br>/g, ' ').replace(/<\/?[^>]+(>|$)/g, "");
             const words = preview.split(' ');
             const shortPreview = words.length > 50 ? words.slice(0, 50).join(' ') + '...' : preview;
@@ -1349,16 +2136,13 @@ if (!window.disqusLoaded) {
             chaptersContainer.appendChild(chapterEl);
         });
         
-        // Adicionar o botão "Ver Mais" se houver mais de 4 capítulos e não for uma pesquisa
         if (capitulos.length > 4 && !isSearch) {
             const verMaisContainer = createVerMaisElement();
             chaptersContainer.parentNode.insertBefore(verMaisContainer, chaptersContainer.nextSibling);
         }
         
-        // Atualizar contador de capítulos
         totalChapters.textContent = allChapters.length;
         
-        // Adicionar event listeners aos botões "Ler"
         document.querySelectorAll('.btn-read').forEach(btn => {
             btn.addEventListener('click', () => {
                 const id = parseInt(btn.getAttribute('data-id'));
@@ -1367,12 +2151,9 @@ if (!window.disqusLoaded) {
         });
     }
 
-    // Função para abrir um capítulo no modal
     async function abrirCapitulo(id) {
-        // Ajusta para índice do array (começa em 0)
         const arrayIndex = id - 1;
         
-        // Verifica se já temos o capítulo carregado
         if (arrayIndex >= 0 && arrayIndex < allChapters.length) {
             currentChapter = allChapters[arrayIndex];
             currentChapterIndex = arrayIndex;
@@ -1380,7 +2161,6 @@ if (!window.disqusLoaded) {
             return;
         }
         
-        // Se o capítulo não estiver carregado, tenta carregá-lo
         try {
             const cap = await carregarCapitulo(id);
             if (!cap) {
@@ -1388,7 +2168,6 @@ if (!window.disqusLoaded) {
                 return;
             }
             
-            // Atualiza a lista de capítulos se necessário
             if (id > maxChapterLoaded) {
                 allChapters.push(cap);
                 maxChapterLoaded = id;
@@ -1404,160 +2183,181 @@ if (!window.disqusLoaded) {
         }
     }
 
-    // Mostra o capítulo atual no modal
     function mostrarCapituloNoModal() {
         if (!currentChapter) return;
         
-        const displayNumber = currentChapterIndex + 1; // Mostra número começando do 1
+        const displayNumber = currentChapterIndex + 1;
         readerTitle.textContent = `Capítulo ${displayNumber}: ${currentChapter.Titulo}`;
         readerBody.innerHTML = `<p>${currentChapter.Content}</p>`;
         
-        // Atualizar botões de navegação
         btnPrev.disabled = currentChapterIndex === 0;
-        btnNext.disabled = false; // Sempre ativo, tentará carregar o próximo
+        btnNext.disabled = false;
         
-        // Mostrar modal
         readerModal.classList.add('active');
         document.body.style.overflow = 'hidden';
         
-        // Scroll para o topo com animação
         readerBody.scrollTo({
             top: 0,
             behavior: 'smooth'
         });
     }
 
-    // Fechar leitor
     function fecharLeitor() {
         readerModal.classList.remove('active');
         document.body.style.overflow = 'auto';
     }
 
-    // Navegação entre capítulos
-    btnPrev.addEventListener('click', () => {
-        if (currentChapterIndex > 0) {
-            currentChapterIndex--;
-            currentChapter = allChapters[currentChapterIndex];
-            mostrarCapituloNoModal();
-            
-            // Scroll para o topo com animação
-            readerBody.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
-        }
-    });
+    // Event listeners combinados
+    document.addEventListener('DOMContentLoaded', function() {
+        // Inicializar player de música
+        musicSelect.addEventListener('change', e => playSelectedMusic(e));
+        mobileMusicSelect.addEventListener('change', e => playSelectedMusic(e));
+        
+        playPauseBtn.addEventListener('click', togglePlayPause);
+        nextBtn.addEventListener('click', playNextMusic);
+        prevBtn.addEventListener('click', playPreviousMusic);
+        
+        mobilePlayPauseBtn.addEventListener('click', togglePlayPause);
+        mobileNextBtn.addEventListener('click', playNextMusic);
+        mobilePrevBtn.addEventListener('click', playPreviousMusic);
+        
+        toggleSelectBtn.addEventListener('click', toggleSelectMenu);
+        mobileToggleSelectBtn.addEventListener('click', toggleSelectMenu);
+        
+        audioPlayer.addEventListener('ended', playNextMusic);
 
-    btnNext.addEventListener('click', async () => {
-        const nextChapterId = currentChapterIndex + 2; // +1 para índice e +1 para próximo
+        playerContainer.style.left = '1.25rem';
+playerContainer.style.top = '1.25rem';
+mobileControls.style.right = '1.25rem';
+mobileControls.style.bottom = '1.25rem';
+
+        playerDragArea.addEventListener('mousedown', startDrag);
+        playerDragArea.addEventListener('touchstart', startDrag, { passive: false });
+        mobileDragArea.addEventListener('mousedown', startMobileDrag);
+        mobileDragArea.addEventListener('touchstart', startMobileDrag, { passive: false });
+
+        // Controles do botão de ocultar player
+        hidePlayerBtn.addEventListener('click', togglePlayerVisibility);
+        miniPlayer.addEventListener('click', togglePlayerVisibility);
         
-        // Verifica se já temos o próximo capítulo carregado
-        if (nextChapterId - 1 < allChapters.length) {
-            currentChapterIndex++;
-            currentChapter = allChapters[currentChapterIndex];
-            mostrarCapituloNoModal();
+        // Verificar tamanho da tela inicialmente
+        checkScreenSize();
+        window.addEventListener('resize', checkScreenSize);
+
+        loadMusics();
+
+        // Inicializar leitor de novel
+        btnPrev.addEventListener('click', () => {
+            if (currentChapterIndex > 0) {
+                currentChapterIndex--;
+                currentChapter = allChapters[currentChapterIndex];
+                mostrarCapituloNoModal();
+                
+                readerBody.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            }
+        });
+
+        btnNext.addEventListener('click', async () => {
+            const nextChapterId = currentChapterIndex + 2;
             
-            // Scroll para o topo com animação
-            readerBody.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
-            return;
-        }
-        
-        // Tenta carregar o próximo capítulo
-        try {
-            const cap = await carregarCapitulo(nextChapterId);
-            if (!cap) {
-                btnNext.disabled = true;
+            if (nextChapterId - 1 < allChapters.length) {
+                currentChapterIndex++;
+                currentChapter = allChapters[currentChapterIndex];
+                mostrarCapituloNoModal();
+                
+                readerBody.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
                 return;
             }
             
-            // Adiciona ao array de capítulos
-            allChapters.push(cap);
-            maxChapterLoaded = nextChapterId;
-            currentChapterIndex++;
-            currentChapter = cap;
-            
-            // Atualiza a lista de capítulos
-            renderizarCapitulos(allChapters, isSearching);
-            mostrarCapituloNoModal();
-            
-            // Scroll para o topo com animação
-            readerBody.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
-        } catch (error) {
-            console.error('Erro ao carregar próximo capítulo:', error);
-            btnNext.disabled = true;
-        }
-    });
+            try {
+                const cap = await carregarCapitulo(nextChapterId);
+                if (!cap) {
+                    btnNext.disabled = true;
+                    return;
+                }
+                
+                allChapters.push(cap);
+                maxChapterLoaded = nextChapterId;
+                currentChapterIndex++;
+                currentChapter = cap;
+                
+                renderizarCapitulos(allChapters, isSearching);
+                mostrarCapituloNoModal();
+                
+                readerBody.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            } catch (error) {
+                console.error('Erro ao carregar próximo capítulo:', error);
+                btnNext.disabled = true;
+            }
+        });
 
-    // Event listener para pesquisa
-    searchButton.addEventListener('click', () => {
-        const searchTerm = searchInput.value.trim();
-        if (searchTerm) {
-            isSearching = true;
-            currentSearchTerm = searchTerm;
-            const filteredChapters = filterChapters(searchTerm);
-            renderizarCapitulos(filteredChapters, true);
-        } else {
-            isSearching = false;
-            currentSearchTerm = '';
-            renderizarCapitulos(allChapters, false);
-        }
-    });
+        searchButton.addEventListener('click', () => {
+            const searchTerm = searchInput.value.trim();
+            if (searchTerm) {
+                isSearching = true;
+                currentSearchTerm = searchTerm;
+                const filteredChapters = filterChapters(searchTerm);
+                renderizarCapitulos(filteredChapters, true);
+            } else {
+                isSearching = false;
+                currentSearchTerm = '';
+                renderizarCapitulos(allChapters, false);
+            }
+        });
 
-    // Event listener para pressionar Enter na pesquisa
-    searchInput.addEventListener('keypress', (e) => {
-        if (e.key === 'Enter') {
-            searchButton.click();
-        }
-    });
+        searchInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                searchButton.click();
+            }
+        });
 
-    // Event listeners
-    btnClose.addEventListener('click', fecharLeitor);
-    
-    // Fechar ao clicar fora do conteúdo
-    readerModal.addEventListener('click', (e) => {
-        if (e.target === readerModal) {
-            fecharLeitor();
-        }
-    });
+        btnClose.addEventListener('click', fecharLeitor);
+        
+        readerModal.addEventListener('click', (e) => {
+            if (e.target === readerModal) {
+                fecharLeitor();
+            }
+        });
 
-    // Fechar com ESC
-    document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && readerModal.classList.contains('active')) {
-            fecharLeitor();
-        }
-    });
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && readerModal.classList.contains('active')) {
+                fecharLeitor();
+            }
+        });
 
-    // Inicialização
-    async function init() {
-        try {
-            // Carregar dados da novel
-            novelData = await loadNovelData();
-            updateNovelUI(novelData);
-            
-            // Carregar capítulos
-            allChapters = await carregarTodosCapitulos();
-            renderizarCapitulos(allChapters, false);
-          
-        } catch (error) {
-            console.error('Erro ao carregar dados:', error);
-            chaptersContainer.innerHTML = `
-                <div class="no-chapters">
-                    <i class="fas fa-exclamation-triangle"></i>
-                    <h3>Erro ao Carregar Dados</h3>
-                    <p>${error.message}</p>
-                </div>
-            `;
+        // Inicialização combinada
+        async function init() {
+            try {
+                novelData = await loadNovelData();
+                updateNovelUI(novelData);
+                
+                allChapters = await carregarTodosCapitulos();
+                renderizarCapitulos(allChapters, false);
+              
+            } catch (error) {
+                console.error('Erro ao carregar dados:', error);
+                chaptersContainer.innerHTML = `
+                    <div class="no-chapters">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <h3>Erro ao Carregar Dados</h3>
+                        <p>${error.message}</p>
+                    </div>
+                `;
+            }
         }
-    }
-    
-    // Iniciar o carregamento
-    init();
+        
+        init();
+    });
 </script>
+    
 </body>
 </html>
