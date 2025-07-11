@@ -102,7 +102,7 @@ document.addEventListener('dragstart', function(e) {
             
             while (true) {
                 try {
-                    const response = await fetch(`./Novels/${novelId}/Capitulos/cap${id}.json`);
+                    const response = await fetch(`./public/Novels/${novelId}/Capitulos/cap${id}.json`);
                     if (!response.ok) {
                         break;
                     }
@@ -144,7 +144,7 @@ document.addEventListener('dragstart', function(e) {
         // Função para buscar os novels
         async function fetchNovels() {
             try {
-                const response = await fetch('./Novels/AllNovels.json');
+                const response = await fetch('./public/Novels/AllNovels.json');
                 
                 if (!response.ok) {
                     throw new Error('Arquivo não encontrado');
@@ -312,7 +312,7 @@ document.addEventListener('dragstart', function(e) {
                 
                 // Adicionar evento de clique para redirecionar
                 slide.addEventListener('click', () => {
-                    window.location.href = `./Novels/${novel.id}/index.html`;
+                    window.location.href = `./public/Novels/${novel.id}/index.html`;
                 });
                 
                 slidesContainer.appendChild(slide);
@@ -474,7 +474,7 @@ document.addEventListener('dragstart', function(e) {
                     
                     // Adicionar evento de clique para redirecionar
                     card.addEventListener('click', () => {
-                        window.location.href = `./Novels/${novel.id}/index.html`;
+                        window.location.href = `./public/Novels/${novel.id}/index.html`;
                     });
                     
                     novelsContainer.appendChild(card);
@@ -530,7 +530,7 @@ document.addEventListener('dragstart', function(e) {
                     
                     // Adicionar evento de clique para redirecionar
                     card.addEventListener('click', () => {
-                        window.location.href = `./Novels/${novel.id}/index.html`;
+                        window.location.href = `./public/Novels/${novel.id}/index.html`;
                     });
                     
                     novelsContainer.appendChild(card);
