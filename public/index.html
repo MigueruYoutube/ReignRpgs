@@ -1,0 +1,1165 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reign Of Rpg's - Novels</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+      :root {
+    --primary: #9c27b0;
+    --primary-dark: #7b1fa2;
+    --secondary: #ffd700;
+    --dark: #121212;
+    --darker: #0a0a0a;
+    --light: #ffffff;
+    --gray: #b0b0b0;
+    --red: #f44336;
+    --card-bg: rgba(30, 30, 30, 0.8);
+    --card-hover: rgba(50, 50, 50, 0.8);
+    --transition: all 0.3s ease;
+    --border-radius: 0.5rem;
+    --shadow: 0 0.3125rem 0.9375rem rgba(0, 0, 0, 0.3);
+    --base-font-size: 16px;
+}
+
+html {
+    font-size: var(--base-font-size);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background: var(--darker);
+    color: var(--light);
+    line-height: 1.6;
+    min-height: 100vh;
+    padding-bottom: 3.125rem;
+    /* Bloqueio de seleção */
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+/* Permite seleção em campos de entrada */
+input, textarea {
+    -webkit-user-select: text !important;
+    -moz-user-select: text !important;
+    -ms-user-select: text !important;
+    user-select: text !important;
+}
+
+/* Bloqueio de interação com imagens */
+img {
+    pointer-events: none;
+    -webkit-user-drag: none;
+}
+
+.welcome-notification {
+    position: fixed;
+    top: 1.25rem;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--primary);
+    color: white;
+    padding: 0.5rem 1.25rem;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    z-index: 2000;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    opacity: 0;
+    transition: opacity 0.5s ease, top 0.5s ease;
+    font-size: 0.6rem;
+    pointer-events: none;
+}
+
+.welcome-notification.show {
+    opacity: 1;
+    top: 1.25rem;
+}
+
+.welcome-notification i {
+    font-size: 0.6rem;
+}
+
+header {
+    background: rgba(10, 10, 10, 0.95);
+    backdrop-filter: blur(0.625rem);
+    padding: 0.9375rem 5%;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 0.125rem 0.625rem rgba(0, 0, 0, 0.3);
+    border-bottom: 1px solid rgba(156, 39, 176, 0.3);
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--light);
+    display: flex;
+    align-items: center;
+    gap: 0.625rem;
+    text-decoration: none;
+}
+
+.logo span {
+    color: var(--secondary);
+    margin: 0 -0.5625rem 0 0;
+}
+
+.logo i {
+    color: var(--primary);
+}
+
+.header-actions {
+    display: flex;
+    gap: 0.9375rem;
+    align-items: center;
+}
+
+.search-container {
+    position: relative;
+    width: 20.25rem;
+    margin-left: 6.25rem;
+}
+
+#searchInput {
+    width: 100%;
+    padding: 0.75rem 0.9375rem 0.75rem 2.8125rem;
+    border-radius: 3.125rem;
+    border: 0.125rem solid rgba(255, 255, 255, 0.1);
+    background: rgba(0, 0, 0, 0.3);
+    color: var(--light);
+    font-size: 1rem;
+    transition: var(--transition);
+}
+
+#searchInput:focus {
+    outline: none;
+    border-color: var(--primary);
+    background: rgba(0, 0, 0, 0.4);
+}
+
+.search-icon {
+    position: absolute;
+    left: 0.9375rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--gray);
+}
+
+.main-nav {
+    background: rgba(0, 0, 0, 0.3);
+    padding: 0 5%;
+    overflow-x: auto;
+    white-space: nowrap;
+    -webkit-overflow-scrolling: touch;
+}
+
+.main-nav::-webkit-scrollbar {
+    height: 0.3125rem;
+}
+
+.main-nav::-webkit-scrollbar-thumb {
+    background: var(--primary);
+    border-radius: 0.625rem;
+}
+
+.nav-links {
+    display: inline-flex;
+    list-style: none;
+    padding: 0.9375rem 0;
+    gap: 0.9375rem;
+}
+
+.nav-link {
+    color: var(--gray);
+    text-decoration: none;
+    font-weight: 500;
+    padding: 0.5rem 0.9375rem;
+    border-radius: 1.875rem;
+    transition: var(--transition);
+}
+
+.nav-link:hover, .nav-link.active {
+    background: var(--primary);
+    color: white;
+}
+
+.container {
+    max-width: 87.5rem;
+    margin: 1.875rem auto;
+    padding: 0 5%;
+}
+
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.25rem;
+}
+
+.section-title {
+    font-size: 1.8rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 0.625rem;
+}
+
+.section-title i {
+    color: var(--secondary);
+}
+
+.section-link {
+    color: var(--secondary);
+    text-decoration: none;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 0.3125rem;
+}
+
+.section-link:hover {
+    text-decoration: underline;
+}
+
+.carousel-section {
+    margin-bottom: 2.5rem;
+    transition: all 0.3s ease;
+}
+
+.carousel {
+    position: relative;
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    transition: all 0.3s ease;
+    width: 100%;
+    padding-bottom: 56.25%;
+    height: 0;
+}
+
+.carousel.hidden {
+    opacity: 0;
+    height: 0;
+    margin: 0;
+    overflow: hidden;
+    display: none;
+}
+
+.slides-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    transition: transform 0.5s ease;
+    scroll-behavior: smooth;
+}
+
+.slide {
+    min-width: 100%;
+    height: 100%;
+    position: relative;
+    flex-shrink: 0;
+    cursor: pointer;
+}
+
+.slide-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+}
+
+.slide-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(to top, rgb(18,18,18, 1) 0%, rgb(18,18,18, 0) 30%, transparent 100%);
+    z-index: 2;
+}
+
+.slide-content {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 1.25rem;
+    padding-top: 3.75rem;
+    z-index: 3;
+}
+
+.slide-badges {
+    display: flex;
+    gap: 0.625rem;
+    margin-bottom: 0.625rem;
+}
+
+.slide-badge {
+    padding: 0.3125rem 0.9375rem;
+    border-radius: 1.875rem;
+    font-size: 0.85rem;
+    font-weight: 500;
+}
+
+.badge-new {
+    background: var(--primary);
+    color: white;
+}
+
+.badge-popular {
+    background: var(--secondary);
+    color: var(--darker);
+}
+
+.badge-completed {
+    background: var(--red);
+    color: white;
+}
+
+.slide-title {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+    color: white;
+    text-shadow: 0 0.125rem 0.3125rem rgba(0, 0, 0, 0.5);
+}
+
+.slide-meta {
+    display: flex;
+    gap: 0.9375rem;
+    margin-bottom: 0.625rem;
+    font-size: 0.6rem;
+    color: var(--gray);
+}
+
+.slide-meta .date {
+    display: flex;
+    align-items: center;
+    gap: 0.3125rem;
+}
+
+.slide-meta .date i {
+    font-size: 0.5rem;
+}
+
+.slide-description {
+    color: white;
+    margin-bottom: 0.9375rem;
+    max-width: 37.5rem;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-shadow: 0 0.0625rem 0.1875rem rgba(0, 0, 0, 0.1);
+    font-size: 0.9rem;
+}
+
+.carousel-controls {
+    position: absolute;
+    bottom: 1.25rem;
+    right: 1.25rem;
+    display: flex;
+    gap: 0.625rem;
+    z-index: 4;
+}
+
+.control-btn {
+    width: 0.75rem;
+    height: 0.75rem;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    border: none;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.control-btn.active {
+    background: var(--secondary);
+    transform: scale(1.2);
+}
+
+.novels-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(10rem, 1fr));
+    gap: 1.25rem;
+    margin-top: 1.875rem;
+}
+
+.novel-card {
+    background: var(--card-bg);
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    transition: var(--transition);
+    box-shadow: var(--shadow);
+    position: relative;
+    cursor: pointer;
+}
+
+.novel-card:hover {
+    transform: translateY(-0.625rem);
+    background: var(--card-hover);
+    box-shadow: 0 0.625rem 1.5625rem rgba(0, 0, 0, 0.4);
+}
+
+.card-img-container {
+    position: relative;
+    height: 14rem;
+    overflow: hidden;
+}
+
+.card-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: var(--transition);
+}
+
+.novel-card:hover .card-img {
+    transform: scale(1.05);
+}
+
+.card-badges {
+    position: absolute;
+    top: 0.625rem;
+    right: 0.625rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.3125rem;
+}
+
+.card-badge {
+    padding: 0.2rem 0.5rem;
+    border-radius: 1.875rem;
+    font-size: 0.65rem;
+    font-weight: 500;
+    text-align: center;
+}
+
+.card-content {
+    padding: 0.75rem;
+}
+
+.card-title {
+    font-size: 0.95rem;
+    font-weight: 600;
+    margin-bottom: 0.4rem;
+    color: white;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.card-meta {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.55rem;
+    color: var(--gray);
+    margin-bottom: 0.4rem;
+}
+
+.card-meta .date {
+    display: flex;
+    align-items: center;
+    gap: 0.2rem;
+}
+
+.card-meta .date i {
+    font-size: 0.45rem;
+}
+
+.card-categories {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25rem;
+    margin-bottom: 0.5rem;
+}
+
+.card-category {
+    font-size: 0.6rem;
+    padding: 0.15rem 0.4rem;
+    background: rgba(156, 39, 176, 0.2);
+    color: var(--primary);
+    border-radius: 1.875rem;
+}
+
+.card-info {
+    color: var(--gray);
+    font-size: 0.75rem;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    margin-bottom: 0.5rem;
+    min-height: 2.2rem;
+}
+
+.about-us-sidebar {
+    margin-top: 1.5rem;
+    background: var(--card-bg);
+    padding: 1.5rem;
+    border-radius: var(--border-radius);
+}
+
+.about-us-sidebar h3 {
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+    color: white;
+    position: relative;
+    padding-bottom: 0.5rem;
+}
+
+.about-us-sidebar h3::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 3.125rem;
+    height: 0.1875rem;
+    background: var(--primary);
+}
+
+.about-us-sidebar p {
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+}
+
+.social-links {
+    display: flex;
+    gap: 0.9375rem;
+    margin-top: 1.25rem;
+}
+
+.social-link {
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--light);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    transition: var(--transition);
+}
+
+.social-link:hover {
+    background: var(--primary);
+    transform: translateY(-0.3125rem);
+}
+
+footer {
+    background: rgba(10, 10, 10, 0.95);
+    padding: 2.5rem 5% 1.25rem;
+    margin-top: 3.125rem;
+    border-top: 1px solid rgba(156, 39, 176, 0.3);
+}
+
+.footer-content {
+    max-width: 75rem;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(15.625rem, 1fr));
+    gap: 1.875rem;
+}
+
+.footer-section h3 {
+    font-size: 1.3rem;
+    margin-bottom: 1.25rem;
+    color: white;
+    position: relative;
+    padding-bottom: 0.625rem;
+}
+
+.footer-section h3::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 3.125rem;
+    height: 0.1875rem;
+    background: var(--primary);
+}
+
+.footer-links {
+    list-style: none;
+}
+
+.footer-links li {
+    margin-bottom: 0.75rem;
+}
+
+.footer-links a {
+    color: var(--gray);
+    text-decoration: none;
+    transition: var(--transition);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.footer-links a:hover {
+    color: var(--secondary);
+    transform: translateX(0.3125rem);
+}
+
+.footer-section.about-footer {
+    display: none;
+}
+
+.copyright {
+    text-align: center;
+    padding-top: 1.875rem;
+    margin-top: 1.875rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    color: var(--gray);
+    font-size: 0.9rem;
+}
+
+.loading {
+    text-align: center;
+    padding: 3.125rem 0;
+    font-size: 1.2rem;
+    color: var(--gray);
+}
+
+.loading-spinner {
+    display: inline-block;
+    width: 3.125rem;
+    height: 3.125rem;
+    border: 0.3125rem solid rgba(156, 39, 176, 0.3);
+    border-radius: 50%;
+    border-top-color: var(--primary);
+    animation: spin 1s ease-in-out infinite;
+    margin-bottom: 1.25rem;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+.error-message {
+    background: rgba(244, 67, 54, 0.2);
+    border: 1px solid var(--red);
+    border-radius: var(--border-radius);
+    padding: 1.875rem;
+    text-align: center;
+    margin: 3.125rem 0;
+}
+
+.error-message i {
+    font-size: 3rem;
+    color: var(--red);
+    margin-bottom: 1.25rem;
+}
+
+.empty-state {
+    text-align: center;
+    padding: 3.125rem 1.25rem;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: var(--border-radius);
+}
+
+.empty-state i {
+    font-size: 4rem;
+    color: var(--gray);
+    margin-bottom: 1.25rem;
+}
+
+@media (min-width: 768px) {
+    .main-content-wrapper {
+        display: flex;
+        gap: 2rem;
+        align-items: flex-start;
+    }
+    
+    .novels-section {
+        flex: 1;
+        min-width: 0;
+        order: 2;
+    }
+    
+    .carousel-section {
+        width: 40%;
+        max-width: 500px;
+        position: sticky;
+        top: 100px;
+        margin-bottom: 0;
+        order: 1;
+    }
+    
+    .carousel {
+        padding-bottom: 60%;
+        margin-bottom: 1.5rem;
+    }
+    
+    .novels-grid {
+        display: flex;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+        padding-bottom: 1rem;
+        gap: 1.25rem;
+        margin-top: 0;
+        scrollbar-width: none;
+    }
+    
+    .novels-grid::-webkit-scrollbar {
+        display: none;
+    }
+    
+    .novel-card {
+        flex: 0 0 220px;
+        scroll-snap-align: start;
+    }
+    
+    .novels-grid.has-search {
+        display: grid;
+        overflow-x: visible;
+        grid-template-columns: repeat(auto-fill, minmax(10rem, 1fr));
+    }
+}
+
+@media (max-width: 767px) {
+    .logo {
+        font-size: 1.3rem;
+    }
+    
+    .search-container {
+        width: 8rem;
+        margin-left: -1rem;
+        margin-top: 0rem;
+        order: 3;
+    }
+    
+    .header-actions {
+        flex-wrap: wrap;
+    }
+    
+    .slide-title {
+        font-size: 1.2rem;
+    }
+    
+    .section-title {
+        font-size: 1.5rem;
+    }
+    
+    .novels-grid {
+        grid-template-columns: repeat(auto-fill, minmax(8.75rem, 1fr));
+    }
+    
+    .card-img-container {
+        height: 12.5rem;
+    }
+    
+    .about-us-sidebar {
+        display: none;
+    }
+    
+    .carousel-section {
+        order: -1;
+        margin-bottom: 1rem;
+        width: 100%;
+    }
+    
+    .footer-section.about-footer {
+        display: block;
+    }
+
+    /* Estilo específico para mobile portrait */
+    @media (orientation: portrait) {
+        .carousel.hidden {
+            display: none;
+        }
+        
+        .carousel-section.hidden {
+            display: none;
+        }
+        
+        .novels-section {
+            margin-top: 0;
+        }
+        
+        .novels-grid {
+          
+          
+            margin-top: 0.5rem;
+        }
+        
+            .modal-content {
+        margin: 10% auto;
+        width: 95%;
+        padding: 1.25rem;
+    }
+    
+    .close-btn {
+        font-size: 1.75rem;
+        top: 0.5rem;
+        right: 1rem;
+    }
+        
+    }
+}
+
+.slides-container {
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+}
+
+.slides-container::-webkit-scrollbar {
+    display: none;
+}
+
+.slide {
+    scroll-snap-align: start;
+}
+
+:root {
+    --orange: #ffd700;
+}
+
+.filters {
+    display: inline-block;
+}
+
+#filterSelect {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background: transparent;
+    border: none;
+    color: var(--orange);
+    font-weight: 500;
+    font-size: 1rem;
+    cursor: pointer;
+    padding: 0;
+    margin: 0;
+    outline: none;
+    text-decoration: none;
+}
+
+#filterSelect::-ms-expand {
+    display: none;
+}
+
+#filterSelect:hover {
+    text-decoration: underline;
+}
+
+a[href="#"] {
+    cursor: pointer;
+}
+
+  /* Overlay escurecido */
+  .modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.4);
+    z-index: 1004;
+    justify-content: center;
+    align-items: center;
+  }
+
+  /* Caixa do modal */
+  .modal-container {
+    position: relative;
+    background: var(--darker);
+    width: 60%;
+    max-height: 80%;
+    border-radius: 0.625rem;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    border: 0.125rem solid gold;
+    box-shadow: 0 0 0.9375rem rgba(218, 165, 32, 0.5);
+    animation: glow 2s ease-in-out infinite alternate;
+    font-size: 1rem;
+  }
+
+  @keyframes glow {
+    from {
+      box-shadow: 0 0 0.625rem rgba(255, 215, 0, 0.3);
+    }
+    to {
+      box-shadow: 0 0 1.25rem rgba(255, 215, 0, 0.8);
+    }
+  }
+
+  /* Header invisível (só pro botão ficar no topo) */
+  .modal-header {
+    height: 0;
+  }
+
+  /* Botão de fechar (X) */
+  .modal-close {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.75rem;
+    font-size: 2rem;
+    background: none;
+    border: none;
+    color: #444;
+    cursor: pointer;
+    z-index: 10;
+  }
+
+  .modal-close:hover {
+    color: red;
+  }
+
+  /* Conteúdo do modal com scroll interno */
+  .modal-content {
+    padding: 1.25rem;
+    overflow-y: auto;
+    flex: 1;
+    font-size: 1rem;
+  }
+
+  /* Botões que abrem o modal */
+  .modal-buttons-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.625rem;
+    margin: 1rem 0;
+  }
+
+  .modal-button {
+    padding: 0.5rem 1rem;
+    background: #4a6fa5;
+    color: white;
+    border: none;
+    border-radius: 0.25rem;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s;
+  }
+
+  .modal-button:hover {
+    background: #3a5a8c;
+  }
+
+  /* Spinner de carregamento */
+  .loading-spinner {
+    width: 2rem;
+    height: 2rem;
+    border: 0.1875rem solid #f3f3f3;
+    border-top: 0.1875rem solid #3498db;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin: 1rem auto;
+  }
+
+  @keyframes spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  /* Mensagem de erro */
+  .error-message {
+    color: red;
+    text-align: center;
+    padding: 1rem;
+    font-size: 1rem;
+  }
+
+  /* Responsivo: Mobile */
+  @media (max-width: 48rem) {
+    .modal-container {
+      width: 90%;
+      font-size: 0.875rem;
+    }
+
+    .modal-content {
+      padding: 1rem;
+      font-size: 0.875rem;
+    }
+
+    .modal-button {
+      font-size: 0.8125rem;
+      padding: 0.5rem 0.75rem;
+    }
+
+    .modal-close {
+      font-size: 3rem;
+      top: -0.5rem;
+      right: 0.6rem;
+    }
+  }
+  
+</style>
+</head>
+<body>
+
+
+<!-- Modal -->
+<div id="modalOverlay" class="modal-overlay">
+  <div class="modal-container">
+    <div class="modal-header">
+      <button class="modal-close" onclick="closeModal()">×</button>
+    </div>
+    <div id="modalContent" class="modal-content">
+      <!-- Conteúdo carregado dinamicamente -->
+    </div>
+  </div>
+</div>
+    <!-- Welcome Notification -->
+    <div class="welcome-notification" id="welcomeNotification">
+        <i class="fas fa-book-open"></i>
+        <span>Bem vindo ao Reign of Rpg's!</span>
+    </div>
+    
+    <!-- Header -->
+    <header>
+        <a href="#" class="logo" onclick="event.preventDefault(); window.scrollTo({top: 0, behavior: 'smooth'});">
+            <i class="fas fa-book"></i>ReignOf<span>Rpg</span>
+        </a>
+        
+        <div class="header-actions">
+            <div class="search-container">
+                <i class="fas fa-search search-icon"></i>
+                <input type="text" id="searchInput" placeholder="Pesquisar novels...">
+            </div>
+        </div>
+    </header>
+    
+    <!-- Navigation -->
+    <nav class="main-nav" id="categoriesNav">
+        <ul class="nav-links">
+            <li><a href="#" class="nav-link active" data-category="all" onclick="event.preventDefault(); window.scrollTo({top: 0, behavior: 'smooth'});">Todos</a></li>
+            <!-- Categorias serão preenchidas pelo JavaScript -->
+        </ul>
+    </nav>
+    
+    <!-- Main Content -->
+    <div class="container">
+        <div class="main-content-wrapper">
+            <!-- Seção Lateral (Carrossel - ESQUERDA) -->
+            <aside class="carousel-section" id="carouselSection">
+                <!-- Carrossel de Populares -->
+                <div class="section-header">
+                    <h2 class="section-title">
+                        <i class="fas fa-fire"></i>
+                        Populares
+                    </h2>
+                    <a href="./PopularNovels.html" class="section-link">
+                        Ver todos <i class="fas fa-chevron-right"></i>
+                    </a>
+                </div>
+                
+                <div class="carousel" id="carousel">
+                    <div class="slides-container" id="slidesContainer">
+                        <!-- Slides serão preenchidos pelo JavaScript -->
+                    </div>
+                    
+                    <div class="carousel-controls" id="carouselControls">
+                        <!-- Controles serão preenchidos pelo JavaScript -->
+                    </div>
+                </div>
+                
+                <!-- Sobre Nós na Sidebar (apenas desktop) -->
+                <div class="about-us-sidebar">
+                    <h3>Sobre Nós</h3>
+                    <p>Reign Of Rpg's é um universo completo dedicado à criação de bots para Discord, mundos de RPG e histórias envolventes de ficção. Atualizamos regularmente com novas experiências e conteúdos.</p>
+                    <div class="social-links">
+                        <a href="https://discord.gg/P8CnCTqNV3" class="social-link"><i class="fab fa-discord"></i></a>
+                        <a href="https://github.com/MigueruYoutube" class="social-link"><i class="fab fa-github"></i></a>
+                    </div>
+                </div>
+            </aside>
+            
+            <!-- Seção de Novels (DIREITA) -->
+            <section class="novels-section" id="novelsSection">
+                <!-- Todos os Novels -->
+                <section>
+                    <div class="section-header">
+                        <h2 class="section-title">
+                            <i class="fas fa-book-open"></i>
+                            Todos os Novels
+                        </h2>
+                        <div class="filters">
+                            <select id="filterSelect">
+                                <option value="all">Todos</option>
+                                <option value="new">Novos</option>
+                                <option value="popular">Populares</option>
+                                <option value="completed">Completos</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div id="loadingIndicator" class="loading">
+                        <div class="loading-spinner"></div>
+                        <p>Carregando novels...</p>
+                    </div>
+                    
+                    <div class="novels-grid" id="novelsContainer">
+                        <!-- Cards serão preenchidos pelo JavaScript -->
+                    </div>
+                </section>
+            </section>
+        </div>
+    </div>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section about-footer">
+                <h3>Sobre Nós</h3>
+                <p>Reign Of Rpg's é um universo completo dedicado à criação de bots para Discord, mundos de RPG e histórias envolventes de ficção. Atualizamos regularmente com novas experiências e conteúdos.</p>
+                <div class="social-links">
+                    <a href="https://discord.gg/P8CnCTqNV3" class="social-link"><i class="fab fa-discord"></i></a>
+                    <a href="https://github.com/MigueruYoutube" class="social-link"><i class="fab fa-github"></i></a>
+                </div>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Links Rápidos</h3>
+                <ul class="footer-links">
+                    <li><a href="#" onclick="event.preventDefault(); window.scrollTo({top: 0, behavior: 'smooth'});"><i class="fas fa-chevron-right"></i> Página Inicial</a></li>
+                    <li><a href="./PopularNovels.html"><i class="fas fa-chevron-right"></i> Novels Populares</a></li>
+                    <li><a href="./NewNovels.html"><i class="fas fa-chevron-right"></i> Lançados Recentemente</a></li>
+                    <li><a href="https://discord.com/channels/790817989200314380/1388900523637211228"><i class="fas fa-chevron-right"></i> Sugerir Novel</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Ajuda</h3>
+                <ul class="footer-links">
+                    <li><a onclick="openModal('./redirects/comoler.html')"><i class="fas fa-chevron-right"></i> Como ler</a></li>
+                    <li><a onclick="openModal('./redirects/termos.html')"><i class="fas fa-chevron-right"></i> Termos de Uso</a></li>
+                    <li><a onclick="openModal('./redirects/privacidade.html')"><i class="fas fa-chevron-right"></i> Privacidade</a></li>
+                                   <li><a href="https://discord.com/channels/790817989200314380/1378164709940924446"><i class="fas fa-chevron-right"></i> Reportar erro</a></li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="copyright">
+            &copy; 2025 Reign Of Rpg's. Todos os direitos reservados.
+        </div>
+    </footer>
+    
+<script src="./scripts/RenderInitialPage.js"></script>
+</body>
+</html>

@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Como Usar o Site - Reign of RPGs</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        :root {
+            --bg-dark: #0a0a0a;
+            --gold: #FFD700;
+            --orange: #FFA500;
+            --red: #FF4500;
+            --text-light: #cccccc;
+            --text-white: #ffffff;
+            --card-bg: #2a2a2a;
+            
+            /* Base font size */
+            font-size: 100%; /* 1rem = 16px por padrão */
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            line-height: 1.5;
+            padding: 0;
+            margin: 0;
+            font-size: 0.875rem; /* 14px base */
+        }
+        
+        .container {
+            max-width: 100%;
+            padding: 0.9375rem; /* 15px */
+        }
+        
+        header {
+            text-align: center;
+            padding: 0.9375rem 0.625rem; /* 15px 10px */
+            margin-bottom: 0.9375rem; /* 15px */
+        }
+        
+        h1 {
+            color: var(--gold);
+            font-size: 1.5rem;
+            margin-bottom: 0.625rem; /* 10px */
+            text-shadow: 0 0.0625rem 0.125rem rgba(0, 0, 0, 0.3); /* 0 1px 2px */
+        }
+        
+        h1 i {
+            margin-right: 0.5rem; /* 8px */
+        }
+        
+        h2 {
+            color: var(--gold);
+            font-size: 1.2rem;
+            margin: 1.25rem 0 0.625rem; /* 20px 0 10px */
+            padding-bottom: 0.3125rem; /* 5px */
+            border-bottom: 0.0625rem solid var(--orange); /* 1px */
+        }
+        
+        h2 i {
+            margin-right: 0.5rem; /* 8px */
+        }
+        
+        h3 {
+            color: var(--orange);
+            font-size: 1.1rem;
+            margin: 0.9375rem 0 0.5rem; /* 15px 0 8px */
+        }
+        
+        p {
+            margin-bottom: 0.625rem; /* 10px */
+            font-size: 0.9rem;
+        }
+        
+        .info-card {
+            background-color: var(--card-bg);
+            border-radius: 0.3125rem; /* 5px */
+            padding: 0.75rem; /* 12px */
+            margin: 0.9375rem 0; /* 15px */
+            box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.2); /* 0 2px 4px */
+            border-left: 0.1875rem solid var(--gold); /* 3px */
+            font-size: 0.9rem;
+        }
+        
+        .warning-card {
+            background-color: var(--card-bg);
+            border-radius: 0.3125rem; /* 5px */
+            padding: 0.75rem; /* 12px */
+            margin: 0.9375rem 0; /* 15px */
+            box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.2); /* 0 2px 4px */
+            border-left: 0.1875rem solid var(--red); /* 3px */
+            font-size: 0.9rem;
+        }
+        
+        .step {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 0.625rem; /* 10px */
+        }
+        
+        .step-number {
+            background-color: var(--gold);
+            color: var(--bg-dark);
+            width: 1.375rem; /* 22px */
+            height: 1.375rem; /* 22px */
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-right: 0.625rem; /* 10px */
+            flex-shrink: 0;
+            font-weight: bold;
+            font-size: 0.8rem;
+        }
+        
+        .step-content {
+            flex: 1;
+        }
+        
+        ul {
+            margin-left: 1.125rem; /* 18px */
+            margin-bottom: 0.75rem; /* 12px */
+        }
+        
+        li {
+            margin-bottom: 0.375rem; /* 6px */
+            font-size: 0.9rem;
+        }
+        
+        .feature-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(12.5rem, 1fr)); /* 200px */
+            gap: 0.75rem; /* 12px */
+            margin: 0.9375rem 0; /* 15px */
+        }
+        
+        .feature-item {
+            background-color: var(--card-bg);
+            padding: 0.75rem; /* 12px */
+            border-radius: 0.3125rem; /* 5px */
+            box-shadow: 0 0.125rem 0.1875rem rgba(0, 0, 0, 0.1); /* 0 2px 3px */
+            font-size: 0.9rem;
+        }
+        
+        .feature-item i {
+            color: var(--gold);
+            font-size: 1.1rem;
+            margin-bottom: 0.375rem; /* 6px */
+            display: block;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 0.9375rem 0.625rem; /* 15px 10px */
+            margin-top: 1.25rem; /* 20px */
+            border-top: 0.0625rem solid var(--gold); /* 1px */
+            color: var(--text-light);
+            font-size: 0.8rem;
+        }
+        
+        footer p {
+            margin-bottom: 0.375rem; /* 6px */
+        }
+        
+        .copyright {
+            color: var(--gold);
+            font-size: 0.9rem;
+        }
+        
+        .discord-link {
+            color: var(--orange);
+            text-decoration: none;
+            transition: color 0.3s;
+            font-size: 0.9rem;
+        }
+        
+        .discord-link:hover {
+            color: var(--gold);
+        }
+        
+        .creator {
+            color: var(--gold);
+            font-style: italic;
+            font-size: 0.9rem;
+        }
+        
+        @media (max-width: 30rem) { /* ~480px */
+            .feature-list {
+                grid-template-columns: 1fr;
+            }
+            
+            h1 {
+                font-size: 1.3rem;
+            }
+            
+            h2 {
+                font-size: 1.1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1><i class="fas fa-book-open"></i>Como Usar o Site - Reign of RPGs</h1>
+            <p>Guia rápido para sua experiência de leitura</p>
+        </header>
+        
+        <section>
+            <div class="info-card">
+                <p><i class="fas fa-info-circle" style="color: var(--gold); margin-right: 0.5rem;"></i>Este site funciona de forma simples. Siga as instruções abaixo.</p>
+            </div>
+            
+            <h2><i class="fas fa-search"></i>Encontrar e Ler uma Obra</h2>
+            
+            <div class="step">
+                <div class="step-number">1</div>
+                <div class="step-content">
+                    <h3>Método de Busca</h3>
+                    <p>Use a busca no topo do site:</p>
+                    <ul>
+                        <li>Digite o nome da obra</li>
+                        <li>Clique no resultado correto</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="step">
+                <div class="step-number">2</div>
+                <div class="step-content">
+                    <h3>Navegação Direta</h3>
+                    <p>Ou navegue:</p>
+                    <ul>
+                        <li>Pela aba inicial</li>
+                        <li>Obras sugeridas na página principal</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="step">
+                <div class="step-number">3</div>
+                <div class="step-content">
+                    <h3>Acessar Capítulos</h3>
+                    <p>Após selecionar:</p>
+                    <ul>
+                        <li>Vá para a página da obra</li>
+                        <li>Encontre a lista de capítulos</li>
+                        <li>Clique para ler</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <h2><i class="fas fa-exclamation-triangle"></i>Informações Importantes</h2>
+            
+            <div class="feature-list">
+                <div class="feature-item">
+                    <i class="fas fa-history"></i>
+                    <h3>Sem Histórico</h3>
+                    <p>Não armazenamos histórico de leitura.</p>
+                </div>
+                
+                <div class="feature-item">
+                    <i class="fas fa-star"></i>
+                    <h3>Sem Avaliações</h3>
+                    <p>Todas as obras têm igual destaque.</p>
+                </div>
+                
+                <div class="feature-item">
+                    <i class="fas fa-unique"></i>
+                    <h3>Conteúdo Original</h3>
+                    <p>Cada autor contribui com material único.</p>
+                </div>
+            </div>
+            
+            <div class="warning-card">
+                <p><i class="fas fa-exclamation-circle" style="color: var(--red); margin-right: 0.5rem;"></i>Não garantimos que todas as obras agradem a todos, pois são criadas por autores diferentes.</p>
+            </div>
+            
+            <h2><i class="fas fa-bug"></i>Relatar Problemas</h2>
+            
+            <div class="step">
+                <div class="step-number">1</div>
+                <div class="step-content">
+                    <p>Se encontrar problemas como:</p>
+                    <ul>
+                        <li>Erros no texto</li>
+                        <li>Falhas no carregamento</li>
+                        <li>Capítulos ausentes</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="step">
+                <div class="step-number">2</div>
+                <div class="step-content">
+                    <p>Por favor:</p>
+                    <ul>
+                        <li>Volte à página inicial</li>
+                        <li>Vá até o final</li>
+                        <li>Clique em "Reportar Erro"</li>
+                        <li>Descreva o problema</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <footer>
+                <p class="copyright">&copy; 2025 Reign of RPGs</p>
+                <p>Criado por <span class="creator">Miguel Kayky</span>.</p>
+                <p>Discord: <a href="https://discord.gg/P8CnCTqNV3" class="discord-link" target="_blank">Reign of RPGs</a></p>
+            </footer>
+        </section>
+    </div>
+</body>
+</html>

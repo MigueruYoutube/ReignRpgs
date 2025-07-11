@@ -1,0 +1,54 @@
+[
+  {
+    "id": 1,
+    "name": "Guerreiro Imortal: A lenda de Kaisen",
+    "date": "29/06/2025, 14:42",
+    "author": "Migueru",
+    "authorUrl": "https://www.instagram.com/_miguel.kayky_?igsh=MWJ1eXMzaGFwazl2",
+     "recommended": [2,4],
+    "sinopse": "Kaisen perdeu seu irmão numa tragédia que despedaçou sua alma — mas quando ele mesmo sucumbiu à morte, algo impossível aconteceu. Seu corpo foi tomado pela alma de Modrith, um mago espadachim lendário e traído há mil anos, dando a Kaisen um poder inimaginável e uma segunda chance sombria. Agora, com duas almas lutando dentro dele, Kaisen desperta uma força que desafia as regras da vida e da morte. Entre magia ancestral e lâminas afiadas, ele terá que dominar essa nova existência para sobreviver a um mundo que não perdoa",
+    "cover": "https://i.imgur.com/bmvMNVg.png",
+    "category": ["ação", "aventura", "drama", "fantasia", "mistério", "sobrenatural"],
+    "IsPopular": true,
+    "IsCompleted": false
+},
+    {
+    "id": 2,
+    "name": "Cicatrizes de Sangue",
+    "date": "30/06/2025, 23:36",
+    "author": "Migueru",
+    "authorUrl": "https://www.instagram.com/_miguel.kayky_?igsh=MWJ1eXMzaGFwazl2",
+    "recommended": [1,2,4],
+    "sinopse": "Em um mundo onde o sangue clama por vingança, Victor Kane caça o mafioso Dante Moretti após seu irmão ser brutalmente assassinado. Na trilha, ele enfrenta um submundo de tráfico, corrupção e canibalismo — onde aliados armam tanto quanto inimigos, e a verdade corta mais fundo que qualquer lâmina.",
+        "cover": "https://i.imgur.com/on0TuUc.png",
+    "category": ["ação", "suspense psicológico", "drama", "crime", "mistério"],
+    "IsPopular": true,
+    "IsCompleted": false
+},
+    {
+    "id": 3,
+    "name": "Sombras do Coração",
+    "date": "11/07/2025, 01:36",
+    "author": "Migueru",
+    "authorUrl": "https://www.instagram.com/_miguel.kayky_?igsh=MWJ1eXMzaGFwazl2",
+    "recommended": [6,1,7],
+    "sinopse": "Nova York, 2018. Evelyn Carter, uma cientista fugitiva, carrega um segredo que pode destruir um império farmacêutico — e sua vida. Lucian Hart, um ex-consultor com um passado sangrento, vê nela a chance de redimir seus próprios pecados. O que começa como um pacto de proteção se transforma em uma obsessão perigosa, enquanto perseguições, mentiras e um amor proibido os arrastam para o lado mais sombrio da cidade — e de si mesmos.",
+        "cover": "https://i.imgur.com/EjBOW8a.png",
+    "category": ["romance", "suspense", "drama", "mistério"],
+    "IsPopular": true,
+    "IsCompleted": false
+},
+    {
+    "id": 4,
+    "name": "O Último Sussurro das Estrelas",
+    "date": "11/07/2025, 04:23",
+    "author": "Migueru",
+    "authorUrl": "https://www.instagram.com/_miguel.kayky_?igsh=MWJ1eXMzaGFwazl2",
+    "recommended": [6,1,7],
+    "sinopse": "Em um mundo pós-apocalíptico onde a humanidade sobrevive em cidades flutuantes acima das nuvens tóxicas, Lira, uma jovem com um passado misterioso, descobre um antigo segredo escondido nas ruínas da superfície. Ao desvendar uma mensagem cifrada deixada por uma civilização extinta, ela se vê perseguida por facções poderosas que desejam controlar o conhecimento perdido. Entre traições, alianças frágeis e dilemas morais, Lira precisa decidir se revelará a verdade — mesmo que isso signifique o fim de tudo o que resta.",
+        "cover": "https://i.imgur.com/HLPPmTm.png",
+    "category": ["ficção científica", "suspense", "drama", "mistério", "aventura"],
+    "IsPopular": true,
+    "IsCompleted": true
+}
+]
