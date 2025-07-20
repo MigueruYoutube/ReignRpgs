@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apoie nosso trabalho</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>:root {
+    /* Cores */
+    --primary: #9c27b0;
+    --primary-dark: #7b1fa2;
+    --secondary: #ffd700;
+    --dark: #121212;
+    --darker: #0a0a0a;
+    --light: #ffffff;
+    --gray: #b0b0b0;
+    --red: #f44336;
+    --card-bg: rgba(30, 30, 30, 0.8);
+    --card-hover: rgba(50, 50, 50, 0.8);
+    --primary-color: #6c5ce7;
+    --secondary-color: #a29bfe;
+    --text-color: #f5f6fa;
+    --bg-color: #1e272e;
+    --success-color: #00b894;
+    
+    /* Tipografia responsiva */
+    --base-font-size: clamp(14px, 1.5vw, 16px);
+    --h2-font-size: clamp(1.1rem, 3vw, 1.3rem);
+    --p-font-size: clamp(0.7rem, 1.8vw, 0.9rem);
+    --key-font-size: clamp(0.9rem, 2.5vw, 1rem);
+    --btn-font-size: clamp(0.8rem, 2vw, 1rem);
+    
+    /* Espaçamentos responsivos */
+    --space-xs: clamp(0.25rem, 1vw, 0.5rem);
+    --space-sm: clamp(0.5rem, 1.5vw, 1rem);
+    --space-md: clamp(1rem, 2vw, 1.5rem);
+    --space-lg: clamp(1.5rem, 3vw, 2rem);
+    --space-xl: clamp(2rem, 4vw, 3rem);
+    
+    /* Efeitos */
+    --transition: all 0.3s ease;
+    --border-radius: clamp(0.5rem, 2vw, 1rem);
+    --shadow: 0 clamp(0.25rem, 1.5vw, 0.5rem) clamp(0.5rem, 2.5vw, 1rem) rgba(0, 0, 0, 0.3);
+    --box-shadow: 0 clamp(0.5rem, 3vw, 1rem) clamp(1rem, 4vw, 2rem) rgba(0, 0, 0, 0.3);
+    --border-width: clamp(1px, 0.3vw, 2px);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background: var(--darker);
+    color: var(--light);
+    line-height: 1.6;
+    min-height: 80vh;
+    padding-bottom: clamp(1rem, 5vw, 3.125rem);
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.popup-content {
+    width: 100%;
+    overflow-y: hidden;
+    max-width: clamp(20rem, 90vw, 50rem);
+    background: var(--bg-color);
+    border-radius: var(--border-radius);
+    padding: clamp(1rem, 3vw, 2rem);
+    box-shadow: var(--box-shadow);
+    text-align: center;
+    position: relative;
+    border: var(--border-width) solid rgba(108, 92, 231, 0.2);
+    margin: 0 auto;
+    animation: fadeIn 0.5s ease-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.95); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+.popup-header {
+    margin-bottom: clamp(1rem, 3vw, 1.5rem);
+}
+
+.popup-header i {
+    font-size: clamp(1.5rem, 5vw, 2rem);
+    color: var(--secondary-color);
+    margin-bottom: clamp(0.5rem, 2vw, 1rem);
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
+
+.popup-header h2 {
+    font-size: var(--h2-font-size);
+    margin-bottom: clamp(0.25rem, 1vw, 0.5rem);
+    background: linear-gradient(to right, var(--secondary-color), var(--primary-color));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.popup-header p {
+    font-size: var(--p-font-size);
+    opacity: 0.9;
+}
+
+.pix-content {
+    background: rgba(108, 92, 231, 0.1);
+    border-radius: var(--border-radius);
+    padding: clamp(1rem, 3vw, 1.5rem);
+    margin: clamp(1rem, 3vw, 1.5rem) 0;
+    border: var(--border-width) dashed var(--secondary-color);
+}
+
+.pix-key {
+    font-family: 'Courier New', monospace;
+    font-size: var(--key-font-size);
+    word-break: break-all;
+    margin: clamp(0.5rem, 2vw, 1rem) 0;
+    padding: clamp(0.5rem, 1.5vw, 0.8rem);
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: calc(var(--border-radius) / 2);
+    border-left: clamp(2px, 0.5vw, 3px) solid var(--primary-color);
+}
+
+.pix-owner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: clamp(0.25rem, 1vw, 0.5rem);
+    margin-top: clamp(0.5rem, 2vw, 1rem);
+    font-size: var(--p-font-size);
+    opacity: 0.8;
+}
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: clamp(0.25rem, 1vw, 0.5rem);
+    padding: clamp(0.5rem, 1.5vw, 0.8rem) clamp(1rem, 3vw, 1.5rem);
+    border-radius: clamp(1.5rem, 6vw, 3.125rem);
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+    border: none;
+    outline: none;
+    width: 100%;
+    max-width: clamp(10rem, 40vw, 15.75rem);
+    margin: 0 auto;
+    font-size: var(--btn-font-size);
+}
+
+.btn-primary {
+    background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+    color: white;
+    box-shadow: 0 clamp(0.25rem, 1vw, 0.4rem) clamp(0.5rem, 2vw, 0.8rem) rgba(108, 92, 231, 0.4);
+}
+
+.btn-primary:hover {
+    transform: translateY(clamp(-1px, -0.2vw, -3px));
+    box-shadow: 0 clamp(0.4rem, 1.5vw, 0.6rem) clamp(1rem, 3vw, 1.25rem) rgba(108, 92, 231, 0.6);
+}
+
+.btn-primary:active {
+    transform: translateY(clamp(1px, 0.1vw, 2px));
+}
+
+.emoji-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 10;
+    overflow: hidden;
+}
+
+.emoji {
+    position: absolute;
+    font-size: clamp(1rem, 3vw, 1.5rem);
+    animation: floatUp 2s ease-out forwards;
+    color: var(--secondary-color);
+    bottom: 0;
+    opacity: 1;
+}
+
+@keyframes floatUp {
+    0% {
+        transform: translateY(0) translateX(var(--start-x)) scale(1);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-50vh) translateX(var(--end-x)) scale(0.5);
+        opacity: 0;
+    }
+}
+
+.thank-you-notification {
+    position: fixed;
+    bottom: clamp(0.5rem, 2vw, 1rem);
+    right: clamp(0.5rem, 2vw, 1rem);
+    transform: translateY(clamp(5rem, 15vw, 6.25rem));
+    background: var(--success-color);
+    color: white;
+    padding: clamp(0.5rem, 1.5vw, 1rem) clamp(1rem, 3vw, 1.5rem);
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    z-index: 20;
+    text-align: center;
+    opacity: 0;
+    transition: var(--transition);
+    display: flex;
+    align-items: center;
+    gap: clamp(0.25rem, 1vw, 0.5rem);
+    max-width: calc(100% - clamp(1rem, 4vw, 2rem));
+    font-size: var(--p-font-size);
+}
+
+.thank-you-notification.show {
+    opacity: 1;
+    transform: translateY(0);
+}</style>
+</head>
+<body>
+    <div class="popup-content">
+        <div class="popup-header">
+            <i class="fas fa-hand-holding-heart"></i>
+            <h2>Apoie nosso trabalho</h2>
+            <p>Sua contribuição via Pix ajuda a manter este projeto vivo e em constante evolução. Cada doação faz diferença!</p>
+        </div>
+
+        <div class="pix-content">
+            <p><i class="fas fa-qrcode"></i> Chave Pix (Copia e cola):</p>
+            <div class="pix-key" id="pixKey">carregando...</div>
+            <div class="pix-owner">
+                <i class="fas fa-user"></i>
+                <span>Titular: Miguel Kayky Nascimento Costa</span>
+            </div>
+        </div>
+
+        <button class="btn btn-primary" id="copyPixBtn">
+            <i class="far fa-copy"></i> Copiar Chave Pix
+        </button>
+
+        <div class="emoji-container" id="emojiContainer"></div>
+    </div>
+
+    <div class="thank-you-notification" id="thankYouNotification">
+        <i class="fas fa-heart"></i>
+        <p>Muito obrigado pelo apoio!</p>
+    </div>
+
+    <script>
+        // Função autoexecutável que não depende de DOMContentLoaded
+        (function initPixDonation() {
+            // Elementos DOM
+            const copyPixBtn = document.getElementById('copyPixBtn');
+            const pixKey = document.getElementById('pixKey');
+            const emojiContainer = document.getElementById('emojiContainer');
+            const thankYouNotification = document.getElementById('thankYouNotification');
+
+            // Verifica se todos os elementos existem
+            if (!copyPixBtn || !pixKey || !emojiContainer || !thankYouNotification) {
+                console.error('Elementos do DOM não encontrados');
+                return;
+            }
+
+            // Ícones para animação
+            const icons = [
+                'fa-heart', 'fa-gem', 'fa-star', 'fa-thumbs-up', 
+                'fa-smile', 'fa-hand-holding-heart', 'fa-sparkle',
+                'fa-bolt', 'fa-sun', 'fa-moon', 'fa-cloud'
+            ];
+            
+            // Chave Pix (substitua pela sua)
+            const pixKeyValue = '00020126950014br.gov.bcb.pix01363ba18954-570c-4d29-a1d0-11e8c635b9eb0233Doacao do site ( Obg por apoiar )5204000053039865802BR5925MIGUEL KAYKY NASCIMENTO C6009Sao Paulo62290525REC6878497BEF328578684181630463DF';
+
+            // Atualiza o texto da chave Pix
+            pixKey.textContent = '00020126950014br.gov.bc...';
+
+            // Função para copiar a chave Pix
+            function copyPixKey() {
+                const textarea = document.createElement('textarea');
+                textarea.value = pixKeyValue;
+                textarea.style.position = 'fixed';
+                textarea.style.opacity = '0';
+                document.body.appendChild(textarea);
+                textarea.select();
+                
+                try {
+                    const successful = document.execCommand('copy');
+                    if (successful) {
+                        createFloatingIcons();
+                        thankYouNotification.classList.add('show');
+                        setTimeout(() => {
+                            thankYouNotification.classList.remove('show');
+                        }, 5000);
+                    } else {
+                        throw new Error('Falha ao copiar');
+                    }
+                } catch (err) {
+                    console.error('Erro ao copiar:', err);
+                    alert('Não foi possível copiar. Por favor, selecione e copie manualmente.');
+                } finally {
+                    document.body.removeChild(textarea);
+                }
+            }
+
+            // Função para criar ícones flutuantes
+            function createFloatingIcons() {
+                emojiContainer.innerHTML = '';
+                
+                for (let i = 0; i < 15; i++) {
+                    const icon = document.createElement('i');
+                    const randomIcon = icons[Math.floor(Math.random() * icons.length)];
+                    icon.className = `fas ${randomIcon} emoji`;
+                    
+                    const startX = Math.random() * 100;
+                    const endX = (Math.random() - 0.5) * 40;
+                    
+                    icon.style.setProperty('--start-x', `${startX}%`);
+                    icon.style.setProperty('--end-x', `${endX}px`);
+                    icon.style.left = `${startX}%`;
+                    icon.style.animationDelay = `${i * 0.05}s`;
+                    
+                    emojiContainer.appendChild(icon);
+                    
+                    setTimeout(() => {
+                        if (icon.parentNode) {
+                            icon.parentNode.removeChild(icon);
+                        }
+                    }, 2000);
+                }
+            }
+
+            // Event listeners
+            copyPixBtn.addEventListener('click', copyPixKey);
+
+            // Notifica que o widget foi carregado
+            console.log('Widget Pix inicializado com sucesso');
+            
+            // Se estiver em um iframe, ajusta a altura
+            if (window.parent !== window) {
+                const height = document.documentElement.scrollHeight;
+                window.parent.postMessage({
+                    type: 'iframeHeightUpdate',
+                    height: height,
+                    source: 'pixDonationWidget'
+                }, '*');
+            }
+        })();
+    </script>
+</body>
+</html>

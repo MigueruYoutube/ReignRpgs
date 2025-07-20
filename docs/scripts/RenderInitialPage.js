@@ -1,4 +1,6 @@
 
+window.onload = () => setTimeout(() => openModal('./redirects/nosapoie.html'), 5000);
+
    document.addEventListener('contextmenu', function(e) {
     e.preventDefault();
 });
@@ -23,7 +25,15 @@ document.addEventListener('dragstart', function(e) {
         return response.text();
       })
       .then(html => {
+        // Primeiro, insira o HTML no DOM
         modalContent.innerHTML = html;
+        
+        // Depois, execute os scripts que estão no conteúdo carregado
+        executeScripts(modalContent);
+        
+        // Dispare um evento personalizado para notificar que o conteúdo foi carregado
+        const event = new CustomEvent('contentLoaded', { detail: { url } });
+        modalContent.dispatchEvent(event);
       })
       .catch(error => {
         modalContent.innerHTML = `
@@ -31,9 +41,33 @@ document.addEventListener('dragstart', function(e) {
             Erro ao carregar conteúdo.<br>Verifique sua conexão ou se o diretório está acessível.
           </p>
         `;
+        console.error('Erro ao carregar modal:', error);
       });
-  }
+}
 
+// Função para executar scripts dentro do conteúdo carregado
+function executeScripts(container) {
+    // Encontra todos os scripts no container
+    const scripts = container.querySelectorAll('script');
+    
+    scripts.forEach(oldScript => {
+        // Cria um novo script
+        const newScript = document.createElement('script');
+        
+        // Copia todos os atributos do script original
+        Array.from(oldScript.attributes).forEach(attr => {
+            newScript.setAttribute(attr.name, attr.value);
+        });
+        
+        // Se o script tem conteúdo interno (não é um src), copia o texto
+        if (!oldScript.src && oldScript.textContent) {
+            newScript.textContent = oldScript.textContent;
+        }
+        
+        // Substitui o script antigo pelo novo (que será executado)
+        oldScript.parentNode.replaceChild(newScript, oldScript);
+    });
+}
 
 
 

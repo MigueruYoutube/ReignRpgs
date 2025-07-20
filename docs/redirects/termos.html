@@ -5,168 +5,187 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Termos de Uso - Reign of RPGs</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <style>
-        :root {
-            --primary-bg: #0a0a0a;
-            --gold: #FFD700;
-            --orange: #FFA500;
-            --red: #FF4500;
-            --gray: #777777;
-            --light-gray: #cccccc;
-            
-            /* Base font size */
-            font-size: 100%; /* 1rem = 16px por padrão */
-        }
-        
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: var(--primary-bg);
-            color: var(--light-gray);
-            line-height: 1.5;
-            padding: 0;
-            margin: 0;
-            font-size: 0.875rem; /* 14px base */
-        }
-        
-        .container {
-            max-width: 100%;
-            padding: 1rem;
-        }
-        
-        header {
-            text-align: center;
-            padding: 1rem 0.625rem;
-            border-bottom: 0.0625rem solid var(--gold);
-            margin-bottom: 1rem;
-        }
-        
-        h1 {
-            color: var(--gold);
-            font-size: 1.5rem;
-            margin-bottom: 0.5rem;
-        }
-        
-        h1 i {
-            margin-right: 0.5rem;
-        }
-        
-        h2 {
-            color: var(--orange);
-            font-size: 1.2rem;
-            margin: 1.25rem 0 0.625rem;
-            border-left: 0.1875rem solid var(--gold);
-            padding-left: 0.625rem;
-        }
-        
-        h2 i {
-            margin-right: 0.5rem;
-            color: var(--gold);
-        }
-        
-        h3 {
-            color: var(--gold);
-            font-size: 1.1rem;
-            margin: 0.9375rem 0 0.5rem;
-        }
-        
-        p {
-            margin-bottom: 0.625rem;
-            color: var(--gray);
-            font-size: 0.9rem;
-        }
-        
-        .highlight {
-            color: var(--light-gray);
-            background-color: rgba(255, 215, 0, 0.1);
-            padding: 0.625rem;
-            border-radius: 0.25rem;
-            border-left: 0.125rem solid var(--gold);
-            margin: 0.9375rem 0;
-            font-size: 0.9rem;
-        }
-        
-        .highlight i {
-            color: var(--gold);
-            margin-right: 0.5rem;
-        }
-        
-        .warning {
-            color: var(--light-gray);
-            background-color: rgba(255, 69, 0, 0.1);
-            padding: 0.625rem;
-            border-radius: 0.25rem;
-            border-left: 0.125rem solid var(--red);
-            margin: 0.9375rem 0;
-            font-size: 0.9rem;
-        }
-        
-        .warning i {
-            color: var(--red);
-            margin-right: 0.5rem;
-        }
-        
-        footer {
-            text-align: center;
-            padding: 1rem 0.625rem;
-            margin-top: 1.25rem;
-            border-top: 0.0625rem solid var(--gold);
-            color: var(--gray);
-            font-size: 0.8rem;
-        }
-        
-        footer p {
-            margin-bottom: 0.375rem;
-        }
-        
-        .copyright {
-            color: var(--gold);
-            font-size: 0.9rem;
-        }
-        
-        .discord-link {
-            color: var(--orange);
-            text-decoration: none;
-            transition: color 0.3s;
-            font-size: 0.9rem;
-        }
-        
-        .discord-link:hover {
-            color: var(--gold);
-        }
-        
-        .creator {
-            color: var(--gold);
-            font-style: italic;
-            font-size: 0.9rem;
-        }
-        
-        ul {
-            margin-left: 1.125rem;
-            margin-bottom: 0.75rem;
-            color: var(--gray);
-        }
-        
-        li {
-            margin-bottom: 0.375rem;
-            font-size: 0.9rem;
-        }
-        
-        @media (max-width: 30rem) { /* ~480px */
-            h1 {
-                font-size: 1.3rem;
-            }
-            
-            h2 {
-                font-size: 1.1rem;
-            }
-        }
-    </style>
+    <style>:root {
+    /* Cores */
+    --primary-bg: #0a0a0a;
+    --gold: #FFD700;
+    --orange: #FFA500;
+    --red: #FF4500;
+    --gray: #777777;
+    --light-gray: #cccccc;
+    
+    /* Tipografia responsiva */
+    --base-font-size: clamp(14px, 1.6vw, 16px);
+    --h1-font-size: clamp(1.3rem, 4vw, 1.5rem);
+    --h2-font-size: clamp(1.1rem, 3.2vw, 1.2rem);
+    --h3-font-size: clamp(1rem, 2.8vw, 1.1rem);
+    --text-font-size: clamp(0.8rem, 2vw, 0.9rem);
+    --small-font-size: clamp(0.7rem, 1.8vw, 0.8rem);
+    
+    /* Espaçamentos responsivos */
+    --space-xxs: clamp(0.25rem, 1vw, 0.375rem);
+    --space-xs: clamp(0.5rem, 1.5vw, 0.625rem);
+    --space-sm: clamp(0.75rem, 2vw, 1rem);
+    --space-md: clamp(1rem, 2.5vw, 1.25rem);
+    --space-lg: clamp(1.25rem, 3vw, 1.5rem);
+    --space-xl: clamp(1.5rem, 4vw, 1.875rem);
+    
+    /* Bordas */
+    --border-thin: clamp(0.0625rem, 0.2vw, 0.125rem);
+    --border-medium: clamp(0.125rem, 0.4vw, 0.1875rem);
+    --border-radius-sm: clamp(0.25rem, 0.8vw, 0.5rem);
+    --border-radius-md: clamp(0.375rem, 1vw, 0.625rem);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--primary-bg);
+    color: var(--light-gray);
+    line-height: 1.5;
+    padding: 0;
+    margin: 0;
+    font-size: var(--text-font-size);
+}
+
+.container {
+    max-width: 100%;
+    padding: var(--space-sm);
+}
+
+header {
+    text-align: center;
+    padding: var(--space-sm) var(--space-xs);
+    border-bottom: var(--border-thin) solid var(--gold);
+    margin-bottom: var(--space-sm);
+}
+
+h1 {
+    color: var(--gold);
+    font-size: var(--h1-font-size);
+    margin-bottom: var(--space-xs);
+}
+
+h1 i {
+    margin-right: var(--space-xs);
+}
+
+h2 {
+    color: var(--orange);
+    font-size: var(--h2-font-size);
+    margin: var(--space-md) 0 var(--space-xs);
+    border-left: var(--border-medium) solid var(--gold);
+    padding-left: var(--space-xs);
+}
+
+h2 i {
+    margin-right: var(--space-xs);
+    color: var(--gold);
+}
+
+h3 {
+    color: var(--gold);
+    font-size: var(--h3-font-size);
+    margin: var(--space-sm) 0 var(--space-xs);
+}
+
+p {
+    margin-bottom: var(--space-xs);
+    color: var(--gray);
+    font-size: var(--text-font-size);
+}
+
+.highlight, .warning {
+    color: var(--light-gray);
+    padding: var(--space-xs);
+    border-radius: var(--border-radius-sm);
+    margin: var(--space-sm) 0;
+    font-size: var(--text-font-size);
+    border-left: var(--border-thin) solid;
+}
+
+.highlight {
+    background-color: rgba(255, 215, 0, 0.1);
+    border-left-color: var(--gold);
+}
+
+.warning {
+    background-color: rgba(255, 69, 0, 0.1);
+    border-left-color: var(--red);
+}
+
+.highlight i {
+    color: var(--gold);
+    margin-right: var(--space-xs);
+}
+
+.warning i {
+    color: var(--red);
+    margin-right: var(--space-xs);
+}
+
+footer {
+    text-align: center;
+    padding: var(--space-sm) var(--space-xs);
+    margin-top: var(--space-md);
+    border-top: var(--border-thin) solid var(--gold);
+    color: var(--gray);
+    font-size: var(--small-font-size);
+}
+
+footer p {
+    margin-bottom: var(--space-xxs);
+}
+
+.copyright {
+    color: var(--gold);
+    font-size: var(--text-font-size);
+}
+
+.discord-link {
+    color: var(--orange);
+    text-decoration: none;
+    transition: color 0.3s;
+    font-size: var(--text-font-size);
+}
+
+.discord-link:hover {
+    color: var(--gold);
+}
+
+.creator {
+    color: var(--gold);
+    font-style: italic;
+    font-size: var(--text-font-size);
+}
+
+ul {
+    margin-left: var(--space-lg);
+    margin-bottom: var(--space-sm);
+    color: var(--gray);
+}
+
+li {
+    margin-bottom: var(--space-xxs);
+    font-size: var(--text-font-size);
+}
+
+@media (max-width: 30rem) {
+    /* Ajustes específicos para telas muito pequenas */
+    :root {
+        --h1-font-size: clamp(1.2rem, 5vw, 1.3rem);
+        --h2-font-size: clamp(1rem, 4.5vw, 1.1rem);
+    }
+    
+    ul {
+        margin-left: var(--space-md);
+    }
+}</style>
 </head>
 <body>
     <div class="container">
