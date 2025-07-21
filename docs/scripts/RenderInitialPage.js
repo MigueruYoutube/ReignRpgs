@@ -1,4 +1,69 @@
 
+document.addEventListener('DOMContentLoaded', function() {
+    const logo = document.querySelector('.logo');
+    let forceScrollToTop = false;
+
+    logo.addEventListener('click', function(e) {
+        e.preventDefault();
+        forceScrollToTop = true;
+        this.classList.add('clicked');
+        
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    });
+
+    // Intercepta TODOS os eventos de scroll
+    window.addEventListener('scroll', function() {
+        if (forceScrollToTop && window.scrollY > 0) {
+            // Cancela qualquer tentativa de descer
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+        
+        // Só libera quando chegar exatamente no topo
+        if (window.scrollY === 0) {
+            logo.classList.remove('clicked');
+            forceScrollToTop = false;
+        }
+    });
+});
+
+const welcomeNotification = document.getElementById('notificationScroll');
+
+function showWelcomeNotification() {
+    // Mostrar com fadeIn
+    setTimeout(() => {
+        welcomeNotification.classList.add('show');
+    }, 1000);
+    
+    // Iniciar fadeOut após 3 segundos visíveis
+    setTimeout(() => {
+        welcomeNotification.classList.remove('show');
+        welcomeNotification.classList.add('hide');
+        
+        // Remover após a animação completar (0.5s = duração do fadeOut)
+        setTimeout(() => {
+            welcomeNotification.remove();
+        }, 500);
+        
+    }, 5000); // 1s delay + 3s visível = 4s total
+    
+    // Efeitos especiais
+    if ('vibrate' in navigator && window.innerWidth <= 768) {
+        navigator.vibrate([200, 100, 200]);
+    } else {
+        const notificationSound = new Audio('https://assets.mixkit.co/sfx/preview/mixkit-alarm-digital-clock-beep-989.mp3');
+        notificationSound.volume = 0.3;
+        notificationSound.play().catch(e => console.log('Erro no som:', e));
+    }
+}
+
+window.onload = showWelcomeNotification;
+
 window.onload = () => setTimeout(() => openModal('./redirects/nosapoie.html'), 5000);
 
    document.addEventListener('contextmenu', function(e) {

@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Reign Of RPG's</title>
- <link rel="icon" href="/images/logo.png" type="image/png">
+ <link rel="icon" href="/ReignRpgs/images/logo.png" type="image/png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600&display=swap" rel="stylesheet">
   <!-- Exemplo se estiver em /assets/css/styles.css -->
@@ -169,74 +169,6 @@
         <p>© 2025 Reign Of RPG's. Todos os direitos reservados.</p>
     </footer>
     
-<script src="../../scripts/RenderNovels.js"></script>
-
-<script>
-  
-  document.addEventListener('DOMContentLoaded', function() {
-    const logo = document.querySelector('.logo');
-    let forceScrollToTop = false;
-
-    logo.addEventListener('click', function(e) {
-        e.preventDefault();
-        forceScrollToTop = true;
-        this.classList.add('clicked');
-        
-        window.scrollTo({
-            top: 0,
-            behavior: 'smooth'
-        });
-    });
-
-    // Intercepta TODOS os eventos de scroll
-    window.addEventListener('scroll', function() {
-        if (forceScrollToTop && window.scrollY > 0) {
-            // Cancela qualquer tentativa de descer
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
-        }
-        
-        // Só libera quando chegar exatamente no topo
-        if (window.scrollY === 0) {
-            logo.classList.remove('clicked');
-            forceScrollToTop = false;
-        }
-    });
-});
-
-const welcomeNotification = document.getElementById('notificationScroll');
-
-function showWelcomeNotification() {
-    // Mostrar com fadeIn
-    setTimeout(() => {
-        welcomeNotification.classList.add('show');
-    }, 1000);
-    
-    // Iniciar fadeOut após 3 segundos visíveis
-    setTimeout(() => {
-        welcomeNotification.classList.remove('show');
-        welcomeNotification.classList.add('hide');
-        
-        // Remover após a animação completar (0.5s = duração do fadeOut)
-        setTimeout(() => {
-            welcomeNotification.remove();
-        }, 500);
-        
-    }, 5000); // 1s delay + 3s visível = 4s total
-    
-    // Efeitos especiais
-    if ('vibrate' in navigator && window.innerWidth <= 768) {
-        navigator.vibrate([200, 100, 200]);
-    } else {
-        const notificationSound = new Audio('https://assets.mixkit.co/sfx/preview/mixkit-alarm-digital-clock-beep-989.mp3');
-        notificationSound.volume = 0.3;
-        notificationSound.play().catch(e => console.log('Erro no som:', e));
-    }
-}
-
-window.onload = showWelcomeNotification;
-  </script>
+<script src="/ReignRpgs/scripts/RenderNovels.js"></script>
 </body>
 </html>
