@@ -347,7 +347,7 @@ function executeScripts(container) {
                 
                 // Adicionar evento de clique para redirecionar
                 slide.addEventListener('click', () => {
-                    window.location.href = `./Novels/${novel.id}/index.html`;
+                    window.location.href = `./Novels/${novel.id}/`;
                 });
                 
                 slidesContainer.appendChild(slide);
@@ -509,7 +509,7 @@ function executeScripts(container) {
                     
                     // Adicionar evento de clique para redirecionar
                     card.addEventListener('click', () => {
-                        window.location.href = `./Novels/${novel.id}/index.html`;
+                        window.location.href = `./Novels/${novel.id}/`;
                     });
                     
                     novelsContainer.appendChild(card);
@@ -565,7 +565,7 @@ function executeScripts(container) {
                     
                     // Adicionar evento de clique para redirecionar
                     card.addEventListener('click', () => {
-                        window.location.href = `./Novels/${novel.id}/index.html`;
+                        window.location.href = `./Novels/${novel.id}/`;
                     });
                     
                     novelsContainer.appendChild(card);

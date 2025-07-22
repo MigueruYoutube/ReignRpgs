@@ -557,126 +557,94 @@
     }
 
     function updateNovelUI(data) {
-    if (!data) {
-        novelTitle.textContent = 'Informações não disponíveis';
-        novelAuthor.textContent = 'Autor desconhecido';
-        novelSynopsis.textContent = 'Sinopse não disponível';
-        novelCover.src = 'https://via.placeholder.com/250x350?text=Capa+Não+Disponível';
-        authorLink.href = '#';
-        return;
-    }
-
-    document.title = data.name + ' | Reign Of RPG\'s';
-    novelTitle.textContent = data.name || '<span class="missing-info">Nome não disponível</span>';
-
-    if (data.author && data.authorUrl) {
-        novelAuthor.textContent = data.author;
-        authorLink.href = data.authorUrl;
-    } else if (data.author) {
-        novelAuthor.textContent = data.author;
-        authorLink.href = '#';
-    } else {
-        novelAuthor.innerHTML = '<span class="missing-info">Autor não disponível</span>';
-        authorLink.href = '#';
-    }
-
-    novelSynopsis.textContent = data.sinopse || 'Sinopse não disponível.';
-
-    if (data.cover) {
-        novelCover.src = data.cover;
-        novelCover.alt = `Capa de ${data.name}`;
-    } else {
-        novelCover.src = 'https://via.placeholder.com/250x350?text=Capa+Não+Disponível';
-        novelCover.alt = 'Capa não disponível';
-    }
-
-    novelBadges.innerHTML = '';
-    if (data.IsPopular) {
-        const badge = document.createElement('span');
-        badge.className = 'novel-badge badge-popular';
-        badge.textContent = 'Popular';
-        novelBadges.appendChild(badge);
-    }
-    if (data.IsCompleted) {
-        const badge = document.createElement('span');
-        badge.className = 'novel-badge badge-completed';
-        badge.textContent = 'Completa';
-        novelBadges.appendChild(badge);
-    }
-    if (data.date && isNovelNew(data.date)) {
-        const badge = document.createElement('span');
-        badge.className = 'novel-badge badge-new';
-        badge.textContent = 'Novo';
-        novelBadges.appendChild(badge);
-    }
-
-    if (data.date) {
-        releaseDate.innerHTML = formatDate(data.date);
-    } else {
-        releaseDate.textContent = '-';
-    }
-
-    // 🔥 INJETAR METADADOS OG DINAMICAMENTE
-    function updateMetaTag(property, content) {
-        let tag = document.querySelector(`meta[property='${property}']`);
-        if (tag) {
-            tag.setAttribute('content', content);
-        } else {
-            tag = document.createElement('meta');
-            tag.setAttribute('property', property);
-            tag.setAttribute('content', content);
-            document.head.appendChild(tag);
+        if (!data) {
+            novelTitle.textContent = 'Informações não disponíveis';
+            novelAuthor.textContent = 'Autor desconhecido';
+            novelSynopsis.textContent = 'Sinopse não disponível';
+            novelCover.src = 'https://via.placeholder.com/250x350?text=Capa+Não+Disponível';
+            authorLink.href = '#';
+            return;
         }
-    }
 
-    // ⚙️ Gerar conteúdo com base na novel
-    const ogTitle = data.name;
-    const ogDescription = `Leia agora sobre ${data.name}. ${data.sinopse ? data.sinopse.slice(0, 120) + '...' : ''}`;
-    const ogImage = data.cover || 'https://via.placeholder.com/250x350?text=Capa+Não+Disponível';
-    const ogUrl = window.location.href;
+        document.title = data.name + ' | Reign Of RPG\'s';
+        novelTitle.textContent = data.name || '<span class="missing-info">Nome não disponível</span>';
+   
+        if (data.author && data.authorUrl) {
+            novelAuthor.textContent = data.author;
+            authorLink.href = data.authorUrl;
+        } else if (data.author) {
+            novelAuthor.textContent = data.author;
+            authorLink.href = '#';
+        } else {
+            novelAuthor.innerHTML = '<span class="missing-info">Autor não disponível</span>';
+            authorLink.href = '#';
+        }
+        
+        novelSynopsis.textContent = data.sinopse || 'Sinopse não disponível.';
+        
+        if (data.cover) {
+            novelCover.src = data.cover;
+            novelCover.alt = `Capa de ${data.name}`;
+        } else {
+            novelCover.src = 'https://via.placeholder.com/250x350?text=Capa+Não+Disponível';
+            novelCover.alt = 'Capa não disponível';
+        }
+        
+        novelBadges.innerHTML = '';
+        if (data.IsPopular) {
+            const badge = document.createElement('span');
+            badge.className = 'novel-badge badge-popular';
+            badge.textContent = 'Popular';
+            novelBadges.appendChild(badge);
+        }
+        if (data.IsCompleted) {
+            const badge = document.createElement('span');
+            badge.className = 'novel-badge badge-completed';
+            badge.textContent = 'Completa';
+            novelBadges.appendChild(badge);
+        }
+        if (data.date && isNovelNew(data.date)) {
+            const badge = document.createElement('span');
+            badge.className = 'novel-badge badge-new';
+            badge.textContent = 'Novo';
+            novelBadges.appendChild(badge);
+        }
+        
+        if (data.date) {
+            releaseDate.innerHTML = formatDate(data.date);
+        } else {
+            releaseDate.textContent = '-';
+        }
+        
+        if (!window.disqusLoaded) {
+            var d = document, s = d.createElement('script');
+            
+            var nomeCorrigido = data.name;
+            var regexCapitulo = /(.*?) - Cap[ií]tulo\s*\d+$/i;
 
-    updateMetaTag('og:title', ogTitle);
-    updateMetaTag('og:description', ogDescription);
-    updateMetaTag('og:image', ogImage);
-    updateMetaTag('og:url', ogUrl);
-    updateMetaTag('og:type', 'article'); // ou "website"
-
-    // 📌 Também pode adicionar Twitter Card se quiser:
-    updateMetaTag('twitter:card', 'summary_large_image');
-    updateMetaTag('twitter:title', ogTitle);
-    updateMetaTag('twitter:description', ogDescription);
-    updateMetaTag('twitter:image', ogImage);
-
-    // 🔄 Sistema de comentários (mantido como no original)
-    if (!window.disqusLoaded) {
-        var d = document, s = d.createElement('script');
-
-        var nomeCorrigido = data.name;
-        var regexCapitulo = /(.*?) - Cap[ií]tulo\s*\d+$/i;
-
-        if (regexCapitulo.test(nomeCorrigido)) {
-            var match = nomeCorrigido.match(regexCapitulo);
-            if (match && match[1]) {
-                nomeCorrigido = match[1] + ' - ReignOfRpgs';
+            if (regexCapitulo.test(nomeCorrigido)) {
+                var match = nomeCorrigido.match(regexCapitulo);
+                if (match && match[1]) {
+                    nomeCorrigido = match[1] + ' - ReignOfRpgs';
+                }
+            } else {
+                nomeCorrigido = nomeCorrigido + ' - ReignOfRpgs';
             }
-        } else {
-            nomeCorrigido = nomeCorrigido + ' - ReignOfRpgs';
+
+            window.disqus_config = function () {
+                this.page.url = window.location.href;
+                this.page.identifier = nomeCorrigido;
+                this.page.title = nomeCorrigido;
+            };
+
+            s.src = 'https://reignofrpgs.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', +new Date());
+            s.setAttribute('data-theme', 'dark');
+            (d.head || d.body).appendChild(s);
+
+            window.disqusLoaded = true;
         }
-
-        window.disqus_config = function () {
-            this.page.url = window.location.href;
-            this.page.identifier = nomeCorrigido;
-            this.page.title = nomeCorrigido;
-        };
-
-        s.src = 'https://reignofrpgs.disqus.com/embed.js';
-        s.setAttribute('data-timestamp', +new Date());
-        s.setAttribute('data-theme', 'dark');
-        (d.head || d.body).appendChild(s);
-
-        window.disqusLoaded = true;
     }
-}
 
     async function carregarCapitulo(id) {
         try {
