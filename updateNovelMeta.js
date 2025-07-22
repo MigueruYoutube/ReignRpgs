@@ -10,6 +10,13 @@ if (!fs.existsSync(allNovelsPath)) {
   process.exit(1);
 }
 
+// Gera uma cor "fake" em HEX baseada no nome da novel
+function fakeHexColorFromName(name) {
+  const hash = Array.from(name).reduce((acc, char) => acc + char.charCodeAt(0), 0);
+  const color = `#${((hash * 1234567) & 0xffffff).toString(16).padStart(6, "0")}`;
+  return color;
+}
+
 const novels = JSON.parse(fs.readFileSync(allNovelsPath, "utf8"));
 
 novels.forEach((novel) => {
@@ -34,8 +41,10 @@ novels.forEach((novel) => {
   $('meta[property^="og:"]').remove();
   $('meta[name^="twitter"]').remove();
   $('meta[name="description"]').remove();
+  $('meta[name="theme-color"]').remove();
   $('title').remove();
 
+  // Trunca sinopse
   const sinopse = (novel.sinopse || "").trim();
   const sliceLength = 160;
   let truncated = sinopse.slice(0, sliceLength).trim();
@@ -43,25 +52,24 @@ novels.forEach((novel) => {
     truncated = truncated.replace(/\s+\S*$/, "") + "...";
   }
 
-  const metaTags = `
-    <title>${novel.name}</title>
+  const fakeHex = fakeHexColorFromName(novel.name);
+
+  const metaTags = `<title>${novel.name}</title>
     <meta name="description" content="${truncated}" />
     <meta property="og:type" content="website" />
     <meta property="og:title" content="${novel.name}" />
     <meta property="og:description" content="${truncated}" />
     <meta property="og:image" content="${coverUrl}" />
-
-    <!-- Twitter Meta Tags -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta property="twitter:domain" content="migueruyoutube.github.io/ReignRpgs" />
     <meta property="twitter:url" content="https://migueruyoutube.github.io/ReignRpgs/Novels/${id}/" />
     <meta name="twitter:title" content="${novel.name}" />
     <meta name="twitter:description" content="${truncated}" />
     <meta name="twitter:image" content="${coverUrl}" />
-  `;
+    <meta name="theme-color" content="${fakeHex}" />`;
 
   $("head").prepend(metaTags);
   fs.writeFileSync(indexPath, $.html(), "utf8");
 
-  console.log(`✅ Metadados atualizados com preview completo para a novel ${id} (${novel.name})`);
+  console.log(`✅ Metadados atualizados com cor ${fakeHex} para a novel ${id} (${novel.name})`);
 });
