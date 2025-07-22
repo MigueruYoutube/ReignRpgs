@@ -21,29 +21,34 @@ novels.forEach((novel) => {
     return;
   }
 
+  // Verifica se o cover é uma URL direta de imagem
+  const coverUrl = novel.cover?.trim() || "";
+  if (!/^https:\/\/i\.imgur\.com\/.+\.(png|jpg|jpeg|gif|webp)$/.test(coverUrl)) {
+    console.warn(`⚠️ Capa inválida ou não direta para a novel ${novel.name}: ${coverUrl}`);
+    return;
+  }
+
   const html = fs.readFileSync(indexPath, "utf8");
   const $ = cheerio.load(html);
 
   // Remove as meta tags OG antigas
   $('meta[property^="og:"]').remove();
 
-  // Limitar sinopse entre 50% e 70% do texto original
+  // Limitar sinopse com corte fixo e limpo
   const sinopse = (novel.sinopse || "").trim();
-  const minLength = Math.floor(sinopse.length * 0.5);
-  const maxLength = Math.floor(sinopse.length * 0.7);
-  const sliceLength = Math.floor(Math.random() * (maxLength - minLength + 1)) + minLength;
-
+  const sliceLength = 160;
   let truncated = sinopse.slice(0, sliceLength).trim();
-  // Garante que termina com "..." se necessário
+
+  // Evita terminar no meio de uma palavra e adiciona "..." se necessário
   if (!/[.!?…]$/.test(truncated)) {
-    truncated += "...";
+    truncated = truncated.replace(/\s+\S*$/, "") + "...";
   }
 
   const metaTags = `
     <!-- metadados inseridos automaticamente -->
     <meta property="og:title" content="${novel.name}" />
     <meta property="og:description" content="${truncated}" />
-    <meta property="og:image" content="${novel.cover}" />
+    <meta property="og:image" content="${coverUrl}" />
     <meta property="og:image:type" content="image/png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
@@ -54,5 +59,5 @@ novels.forEach((novel) => {
 
   fs.writeFileSync(indexPath, $.html(), "utf8");
 
-  console.log(`✅ Metadados adicionados à novel ${id} bah!`);
+  console.log(`✅ Metadados adicionados à novel ${id} (${novel.name})`);
 });
