@@ -46,7 +46,6 @@ novels.forEach((novel) => {
   const metaTags = `
     <title>${novel.name}</title>
     <meta name="description" content="${truncated}" />
-    <meta property="og:url" content="https://migueruyoutube.github.io/ReignRpgs/Novels/${id}/" />
     <meta property="og:type" content="website" />
     <meta property="og:title" content="${novel.name}" />
     <meta property="og:description" content="${truncated}" />
@@ -54,7 +53,7 @@ novels.forEach((novel) => {
 
     <!-- Twitter Meta Tags -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta property="twitter:domain" content="migueruyoutube.github.io" />
+    <meta property="twitter:domain" content="migueruyoutube.github.io/ReignRpgs" />
     <meta property="twitter:url" content="https://migueruyoutube.github.io/ReignRpgs/Novels/${id}/" />
     <meta name="twitter:title" content="${novel.name}" />
     <meta name="twitter:description" content="${truncated}" />
