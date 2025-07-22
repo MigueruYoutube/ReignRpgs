@@ -22,7 +22,7 @@ novels.forEach((novel) => {
   }
 
   const coverUrl = novel.cover?.trim() || "";
-  if (!/^https:\/\/i\.imgur\.com\/.+\.(png|jpg|jpeg|webp)$/.test(coverUrl)) {
+  if (!/^https:\/\/(i\.imgur\.com|cdn\.discordapp\.com|opengraph\.).+\.(png|jpg|jpeg|webp)(\?.*)?$/.test(coverUrl)) {
     console.warn(`⚠️ Capa inválida ou não direta para a novel ${novel.name}: ${coverUrl}`);
     return;
   }
@@ -30,7 +30,11 @@ novels.forEach((novel) => {
   const html = fs.readFileSync(indexPath, "utf8");
   const $ = cheerio.load(html);
 
+  // Remove metatags antigas
   $('meta[property^="og:"]').remove();
+  $('meta[name^="twitter"]').remove();
+  $('meta[name="description"]').remove();
+  $('title').remove();
 
   const sinopse = (novel.sinopse || "").trim();
   const sliceLength = 160;
@@ -40,14 +44,25 @@ novels.forEach((novel) => {
   }
 
   const metaTags = `
-    <!-- metadados OG básicos para preview com imagem grande -->
+    <title>${novel.name}</title>
+    <meta name="description" content="${truncated}" />
+    <meta property="og:url" content="https://migueruyoutube.github.io/ReignRpgs/Novels/${id}/" />
+    <meta property="og:type" content="website" />
     <meta property="og:title" content="${novel.name}" />
     <meta property="og:description" content="${truncated}" />
     <meta property="og:image" content="${coverUrl}" />
+
+    <!-- Twitter Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta property="twitter:domain" content="migueruyoutube.github.io" />
+    <meta property="twitter:url" content="https://migueruyoutube.github.io/ReignRpgs/Novels/${id}/" />
+    <meta name="twitter:title" content="${novel.name}" />
+    <meta name="twitter:description" content="${truncated}" />
+    <meta name="twitter:image" content="${coverUrl}" />
   `;
 
   $("head").prepend(metaTags);
   fs.writeFileSync(indexPath, $.html(), "utf8");
 
-  console.log(`✅ Preview visual gerado para a novel ${id} (${novel.name})`);
+  console.log(`✅ Metadados atualizados com preview completo para a novel ${id} (${novel.name})`);
 });
