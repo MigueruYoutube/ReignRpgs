@@ -38,12 +38,11 @@ novels.forEach((novel) => {
   const $ = cheerio.load(html);
 
   // Remove metatags antigas
-  $('meta[property^="og:"]').remove();
-  $('meta[name^="twitter"]').remove();
-  $('meta[name="description"]').remove();
-  $('meta[name="theme-color"]').remove();
-  $('title').remove();
-
+  $('meta[property^="og:"]').remove();  
+$('meta[name*="twitter"]').remove();  
+$('meta[name="description"]').remove();  
+$('meta[name="theme-color"]').remove();  
+$('title').remove();
   // Trunca sinopse
   const sinopse = (novel.sinopse || "").trim();
   const sliceLength = 160;
