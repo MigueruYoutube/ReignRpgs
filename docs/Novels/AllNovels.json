@@ -50,5 +50,18 @@
     "category": ["ficção científica", "suspense", "drama", "mistério", "aventura"],
     "IsPopular": true,
     "IsCompleted": true
+},
+{
+      "id": 5,
+    "name": "Eclipse dos Mortos",
+    "date": "03/08/2025, 11:29",
+    "author": "Migueru",
+    "authorUrl": "https://www.instagram.com/_miguel.kayky_?igsh=MWJ1eXMzaGFwazl2",
+    "recommended": [6,1],
+    "sinopse": "Em um mundo devastado por uma cepa viral criada em laboratório, sobreviventes descobrem horrores científicos enquanto lutam contra zumbis mutantes e facções humanas cruéis. A cura pode ser pior que a infecção.",
+        "cover": "https://i.imgur.com/V8jnoOt.png",
+    "category": ["apocalipse", "ficção científica", "suspense", "ação", "thriller", "terror", "sobrevivência"],
+    "IsPopular": true,
+    "IsCompleted": false
 }
 ]
